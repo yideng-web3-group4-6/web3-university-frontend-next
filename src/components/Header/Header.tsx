@@ -1,5 +1,6 @@
 import { GraduationCap } from "lucide-react";
 import NavItem from "./NavItem"; // 引入客户端组件
+import WalletConnectButton from "../Wallet/WalletConnectButton";
 
 const Header = () => {
   return (
@@ -20,7 +21,9 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex items-center">{/* <WalletConnectButton /> */}</div>
+          <div className="flex items-center">
+            <WalletConnectButton />
+          </div>
         </div>
       </div>
     </header>
