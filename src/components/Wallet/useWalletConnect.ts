@@ -5,7 +5,7 @@ import { hooks } from "@/components/Wallet/initWallet"; // 获取钱包实例钩
 
 import { getAddChainParameters } from "@/utils/chains"; // 获取 区块链信息
 
-const { useChainId, useIsActivating, useIsActive } = hooks;
+const { useChainId, useIsActivating, useIsActive, useAccount } = hooks;
 
 // 定义 EthereumProvider 类型
 interface EthereumProvider {
@@ -16,6 +16,7 @@ export function useWalletConnect(connector: MetaMask) {
   const chainId = useChainId(); // 获取链id
   const isActivating = useIsActivating(); // 获取钱包连接中的状态
   const isActive = useIsActive(); // 获取钱包是否处于活跃状态
+  const account = useAccount(); // 获取当前的账户
   const [error, setError] = useState<Error | undefined>(undefined); // 存储连接过程中的错误信息
   const [desiredChainId, setDesiredChainId] = useState<number>(1); // 存储用户期望的链 ID，初始值为 0
   useEffect(() => {
@@ -91,5 +92,6 @@ export function useWalletConnect(connector: MetaMask) {
     error,
     chainId: desiredChainId,
     setChainId: setDesiredChainId,
+    account,
   };
 }
