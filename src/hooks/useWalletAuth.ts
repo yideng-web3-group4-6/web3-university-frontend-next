@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 // 导入 wagmi 库的 hooks 用于钱包连接、签名和断开连接
 import { useAccount, useSignMessage, useDisconnect } from "wagmi";
@@ -13,7 +14,8 @@ interface UseWalletAuthReturn {
 
 // 自定义 hook，用于管理钱包认证逻辑
 export const useWalletAuth = (): UseWalletAuthReturn => {
-  const { isConnected } = useAccount(); // 从 wagmi 获取钱包连接状态
+  const { isConnected, address, chain } = useAccount(); // 添加 address 和 chain
+  // const { isConnected } = useAccount(); // 从 wagmi 获取钱包连接状态
   const { disconnect } = useDisconnect(); // 从 wagmi 获取断开连接的函数
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 管理认证状态，初始为未认证
   const [isSigningMessage, setIsSigningMessage] = useState(false); // 管理签名进行状态，初始为未签名
@@ -22,8 +24,28 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   // 定义固定的签名消息内容，用于用户确认授权登录
   const signatureMessage = "确认授权登录您的web3钱包嘛?";
 
+  // const signMessage = async () => {
+  //   if (window.ethereum) {
+  //     console.log(3444344);
+  //     try {
+  //       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+  //       console.log(accounts, "=======");
+  //       const signature = await window.ethereum.request({
+  //         method: "personal_sign",
+  //         params: ["测试签名消息", accounts[0]],
+  //       });
+  //       console.log("签名成功:", signature);
+  //     } catch (error) {
+  //       console.error("签名失败:", error);
+  //     }
+  //   } else {
+  //     console.log("MetaMask 未安装");
+  //   }
+  // };
+
   // 处理签名请求
   const handleSignature = async () => {
+    console.log("钱包状态:", { isConnected, address, chain: chain?.name });
     if (isConnected) {
       // 检查钱包是否已连接
       setIsSigningMessage(true); // 设置签名状态为正在进行
