@@ -24,25 +24,6 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   // 定义固定的签名消息内容，用于用户确认授权登录
   const signatureMessage = "确认授权登录您的web3钱包嘛?";
 
-  // const signMessage = async () => {
-  //   if (window.ethereum) {
-  //     console.log(3444344);
-  //     try {
-  //       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-  //       console.log(accounts, "=======");
-  //       const signature = await window.ethereum.request({
-  //         method: "personal_sign",
-  //         params: ["测试签名消息", accounts[0]],
-  //       });
-  //       console.log("签名成功:", signature);
-  //     } catch (error) {
-  //       console.error("签名失败:", error);
-  //     }
-  //   } else {
-  //     console.log("MetaMask 未安装");
-  //   }
-  // };
-
   // 处理签名请求
   const handleSignature = async () => {
     console.log("钱包状态:", { isConnected, address, chain: chain?.name });
