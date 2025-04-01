@@ -1,42 +1,22 @@
 "use client";
 import { ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet, sepolia, localhost } from "wagmi/chains"; // 导入 sepolia 测试网
+import { mainnet, sepolia, localhost,  } from "wagmi/chains"; // 导入 sepolia 测试网
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
-// 定义本地 Ganache 链
-// const ganache = {
-//   id: 1337, // 链 ID，与 Ganache 的 Network ID 一致
-//   name: "Ganache Local",
-//   network: "ganache",
-//   nativeCurrency: {
-//     name: "Ether",
-//     symbol: "ETH",
-//     decimals: 18,
-//   },
-//   rpcUrls: {
-//     default: {
-//       http: ["http://127.0.0.1:7545"],
-//     },
-//     public: {
-//       http: ["http://127.0.0.1:7545"],
-//     },
-//   },
-//   testnet: true,
-// };
 
 const config = createConfig(
   getDefaultConfig({
     // 支持的区块链
-    chains: [mainnet, sepolia],
+    chains: [mainnet, sepolia, localhost],
     transports: {
       // 添加ETH主网链的 RPC URL
       [mainnet.id]: http(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
       // 添加 sepolia 的 RPC 配置
       [sepolia.id]: http(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
       // 本地链接
-      [localhost.id]: http("http://127.0.0.1:7545"),
+      [localhost.id]: http("http://127.0.0.1:8545"),
     },
 
     // 必需的 API 密钥
@@ -61,8 +41,8 @@ export const Web3Provider = ({ children }: { children: ReactNode }) => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider theme="auto" mode="dark" options={{
-    enforceSupportedChains: false, // 允许显示所有链，包括自定义链
-  }}>
+          enforceSupportedChains: false, // 允许显示所有链，包括自定义链
+        }}>
           {children}
         </ConnectKitProvider>
       </QueryClientProvider>
