@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BigNumber } from "@ethersproject/bignumber";
 import { CoinType } from "@/mockData/courseData";
+import { useYiDengToken } from "@/hooks/useYiDengToken";
 
 interface ExchangeSectionProps {
   // 汇率表，键是 CoinType，值是 BigNumber 表示的汇率
@@ -8,6 +9,7 @@ interface ExchangeSectionProps {
 }
 
 const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates }) => {
+  const { buyTokensWithETH } = useYiDengToken()
   const [ethAmount, setEthAmount] = useState<string>(""); // 输入的 ETH 总数
   const [selectedCoin, setSelectedCoin] = useState<CoinType>("ETH"); // 默认选择的兑换币种
 
@@ -29,15 +31,17 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates }) => {
     console.error("Error calculating yidengAmount:", error);
   }
 
-  const handleExchange = () => {
+  const handleExchange = async () => {
     try {
       // 验证输入：如果输入为空或小于等于 0，提示用户
       if (!ethAmount || parseFloat(ethAmount) <= 0) {
         alert("请输入有效的数量");
         return;
       }
+      const res = await buyTokensWithETH(ethAmount)
+      console.log(res, '买了')
       // 弹出成功提示，显示兑换结果
-      alert(`成功兑换！您用 ${ethAmount} ${selectedCoin} 兑换了 ${yidengAmount} $YD`);
+      // alert(`成功兑换！您用 ${ethAmount} ${selectedCoin} 兑换了 ${yidengAmount} $YD`);
       setEthAmount("");
     } catch (error) {
       alert("兑换失败，请检查输入！");
