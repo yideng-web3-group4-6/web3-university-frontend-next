@@ -1,6 +1,7 @@
 import { GraduationCap } from "lucide-react";
 import NavItem from "./NavItem"; // 引入客户端组件
 import { WagmiConnectButton } from "../WagmiConnect/WalletConnectButton";
+import Avatar from "../common/Avatar";
 
 const Header = () => {
   return (
@@ -23,6 +24,7 @@ const Header = () => {
 
           <div className="flex items-center">
             <WagmiConnectButton />
+            <Avatar />
           </div>
         </div>
       </div>
