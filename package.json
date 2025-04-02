@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/bignumber": "^5.8.0",
+    "@tanstack/react-query": "^5.71.1",
     "@web3-react/core": "^8.2.3",
     "@web3-react/metamask": "^8.2.4",
     "@web3-react/types": "^8.2.3",
@@ -19,6 +21,7 @@
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "viem": "^2.24.3",
     "wagmi": "^2.14.12"
   },
   "devDependencies": {
