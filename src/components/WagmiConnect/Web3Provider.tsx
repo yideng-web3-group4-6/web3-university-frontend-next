@@ -14,7 +14,7 @@ const config = createConfig(
       // 添加ETH主网链的 RPC URL
       [mainnet.id]: http(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
       // 添加 sepolia 的 RPC 配置
-      [sepolia.id]: http(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
+      [sepolia.id]: http(`https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
       // 本地链接
       [localhost.id]: http("http://127.0.0.1:8545"),
     },

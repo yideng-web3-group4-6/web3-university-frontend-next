@@ -10,27 +10,27 @@ import Balance from "@/components/Profile/Balance";
 // import PublishedArticles from "../components/PublishedArticles";
 // import DependentAccountInfo from "../components/DependentAccountInfo";
 
+
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
   const [avatarUrl, setAvatarUrl] = useState<string>("");
   const chainId = useChainId();
   const { address: walletAddress } = useAccount();
   const { data } = useBalance({ address: walletAddress, chainId });
-  console.log(data, "222222222222", chainId);
 
   // 示例数据
-  const nfts = [
-    { id: "1", name: "NFT #1", imageUrl: "https://example.com/nft1.jpg" },
-    { id: "2", name: "NFT #2", imageUrl: "https://example.com/nft2.jpg" },
-  ];
-  const courses = [
-    { id: "1", title: "Solidity 入门", instructor: "Alice" },
-    { id: "2", title: "Web3 开发", instructor: "Bob" },
-  ];
-  const articles = [
-    { id: "1", title: "如何开发智能合约", date: "2023-10-01" },
-    { id: "2", title: "Web3 的未来", date: "2023-10-02" },
-  ];
+  // const nfts = [
+  //   { id: "1", name: "NFT #1", imageUrl: "https://example.com/nft1.jpg" },
+  //   { id: "2", name: "NFT #2", imageUrl: "https://example.com/nft2.jpg" },
+  // ];
+  // const courses = [
+  //   { id: "1", title: "Solidity 入门", instructor: "Alice" },
+  //   { id: "2", title: "Web3 开发", instructor: "Bob" },
+  // ];
+  // const articles = [
+  //   { id: "1", title: "如何开发智能合约", date: "2023-10-01" },
+  //   { id: "2", title: "Web3 的未来", date: "2023-10-02" },
+  // ];
 
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">
