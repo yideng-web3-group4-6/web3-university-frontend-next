@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Sidebar from "@/components/Profile/Sidebar";
 import UserInfoCard from "@/components/Profile/UserInfoCard";
-import { useAccount } from "wagmi";
-// import BalanceAndCity from "../components/BalanceAndCity";
+import { useAccount, useBalance, useChainId } from "wagmi";
+import Balance from "@/components/Profile/Balance";
 // import NFTAssets from "../components/NFTAssets";
 // import PurchasedCourses from "../components/PurchasedCourses";
 // import PublishedArticles from "../components/PublishedArticles";
@@ -13,7 +13,10 @@ import { useAccount } from "wagmi";
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
   const [avatarUrl, setAvatarUrl] = useState<string>("");
+  const chainId = useChainId();
   const { address: walletAddress } = useAccount();
+  const { data } = useBalance({ address: walletAddress, chainId });
+  console.log(data, "222222222222", chainId);
 
   // 示例数据
   const nfts = [
@@ -48,7 +51,8 @@ const Profile: React.FC = () => {
                     avatarUrl={avatarUrl}
                     onAvatarChange={setAvatarUrl}
                   />
-                  {/* <BalanceAndCity ethBalance={ethBalance} city="上海" /> */}
+                  <Balance ethBalance={data?.value.toString() || ""} />
+
                   {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
                 </div>
               )}
