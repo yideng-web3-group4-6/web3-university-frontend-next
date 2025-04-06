@@ -1,0 +1,38 @@
+{
+  "languageSwitcher": "语言",
+  "welcome": "欢迎来到我们的应用！",
+  "exchangeSection": {
+    "title": "币种兑换",
+    "amountLabel": "数量",
+    "targetCoinLabel": "目标币种",
+    "calculateButton": "计算",
+    "mainTitle": "前端Web3大学",
+    "mainDescription": "探索前端开发与Web3技术的完美结合，开启您的区块链开发之旅",
+    "areaTitle": "加密货币兑换 $YD",
+    "rateInfoPrefix": "输入数量，实时兑换 $YD，当前汇率：1 {{coin}} = ",
+    "inputPlaceholder": "输入 {{coin}} 数量",
+    "expectedAmountPrefix": "预计获得：",
+    "exchangeButton": "立即兑换"
+  },
+  "header": {
+    "title": "前端Web3大学"
+  },
+  "nav": {
+    "home": "首页",
+    "course": "课程",
+    "knowledge": "知识库",
+    "award": "奖励"
+  },
+  "language": {
+    "chinese": "中文"
+  },
+  "wallet": {
+    "signing": "签名中...",
+    "verify": "请签名验证",
+    "connect": "连接钱包"
+  },
+  "alert": {
+    "invalidAmount": "请输入有效的数量",
+    "exchangeFailed": "兑换失败，请检查输入！"
+  }
+} 
