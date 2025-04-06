@@ -1,0 +1,38 @@
+{
+  "languageSwitcher": "Language",
+  "welcome": "Welcome to our App!",
+  "exchangeSection": {
+    "title": "Coin Exchange",
+    "amountLabel": "Amount",
+    "targetCoinLabel": "Target Currency",
+    "calculateButton": "Calculate",
+    "mainTitle": "Frontend Web3 University",
+    "mainDescription": "Explore the perfect combination of front-end development and Web3 technology, start your blockchain development journey",
+    "areaTitle": "Cryptocurrency Exchange for $YD",
+    "rateInfoPrefix": "Enter amount for real-time exchange to $YD, current rate: 1 {{coin}} = ",
+    "inputPlaceholder": "Enter {{coin}} amount",
+    "expectedAmountPrefix": "Expected amount:",
+    "exchangeButton": "Exchange Now"
+  },
+  "header": {
+    "title": "Frontend Web3 University"
+  },
+  "nav": {
+    "home": "Home",
+    "course": "Courses",
+    "knowledge": "Knowledge Base",
+    "award": "Awards"
+  },
+  "language": {
+    "chinese": "Chinese"
+  },
+  "wallet": {
+    "signing": "Signing...",
+    "verify": "Please Sign Verification",
+    "connect": "Connect Wallet"
+  },
+  "alert": {
+    "invalidAmount": "Please enter a valid amount",
+    "exchangeFailed": "Exchange failed, please check your input!"
+  }
+} 

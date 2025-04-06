@@ -2,9 +2,14 @@
 import { ConnectKitButton } from "connectkit";
 import { Wallet, CheckCircle } from "lucide-react";
 import { useWalletAuth } from "@hooks/useWalletAuth";
+import { useTranslation } from '@/i18n/client';
+import { useParams } from 'next/navigation';
 
 export const WagmiConnectButton = () => {
   const { isAuthenticated, isSigningMessage } = useWalletAuth();
+  const params = useParams();
+  const lng = params?.lng as string || 'en';
+  const { t } = useTranslation(lng, 'translation');
 
   return (
     <ConnectKitButton.Custom>
@@ -12,10 +17,10 @@ export const WagmiConnectButton = () => {
         const buttonText = isAuthenticated
           ? ensName || truncatedAddress
           : isSigningMessage
-          ? "签名中..."
+          ? t('wallet.signing')
           : isConnected
-          ? "请签名验证"
-          : "连接钱包";
+          ? t('wallet.verify')
+          : t('wallet.connect');
 
         return (
           <button
