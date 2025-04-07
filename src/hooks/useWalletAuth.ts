@@ -10,33 +10,32 @@ interface UseWalletAuthReturn {
   isSigningMessage: boolean; // 表示当前是否正在进行签名操作
   handleSignature: () => Promise<void>; // 处理签名请求的异步函数
   disconnect: () => void; // 断开钱包连接的函数
-  signer: string
+  signer: string;
 }
 
 // 自定义 hook，用于管理钱包认证逻辑
 export const useWalletAuth = (): UseWalletAuthReturn => {
-  const { isConnected, address, chain } = useAccount(); // 添加 address 和 chain
+  const { isConnected } = useAccount(); // 添加 address 和 chain
   // const { isConnected } = useAccount(); // 从 wagmi 获取钱包连接状态
   const { disconnect } = useDisconnect(); // 从 wagmi 获取断开连接的函数
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 管理认证状态，初始为未认证
   const [isSigningMessage, setIsSigningMessage] = useState(false); // 管理签名进行状态，初始为未签名
   const { signMessageAsync } = useSignMessage(); // 从 wagmi 获取异步签名函数
-  const [signer, setSigner] = useState('')
+  const [signer, setSigner] = useState("");
 
   // 定义固定的签名消息内容，用于用户确认授权登录
   const signatureMessage = "确认授权登录您的web3钱包嘛?";
 
   // 处理签名请求
   const handleSignature = async () => {
-    console.log("钱包状态:", { isConnected, address, chain: chain?.name });
     if (isConnected) {
+      if (isAuthenticated || isSigningMessage) return;
       // 检查钱包是否已连接
       setIsSigningMessage(true); // 设置签名状态为正在进行
       try {
         // 调用签名函数，传入签名消息，等待用户签名
         const sig = await signMessageAsync({ message: signatureMessage });
-        setSigner(sig)
-        console.log("签名成功:", sig);
+        setSigner(sig);
         setIsAuthenticated(true); // 更新认证状态为已认证
       } catch (error) {
         console.error("签名错误:", error);
@@ -54,7 +53,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
     // 定义内部异步函数，用于在适当条件下请求签名
     const requestSignature = async () => {
       // 当钱包已连接、未认证且不在签名过程中时，触发签名
-      if (isConnected && !isAuthenticated && !isSigningMessage) {
+      if (isConnected) {
         await handleSignature();
       }
     };
@@ -75,6 +74,6 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
     isSigningMessage, // 签名进行状态
     handleSignature, // 手动触发签名的函数
     disconnect, // 断开钱包连接的函数
-    signer
+    signer,
   };
 };

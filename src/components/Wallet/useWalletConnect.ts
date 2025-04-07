@@ -52,7 +52,6 @@ export function useWalletConnect(connector: MetaMask) {
         // 根据目标链 ID 执行连接逻辑
         if (targetChainId === -1) {
           await connector.activate(); // 如果目标链 ID 为 -1，直接激活连接器
-          console.log("Connected chainId:", connector?.provider?.chainId);
         } else {
           // 激活连接器并切换到指定链
           await connector.activate(getAddChainParameters(targetChainId));
