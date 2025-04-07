@@ -11,6 +11,9 @@ importers:
       '@ethersproject/bignumber':
         specifier: ^5.8.0
         version: 5.8.0
+      '@ethersproject/providers':
+        specifier: ^5.8.0
+        version: 5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       '@radix-ui/react-dialog':
         specifier: ^1.1.6
         version: 1.1.6(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -29,12 +32,12 @@ importers:
       '@web3-react/types':
         specifier: ^8.2.3
         version: 8.2.3(@types/react@19.0.12)(react@19.1.0)
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       accept-language:
         specifier: ^3.0.20
         version: 3.0.20
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       connectkit:
         specifier: ^1.8.2
         version: 1.8.2(@babel/core@7.26.10)(@tanstack/react-query@5.71.1(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-is@16.13.1)(react@19.1.0)(viem@2.24.3(bufferutil@4.0.9)(typescript@5.8.2)(utf-8-validate@5.0.10))(wagmi@2.14.16(@tanstack/query-core@5.71.1)(@tanstack/react-query@5.71.1(react@19.1.0))(@types/react@19.0.12)(bufferutil@4.0.9)(react@19.1.0)(typescript@5.8.2)(utf-8-validate@5.0.10)(viem@2.24.3(bufferutil@4.0.9)(typescript@5.8.2)(utf-8-validate@5.0.10)))
@@ -74,12 +77,12 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
-      tailwind-merge:
-        specifier: ^3.1.0
-        version: 3.1.0
       react-i18next:
         specifier: ^15.4.1
         version: 15.4.1(i18next@24.2.3(typescript@5.8.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      tailwind-merge:
+        specifier: ^3.1.0
+        version: 3.1.0
       viem:
         specifier: ^2.24.3
         version: 2.24.3(bufferutil@4.0.9)(typescript@5.8.2)(utf-8-validate@5.0.10)

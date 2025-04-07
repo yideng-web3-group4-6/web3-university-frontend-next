@@ -46,7 +46,7 @@ export const LanguageSwitcher = ({ lng }: { lng: string }) => {
   return (
     <div>
       <label htmlFor="language-select" style={{ marginRight: "8px" }}>
-        {t("languageSwitcher")}:{" "}
+        {" "}
       </label>
       <select
         id="language-select"

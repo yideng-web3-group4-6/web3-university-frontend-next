@@ -9,8 +9,7 @@ const YI_DENG_TOKEN_ADDRESS = YiDengTokenABI.networks["1337"].address;
 // 精简的 Hook，仅用于购买代币
 export const useYiDengToken = () => {
   const walletAccount = useAccount();
-  const chains = useChains()
-  console.log(chains, '----------')
+  const chains = useChains();
 
   // 使用 ETH 购买代币
   const { writeContractAsync: buyWithETH, isPending: isBuying } = useWriteContract();
