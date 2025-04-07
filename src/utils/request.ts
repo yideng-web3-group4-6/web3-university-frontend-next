@@ -45,7 +45,7 @@ const request = async <T>({
 }: {
   method: "get" | "post" | "put" | "delete";
   url: string;
-  data?: any;
+  data?: object;
   config?: AxiosRequestConfig;
 }): Promise<T> => {
   try {
@@ -62,8 +62,15 @@ const request = async <T>({
 
     // 返回 ResBase 格式的响应
     return responseData as T;
-  } catch (error: any) {
-    return Promise.reject(error.response?.data?.message || error.message || "Request failed");
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      // error 被类型收窄为 AxiosError
+      return Promise.reject(
+        error.response?.data?.message || error.message || "Request failed"
+      );
+    }
+    // 处理非 AxiosError 的情况
+    return Promise.reject("Request failed with unknown error");
   }
 };
 
