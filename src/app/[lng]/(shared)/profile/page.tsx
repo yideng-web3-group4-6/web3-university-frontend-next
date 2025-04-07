@@ -6,6 +6,7 @@ import UserInfoCard from "@/components/Profile/UserInfoCard";
 import { useAccount, useBalance, useChainId } from "wagmi";
 import Balance from "@/components/Profile/Balance";
 import CoursesPannel from "@/components/Profile/CoursesPannel";
+import ArticlesPannel from "@/components/Profile/ArticlesPannel";
 // import NFTAssets from "../components/NFTAssets";
 // import PurchasedCourses from "../components/PurchasedCourses";
 // import PublishedArticles from "../components/PublishedArticles";
@@ -28,10 +29,12 @@ const Profile: React.FC = () => {
     { id: "2", title: "Web3 开发", instructor: "Bob", type: "published" },
     { id: "3", title: "区块链基础", instructor: "Charlie", type: "purchased" },
   ];
-  // const articles = [
-  //   { id: "1", title: "如何开发智能合约", date: "2023-10-01" },
-  //   { id: "2", title: "Web3 的未来", date: "2023-10-02" },
-  // ];
+  const articles = [
+    { id: "1", title: "如何开发智能合约", date: "2023-10-01", type: "published" },
+    { id: "2", title: "Web3 的未来", date: "2023-10-02", type: "tipped" },
+    { id: "3", title: "区块链入门", date: "2023-10-03", type: "liked" },
+    { id: "4", title: "智能合约开发", date: "2023-10-04", type: "collected" },
+  ];
 
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">
@@ -59,7 +62,7 @@ const Profile: React.FC = () => {
               )}
               {/* {activeTab === "nfts" && <NFTAssets nfts={nfts} />} */}
               {activeTab === "courses" && <CoursesPannel courses={courses} />}
-              {/* {activeTab === "articles" && <PublishedArticles articles={articles} />} */}
+              {activeTab === "articles" && <ArticlesPannel articles={articles} />}
             </>
           )}
         </div>
