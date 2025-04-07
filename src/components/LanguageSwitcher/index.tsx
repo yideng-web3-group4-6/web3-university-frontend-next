@@ -6,7 +6,7 @@ import { languages, cookieName } from "@/i18n/config";
 import Cookies from "js-cookie";
 
 export const LanguageSwitcher = ({ lng }: { lng: string }) => {
-  const { t } = useTranslation(lng, "translation");
+  const { t, i18n } = useTranslation(lng, "translation");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -39,7 +39,7 @@ export const LanguageSwitcher = ({ lng }: { lng: string }) => {
 
   // Ensure the component doesn't render until translations are ready
   // Note: A proper loading state might be needed for better UX
-  // if (i18n.resolvedLanguage !== lng) return null; // Temporarily comment out this line
+  if (i18n.resolvedLanguage !== lng) return null; // Temporarily comment out this line
 
   return (
     <div>
