@@ -1,11 +1,12 @@
-'use client'; // Mark Header as a Client Component
+"use client"; // Mark Header as a Client Component
 
 import { GraduationCap } from "lucide-react";
 import NavItem from "./NavItem"; // 引入客户端组件
 import { WagmiConnectButton } from "../WagmiConnect/WalletConnectButton";
+import Avatar from "../common/Avatar";
 import { LanguageSwitcher } from "../LanguageSwitcher"; // Import LanguageSwitcher
-import { useTranslation } from '@/i18n/client'; // Import useTranslation
-import { useParams } from 'next/navigation'; // Import useParams
+import { useTranslation } from "@/i18n/client"; // Import useTranslation
+import { useParams } from "next/navigation"; // Import useParams
 
 // Remove props interface, Header no longer needs lng prop
 // interface HeaderProps {
@@ -15,15 +16,8 @@ import { useParams } from 'next/navigation'; // Import useParams
 // Remove lng from component signature
 const Header = () => {
   const params = useParams(); // Get params hook
-  const lng = params?.lng as string || 'en'; // Extract lng, default to 'en' if needed
-  const { t } = useTranslation(lng, 'translation'); // Use lng from params
-
-  // Remove diagnostic logs
-  // console.log(`[Header] lng prop: ${lng}`);
-  // console.log(`[Header] i18n initialized: ${i18n.isInitialized}`);
-  // console.log(`[Header] i18n resolved language: ${i18n.resolvedLanguage}`);
-  // console.log(`[Header] t('nav.award'): ${t('nav.award')}`);
-  // console.log(`[Header] t('header.title'): ${t('header.title')}`);
+  const lng = (params?.lng as string) || "en"; // Extract lng, default to 'en' if needed
+  const { t } = useTranslation(lng, "translation"); // Use lng from params
 
   return (
     <header className="nav-blur fixed w-full z-50">
@@ -31,15 +25,15 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <GraduationCap className="h-8 w-8 text-cyber-blue float-animation" />
-            <span className="ml-2 text-cyber-blue font-bold text-lg">{t('header.title')}</span>
+            <span className="ml-2 text-cyber-blue font-bold text-lg">{t("header.title")}</span>
           </div>
 
           <div className="hidden md:block">
             <div className="flex items-center transition-colors duration-200">
-              <NavItem path={`/${lng}/`}>{t('nav.home')}</NavItem>
-              <NavItem path={`/${lng}/course`}>{t('nav.course')}</NavItem>
-              <NavItem path={`/${lng}/knowledge`}>{t('nav.knowledge')}</NavItem>
-              <NavItem path={`/${lng}/award`}>{t('nav.award')}</NavItem>
+              <NavItem path={`/${lng}/`}>{t("nav.home")}</NavItem>
+              <NavItem path={`/${lng}/course`}>{t("nav.course")}</NavItem>
+              <NavItem path={`/${lng}/knowledge`}>{t("nav.knowledge")}</NavItem>
+              <NavItem path={`/${lng}/award`}>{t("nav.award")}</NavItem>
             </div>
           </div>
 
@@ -47,6 +41,7 @@ const Header = () => {
             {/* Pass lng obtained from params to LanguageSwitcher */}
             <LanguageSwitcher lng={lng} />
             <WagmiConnectButton />
+            <Avatar />
           </div>
         </div>
       </div>

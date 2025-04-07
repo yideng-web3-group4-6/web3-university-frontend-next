@@ -36,9 +36,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Web3Provider>
           <Header />
-          <main className="pt-16">
-            {children}
-          </main>
+          <div>{children}</div>
         </Web3Provider>
       </body>
     </html>

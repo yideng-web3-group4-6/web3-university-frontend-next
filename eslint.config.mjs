@@ -10,6 +10,10 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    // 全局忽略规则
+    ignores: ["src/types/ethers-contracts/**/*"],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
