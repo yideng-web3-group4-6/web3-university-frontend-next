@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/Profile/Sidebar";
 import UserInfoCard from "@/components/Profile/UserInfoCard";
 import { useAccount, useBalance, useChainId } from "wagmi";
@@ -8,6 +8,7 @@ import Balance from "@/components/Profile/Balance";
 import CoursesPannel from "@/components/Profile/CoursesPannel";
 import ArticlesPannel from "@/components/Profile/ArticlesPannel";
 import NFTAssets from "@/components/Profile/NFTAssets";
+import { getArticleList } from "@/api/article";
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
@@ -15,6 +16,14 @@ const Profile: React.FC = () => {
   const chainId = useChainId();
   const { address: walletAddress } = useAccount();
   const { data } = useBalance({ address: walletAddress, chainId });
+
+  useEffect(() => {
+    async function handleGetArticleList() {
+      const res = await getArticleList();
+      console.log(res);
+    }
+    handleGetArticleList();
+  }, []);
 
   const nfts = [
     { id: "1", name: "Digital Art #1", imageUrl: "/img/nft1.jpg" },
