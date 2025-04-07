@@ -5,11 +5,11 @@ import Sidebar from "@/components/Profile/Sidebar";
 import UserInfoCard from "@/components/Profile/UserInfoCard";
 import { useAccount, useBalance, useChainId } from "wagmi";
 import Balance from "@/components/Profile/Balance";
+import CoursesPannel from "@/components/Profile/CoursesPannel";
 // import NFTAssets from "../components/NFTAssets";
 // import PurchasedCourses from "../components/PurchasedCourses";
 // import PublishedArticles from "../components/PublishedArticles";
 // import DependentAccountInfo from "../components/DependentAccountInfo";
-
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
@@ -23,10 +23,11 @@ const Profile: React.FC = () => {
   //   { id: "1", name: "NFT #1", imageUrl: "https://example.com/nft1.jpg" },
   //   { id: "2", name: "NFT #2", imageUrl: "https://example.com/nft2.jpg" },
   // ];
-  // const courses = [
-  //   { id: "1", title: "Solidity 入门", instructor: "Alice" },
-  //   { id: "2", title: "Web3 开发", instructor: "Bob" },
-  // ];
+  const courses = [
+    { id: "1", title: "Solidity 入门", instructor: "Alice", type: "purchased" },
+    { id: "2", title: "Web3 开发", instructor: "Bob", type: "published" },
+    { id: "3", title: "区块链基础", instructor: "Charlie", type: "purchased" },
+  ];
   // const articles = [
   //   { id: "1", title: "如何开发智能合约", date: "2023-10-01" },
   //   { id: "2", title: "Web3 的未来", date: "2023-10-02" },
@@ -56,9 +57,9 @@ const Profile: React.FC = () => {
                   {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
                 </div>
               )}
-              {/* {activeTab === "nfts" && <NFTAssets nfts={nfts} />}
-              {activeTab === "courses" && <PurchasedCourses courses={courses} />}
-              {activeTab === "articles" && <PublishedArticles articles={articles} />} */}
+              {/* {activeTab === "nfts" && <NFTAssets nfts={nfts} />} */}
+              {activeTab === "courses" && <CoursesPannel courses={courses} />}
+              {/* {activeTab === "articles" && <PublishedArticles articles={articles} />} */}
             </>
           )}
         </div>

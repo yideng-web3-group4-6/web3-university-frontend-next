@@ -12,8 +12,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const tabs = [
     { id: "info", label: "详细信息" },
     { id: "nfts", label: "NFT 资产" },
-    { id: "courses", label: "购买的课程" },
-    { id: "articles", label: "发表的文章" },
+    { id: "courses", label: "课程" },
+    { id: "articles", label: "文章" },
   ];
 
   return (
