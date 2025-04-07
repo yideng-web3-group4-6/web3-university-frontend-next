@@ -58,6 +58,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
       }
     };
     requestSignature();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConnected]);
 
   // 当连接断开时，重置认证状态
