@@ -3,13 +3,11 @@ import React from "react";
 import { BigNumber } from "@ethersproject/bignumber";
 import { CoinType } from "@/mockData/courseData";
 import ExchangeSection from "@/components/Index/ExchangeSection";
-import { useTranslation } from '@/i18n/client';
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 
 const Index = () => {
   const params = useParams();
-  const lng = params?.lng as string || 'en';
-  const { t } = useTranslation(lng);
+  const lng = (params?.lng as string) || "en";
 
   const exchangeRates: Record<CoinType, BigNumber> = {
     ETH: BigNumber.from("1000"), // 1 ETH = 1000 $YD
