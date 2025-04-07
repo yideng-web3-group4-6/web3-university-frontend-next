@@ -7,10 +7,7 @@ import { useAccount, useBalance, useChainId } from "wagmi";
 import Balance from "@/components/Profile/Balance";
 import CoursesPannel from "@/components/Profile/CoursesPannel";
 import ArticlesPannel from "@/components/Profile/ArticlesPannel";
-// import NFTAssets from "../components/NFTAssets";
-// import PurchasedCourses from "../components/PurchasedCourses";
-// import PublishedArticles from "../components/PublishedArticles";
-// import DependentAccountInfo from "../components/DependentAccountInfo";
+import NFTAssets from "@/components/Profile/NFTAssets";
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
@@ -19,11 +16,10 @@ const Profile: React.FC = () => {
   const { address: walletAddress } = useAccount();
   const { data } = useBalance({ address: walletAddress, chainId });
 
-  // 示例数据
-  // const nfts = [
-  //   { id: "1", name: "NFT #1", imageUrl: "https://example.com/nft1.jpg" },
-  //   { id: "2", name: "NFT #2", imageUrl: "https://example.com/nft2.jpg" },
-  // ];
+  const nfts = [
+    { id: "1", name: "Digital Art #1", imageUrl: "/img/nft1.jpg" },
+    { id: "2", name: "Pixel Art #2", imageUrl: "/img/nft2.jpg" },
+  ];
   const courses = [
     { id: "1", title: "Solidity 入门", instructor: "Alice", type: "purchased" },
     { id: "2", title: "Web3 开发", instructor: "Bob", type: "published" },
@@ -60,7 +56,7 @@ const Profile: React.FC = () => {
                   {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
                 </div>
               )}
-              {/* {activeTab === "nfts" && <NFTAssets nfts={nfts} />} */}
+              {activeTab === "nfts" && <NFTAssets nfts={nfts} />}
               {activeTab === "courses" && <CoursesPannel courses={courses} />}
               {activeTab === "articles" && <ArticlesPannel articles={articles} />}
             </>
