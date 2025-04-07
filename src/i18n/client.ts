@@ -27,7 +27,7 @@ i18next
     preload: typeof window === "undefined" ? languages : [],
   });
 
-export function useTranslation(lng: string, ns?: string | string[], options?: any) {
+export function useTranslation(lng: string, ns?: string | string[], options?: object) {
   const ret = useTranslationOrg(ns ?? defaultNS, options); // Use defaultNS if ns is not provided
   const { i18n } = ret;
 

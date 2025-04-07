@@ -15,7 +15,7 @@ interface UseWalletAuthReturn {
 
 // 自定义 hook，用于管理钱包认证逻辑
 export const useWalletAuth = (): UseWalletAuthReturn => {
-  const { isConnected, address, chain } = useAccount(); // 添加 address 和 chain
+  const { isConnected } = useAccount(); // 添加 address 和 chain
   // const { isConnected } = useAccount(); // 从 wagmi 获取钱包连接状态
   const { disconnect } = useDisconnect(); // 从 wagmi 获取断开连接的函数
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 管理认证状态，初始为未认证
@@ -29,6 +29,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   // 处理签名请求
   const handleSignature = async () => {
     if (isConnected) {
+      if (isAuthenticated || isSigningMessage) return;
       // 检查钱包是否已连接
       setIsSigningMessage(true); // 设置签名状态为正在进行
       try {
@@ -52,7 +53,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
     // 定义内部异步函数，用于在适当条件下请求签名
     const requestSignature = async () => {
       // 当钱包已连接、未认证且不在签名过程中时，触发签名
-      if (isConnected && !isAuthenticated && !isSigningMessage) {
+      if (isConnected) {
         await handleSignature();
       }
     };

@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@ethersproject/abi": "^5.8.0",
     "@tailwindcss/postcss": "^4",
     "@types/debug": "^4.1.12",
     "@types/js-cookie": "^3.0.6",

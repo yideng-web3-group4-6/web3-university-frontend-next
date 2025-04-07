@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useAccount, useWriteContract, useChains } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
 import { parseEther } from "viem"; // 使用 viem 的 parseEther，避免 BigNumber 问题
 import YiDengTokenABI from "@/abis/YiDengToken.json"; // 导入合约 ABI
 
@@ -9,7 +9,6 @@ const YI_DENG_TOKEN_ADDRESS = YiDengTokenABI.networks["1337"].address;
 // 精简的 Hook，仅用于购买代币
 export const useYiDengToken = () => {
   const walletAccount = useAccount();
-  const chains = useChains();
 
   // 使用 ETH 购买代币
   const { writeContractAsync: buyWithETH, isPending: isBuying } = useWriteContract();

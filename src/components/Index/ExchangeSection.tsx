@@ -37,6 +37,7 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates, lng })
         return;
       }
       const res = await buyTokensWithETH(ethAmount);
+      console.log(res, "购买代币结果");
       setEthAmount("");
     } catch (error) {
       alert(t("alert.exchangeFailed"));

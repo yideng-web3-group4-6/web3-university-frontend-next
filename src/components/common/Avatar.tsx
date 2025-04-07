@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation"; // 使用 Next.js 的 useRouter 进行页面跳转
+import Image from "next/image";
 
 // 定义 Avatar 组件的 props 接口
 interface AvatarProps {
@@ -21,7 +22,12 @@ const Avatar: React.FC<AvatarProps> = ({ imageUrl, size = 40, altText = "User Av
   return (
     <div className="cursor-pointer transition-transform duration-200 hover:scale-110" onClick={handleClick}>
       {imageUrl ? (
-        <img src={imageUrl} alt={altText} className="rounded-full object-cover" style={{ width: size, height: size }} />
+        <Image
+          src={imageUrl}
+          alt={altText}
+          className="rounded-full object-cover"
+          style={{ width: size, height: size }}
+        />
       ) : (
         <div
           className="flex items-center justify-center rounded-full bg-cyber-blue text-white font-semibold"

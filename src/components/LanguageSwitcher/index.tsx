@@ -15,7 +15,7 @@ export const LanguageSwitcher = ({ lng }: { lng: string }) => {
 
     // Check if the current language is already in the path
     const pathSegments = pathname.split("/");
-    const currentLngInPath = languages.includes(pathSegments[1] as any) ? pathSegments[1] : null;
+    const currentLngInPath = languages.includes(pathSegments[1] as string) ? pathSegments[1] : null;
 
     let newPath;
     if (currentLngInPath) {
