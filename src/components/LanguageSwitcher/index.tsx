@@ -60,7 +60,7 @@ export const LanguageSwitcher = ({ lng }: { lng: string }) => {
       >
         {languages.map((l) => (
           <option key={l} value={l} style={{ color: "black", backgroundColor: "white" }}>
-            {l === "en" ? "English" : t("language.chinese")}
+            {l === "en" ? t("language.English") : t("language.Chinese")}
           </option>
         ))}
       </select>

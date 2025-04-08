@@ -24,7 +24,8 @@
     "award": "奖励"
   },
   "language": {
-    "chinese": "中文"
+    "Chinese": "中文",
+    "English": "英语"
   },
   "wallet": {
     "signing": "签名中...",

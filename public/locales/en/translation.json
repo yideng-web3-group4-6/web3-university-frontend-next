@@ -24,7 +24,8 @@
     "award": "Awards"
   },
   "language": {
-    "chinese": "Chinese"
+    "Chinese": "Chinese",
+    "English": "English"
   },
   "wallet": {
     "signing": "Signing...",
