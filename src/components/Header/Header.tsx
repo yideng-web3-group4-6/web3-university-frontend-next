@@ -34,6 +34,7 @@ const Header = () => {
               <NavItem path={`/${lng}/course`}>{t("nav.course")}</NavItem>
               <NavItem path={`/${lng}/knowledge`}>{t("nav.knowledge")}</NavItem>
               <NavItem path={`/${lng}/award`}>{t("nav.award")}</NavItem>
+              <NavItem path={`/${lng}/article`}>{t("nav.article")}</NavItem>
             </div>
           </div>
 

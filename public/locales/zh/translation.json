@@ -21,7 +21,8 @@
     "home": "首页",
     "course": "课程",
     "knowledge": "知识库",
-    "award": "奖励"
+    "award": "奖励",
+    "article": "文章"
   },
   "language": {
     "chinese": "中文"
@@ -35,4 +36,4 @@
     "invalidAmount": "请输入有效的数量",
     "exchangeFailed": "兑换失败，请检查输入！"
   }
-} 
+}
