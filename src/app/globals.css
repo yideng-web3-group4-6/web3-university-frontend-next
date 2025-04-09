@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --neon-blue: #00f3ff;
@@ -32,12 +32,33 @@ body {
   color: rgb(0 243 255 / var(--tw-text-opacity));
 }
 
-.text-cyber-purple {
-  color: rgb(147 51 234 / var(--tw-text-opacity));
-}
-
 .bg-dark-card {
   background-color: rgb(13 14 20 / var(--tw-bg-opacity));
+}
+
+.feature-card {
+  @apply transform transition-all duration-500;
+  background: rgba(13, 14, 20, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 243, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1), 0 0 40px rgba(0, 243, 255, 0.05);
+}
+
+.right-sidebar-icon {
+  color: white;
+}
+
+.right-sidebar-icon:hover {
+  color: var(--neon-blue);
+  filter: drop-shadow(0 0 10px var(--neon-blue));
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1), 0 0 40px rgba(0, 243, 255, 0.05);
 }
 
 .bg-clip-text {
@@ -76,18 +97,26 @@ body {
   }
 }
 
-input[type="number"] {
+input[type='number'] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: textfield;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 .shadow-neon {
   box-shadow: 0 0 10px rgba(0, 243, 255, 0.3), 0 0 20px rgba(0, 243, 255, 0.2);
+}
+
+.active {
+  color: var(--neon-blue);
+}
+
+.inactive:hover {
+  color: var(--neon-blue);
 }

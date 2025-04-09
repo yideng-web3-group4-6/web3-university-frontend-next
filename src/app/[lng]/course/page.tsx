@@ -1,31 +1,70 @@
-"use client";
-import React from "react";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import CourseList from '@components/course/CourseList';
+import CartSidebar from '@components/sidebar/CartSidebar';
+import RightSidebar from '@components/sidebar/RightSidebar';
+import { Course } from '@utils/courseType';
+import { fetchCourse } from '@/apis/courseApi';
+import { useTranslation } from '@/i18n/client';
+import { useCart } from '@/context/CartContext';
 
+const CoursePage: React.FC = () => {
+  const params = useParams();
+  const lng = (params?.lng as string) || 'en';
+  const { t } = useTranslation(lng);
+  const { cartItems, addToCart, setCartItems, isCartOpen, setIsCartOpen } = useCart();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const Course: React.FC = () => {
-  // const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  // const [isCartOpen, setIsCartOpen] = useState(false);
+  useEffect(() => {
+    const loadCourses = async () => {
+      try {
+        setLoading(true);
+        const response = await fetchCourse();
+        setCourses(response?.courses || []);
+      } catch (error) {
+        console.error('Failed to load courses:', error);
+        setError(t('fetchCoursesError'));
+        setCourses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // const exchangeRates: Record<CoinType, BigNumber> = {
-  //   ETH: BigNumber.from("1000"), // 1 ETH = 1000 $YD
-  //   BTC: BigNumber.from("20000"), // 1 BTC = 20000 $YD
-  //   USDT: BigNumber.from("2"), // 1 USDT = 2 $YD
-  //   BNB: BigNumber.from("500"), // 1 BNB = 500 $YD
-  // };
+    loadCourses();
+  }, [t]);
 
-  // const handleAddToCart = (course: CartItem) => {
-  //   setCartItems(prev => [...prev, course]);
-  // };
+  if (loading) {
+    return (
+      <div className='max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 text-center'>
+        <p className='text-cyber-blue'>{t('loading')}</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className='max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 text-center'>
+        <p className='text-red-500'>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <>
-      哈哈哈
-      {/* <ExchangeSection exchangeRates={exchangeRates} /> */}
-      {/* <CourseList onAddToCart={handleAddToCart} />
-      <RightSidebar cartItems={cartItems} setIsCartOpen={setIsCartOpen} />
-      <CartSidebar cartItems={cartItems} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} /> */}
+      <CourseList onAddToCart={addToCart} lng={lng} courses={courses} />
+      <RightSidebar cartItems={cartItems} setIsCartOpen={setIsCartOpen} lng={lng} />
+      <CartSidebar
+        cartItems={cartItems}
+        isCartOpen={isCartOpen}
+        setIsCartOpen={setIsCartOpen}
+        setCartItems={setCartItems}
+        lng={lng}
+      />
     </>
   );
 };
 
-export default Course;
+export default CoursePage;

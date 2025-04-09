@@ -1,6 +1,7 @@
 {
   "languageSwitcher": "Language",
   "welcome": "Welcome to our App!",
+  "loading": "Loading...",
   "exchangeSection": {
     "title": "Coin Exchange",
     "amountLabel": "Amount",
@@ -34,5 +35,38 @@
   "alert": {
     "invalidAmount": "Please enter a valid amount",
     "exchangeFailed": "Exchange failed, please check your input!"
+  },
+  "courses": {
+    "week": "week",
+    "notFound": "Course not found",
+    "purchaseRequired": "Please purchase the course to unlock this chapter!",
+    "relatedCourses": "Course recommendations",
+    "chapters": "Course Chapters",
+    "play": "Play",
+    "allCourses": "All Courses",
+    "allLevels": "All Levels",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "newest": "Newest Courses",
+    "priceLowToHigh": "Price Low to High",
+    "loadMore": "Load More Courses",
+    "courseDetails": "Course Details",
+    "addShopping": "Add to Cart",
+    "buyNow": "Buy",
+    "chapterLocked": "Locked",
+    "chapterUnlocked": "Unlocked",
+    "unlockView": "Unlock to View",
+    "coursePurchaseRequired": "Please purchase the course to unlock this chapter!"
+  },
+  "cart": {
+    "title": "Shopping",
+    "empty": "Cart is empty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "emptyAlert": "Cart is empty, cannot checkout",
+    "successAlert": "Successfully checked out! Total price is",
+    "scrollToTop": "Back to Top",
+    "confirmDelete": "Are you sure you want to remove this course from the cart?"
   }
-} 
+}

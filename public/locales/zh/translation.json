@@ -1,6 +1,7 @@
 {
   "languageSwitcher": "语言",
   "welcome": "欢迎来到我们的应用！",
+  "loading": "加载中...",
   "exchangeSection": {
     "title": "币种兑换",
     "amountLabel": "数量",
@@ -34,5 +35,38 @@
   "alert": {
     "invalidAmount": "请输入有效的数量",
     "exchangeFailed": "兑换失败，请检查输入！"
+  },
+  "courses": {
+    "week": "周",
+    "relatedCourses": "课程推荐",
+    "chapters": "课程章节",
+    "notFound": "课程未找到",
+    "purchaseRequired": "请购买课程以解锁该章节！",
+    "play": "播放",
+    "allCourses": "全部课程",
+    "allLevels": "全部难度",
+    "beginner": "初级",
+    "intermediate": "中级",
+    "advanced": "高级",
+    "newest": "最新课程",
+    "priceLowToHigh": "价格从低到高",
+    "loadMore": "加载更多课程",
+    "courseDetails": "课程详情",
+    "addShopping": "添加到购物车",
+    "buyNow": "立即购买",
+    "chapterLocked": "未解锁",
+    "chapterUnlocked": "已解锁",
+    "unlockView": "解锁观看",
+    "coursePurchaseRequired": "请先购买课程以解锁该章节！"
+  },
+  "cart": {
+    "title": "购物车",
+    "empty": "购物车为空",
+    "total": "总价",
+    "checkout": "结算",
+    "emptyAlert": "购物车为空，无法结算",
+    "successAlert": "成功结算！总价为",
+    "scrollToTop": "返回顶部",
+    "confirmDelete": "确定要从购物车中移除这个课程吗？"
   }
-} 
+}
