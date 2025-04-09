@@ -7,17 +7,23 @@ import { Web3Provider } from "@/components/WagmiConnect/Web3Provider";
 import { languages } from "@/i18n/config";
 import { Suspense } from 'react';
 
-// Optimize font loading
+// Optimize font loading with fallback strategy
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial', 'sans-serif'],
+  adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: 'swap',
+  preload: true,
+  fallback: ['monospace', 'Courier New', 'Courier'],
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -39,15 +45,11 @@ export default function RootLayout({
   const { lng } = params || { lng: 'zh' };
   
   return (
-    <html lang={lng}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang={lng} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
         <Web3Provider>
-          <Suspense fallback={<div className="h-16 nav-blur fixed w-full z-50"></div>}>
-            <Header />
-          </Suspense>
-          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-            <div>{children}</div>
-          </Suspense>
+          <Header />
+          <main suppressHydrationWarning>{children}</main>
         </Web3Provider>
       </body>
     </html>

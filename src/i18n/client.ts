@@ -2,7 +2,7 @@
 "use client";
 
 import i18next from "i18next";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { initReactI18next, useTranslation as useTranslationOrg } from "react-i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -21,6 +21,8 @@ const i18nInstance = i18next
 
 // 确保只初始化一次
 let initialized = false;
+
+let initializedLanguages = new Set<string>();
 
 async function initI18next() {
   if (!initialized) {
@@ -43,29 +45,45 @@ if (typeof window !== "undefined") {
 }
 
 export function useTranslation(lng: string, ns?: string | string[], options?: object) {
-  // 先获取翻译对象，确保这个 hook 在所有渲染路径中都是首先被调用的
   const ret = useTranslationOrg(ns ?? defaultNS, options);
   const { i18n } = ret;
   
-  // 再使用 useState 和 useEffect
   const [isReady, setIsReady] = useState(false);
   
-  // 确保 i18n 实例已初始化并加载了正确的语言
   useEffect(() => {
-    if (!initialized) {
-      initI18next().then(() => {
-        if (i18n.resolvedLanguage !== lng) {
-          i18n.changeLanguage(lng).then(() => setIsReady(true));
-        } else {
-          setIsReady(true);
-        }
-      });
-    } else if (i18n.resolvedLanguage !== lng) {
-      i18n.changeLanguage(lng).then(() => setIsReady(true));
-    } else {
+    const initializeAndChangeLanguage = async () => {
+      if (!initialized) {
+        await initI18next();
+      }
+      
+      if (!initializedLanguages.has(lng)) {
+        await i18n.changeLanguage(lng);
+        initializedLanguages.add(lng);
+      }
+      
       setIsReady(true);
-    }
+    };
+    
+    initializeAndChangeLanguage();
   }, [lng, i18n]);
   
-  return ret;
+  // 自定义 t 函数，在客户端挂载前使用静态默认值
+  const tWithFallback = useCallback(
+    (key: string, options?: object) => {
+      if (!isReady) {
+        // 返回 key 的最后一部分作为默认值，通常是我们需要的字段名
+        const parts = key.split('.');
+        const fallback = parts[parts.length - 1];
+        return fallback;
+      }
+      return ret.t(key, { ...options });
+    },
+    [isReady, ret.t]
+  );
+  
+  return {
+    ...ret,
+    t: tWithFallback,
+    isReady
+  };
 }

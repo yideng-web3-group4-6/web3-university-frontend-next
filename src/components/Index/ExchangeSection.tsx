@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BigNumber } from "@ethersproject/bignumber";
 import { CoinType } from "@/mockData/courseData";
 import { useYiDengToken } from "@/hooks/useYiDengToken";
@@ -16,6 +16,16 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates, lng })
   const { buyTokensWithETH } = useYiDengToken();
   const [ethAmount, setEthAmount] = useState<string>("");
   const [selectedCoin, setSelectedCoin] = useState<CoinType>("ETH");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 服务端渲染时使用的静态内容
+  const mainTitle = mounted ? t("exchangeSection.mainTitle") : "前端Web3大学";
+  const mainDescription = mounted ? t("exchangeSection.mainDescription") : "探索前端开发与Web3技术的完美结合，开启您的区块链开发之旅";
+  const areaTitle = mounted ? t("exchangeSection.areaTitle") : "加密货币兑换 $YD";
 
   let yidengAmount = "0.00";
 
@@ -49,14 +59,14 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates, lng })
     <div className="hero-gradient flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 sm:px-6 lg:px-8">
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyber-blue to-cyber-purple mb-4">
-          {t("exchangeSection.mainTitle")}
+          {mainTitle}
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12">
-          {t("exchangeSection.mainDescription")}
+          {mainDescription}
         </p>
 
         <div className="bg-dark-card p-6 sm:p-8 rounded-xl border border-cyber-blue/30 shadow-neon">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-cyber-blue mb-6">{t("exchangeSection.areaTitle")}</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-cyber-blue mb-6">{areaTitle}</h2>
           <p className="text-lg sm:text-xl mb-6 text-gray-300">
             {t("exchangeSection.rateInfoPrefix", { coin: selectedCoin })}
             <span className="text-cyber-blue font-semibold">{exchangeRates[selectedCoin].toString()}</span> $YD

@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 export const LanguageSwitcher = ({ lng }: { lng: string }) => {
   // 确保 Hook 的调用顺序在不同渲染路径中保持一致
-  const { t, i18n } = useTranslation(lng, "translation");
+  const { t, i18n, isReady } = useTranslation(lng, "translation");
   const router = useRouter();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
@@ -46,10 +46,12 @@ export const LanguageSwitcher = ({ lng }: { lng: string }) => {
     router.push(newPath);
   };
 
-  // 解决水合问题：在客户端挂载前，保持占位符大小一致
-  if (!mounted) {
+  // 显示一个与最终渲染尺寸相匹配的占位符
+  if (!mounted || !isReady) {
     return (
-      <div style={{ width: "80px", height: "30px", display: "inline-block" }}></div>
+      <div className="p-1.5 rounded border border-gray-500 text-white bg-transparent" 
+           style={{ minWidth: "80px", height: "30px" }}>
+      </div>
     );
   }
 
