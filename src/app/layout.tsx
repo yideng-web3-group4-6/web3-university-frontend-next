@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
-import { Web3Provider } from "@/components/WagmiConnect/Web3Provider";
 import { languages } from "@/i18n/config";
+import { ClientWeb3Wrapper } from "@/components/common/ClientWeb3Wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,10 +34,10 @@ export default function RootLayout({
   return (
     <html lang={lng}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Web3Provider>
+        <ClientWeb3Wrapper>
           <Header />
           <div>{children}</div>
-        </Web3Provider>
+        </ClientWeb3Wrapper>
       </body>
     </html>
   );

@@ -8,12 +8,6 @@ import { LanguageSwitcher } from "../LanguageSwitcher"; // Import LanguageSwitch
 import { useTranslation } from "@/i18n/client"; // Import useTranslation
 import { useParams } from "next/navigation"; // Import useParams
 
-// Remove props interface, Header no longer needs lng prop
-// interface HeaderProps {
-//   lng: string;
-// }
-
-// Remove lng from component signature
 const Header = () => {
   const params = useParams(); // Get params hook
   const lng = (params?.lng as string) || "en"; // Extract lng, default to 'en' if needed

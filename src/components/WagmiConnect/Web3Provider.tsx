@@ -1,10 +1,9 @@
 "use client";
 import { ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet, sepolia, localhost,  } from "wagmi/chains"; // 导入 sepolia 测试网
+import { mainnet, sepolia, localhost } from "wagmi/chains"; // 导入 sepolia 测试网
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
-
 
 const config = createConfig(
   getDefaultConfig({
@@ -36,16 +35,20 @@ const config = createConfig(
 const queryClient = new QueryClient();
 
 // Web3 提供者组件
-export const Web3Provider = ({ children }: { children: ReactNode }) => {
+export default function Web3Provider({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider theme="auto" mode="dark" options={{
-          enforceSupportedChains: false, // 允许显示所有链，包括自定义链
-        }}>
+        <ConnectKitProvider
+          theme="auto"
+          mode="dark"
+          options={{
+            enforceSupportedChains: false, // 允许显示所有链，包括自定义链
+          }}
+        >
           {children}
         </ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
-};
+}
