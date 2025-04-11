@@ -1,16 +1,29 @@
-"use client";
 import React from "react";
 import { BigNumber } from "@ethersproject/bignumber";
 import { CoinType } from "@/mockData/courseData";
 import ExchangeSection from "@components/Index/ExchangeSection";
+import { cookies } from "next/headers";
+import { DEFAULT_LANGUAGE, LANGUAGE_COOKIE_KEY, Language, AVAILABLE_LANGUAGES, getDictionary } from "@/i18n/config";
 
-const Index = () => {
+export default async function Home() {
+  // Get language from cookies for server-side rendering
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get(LANGUAGE_COOKIE_KEY)?.value;
+  const locale = (localeCookie && AVAILABLE_LANGUAGES.includes(localeCookie as Language)) 
+    ? localeCookie as Language 
+    : DEFAULT_LANGUAGE;
+    
+  // Load dictionary
+  await getDictionary(locale as Language);
+
+  // Define exchange rates
   const exchangeRates: Record<CoinType, BigNumber> = {
-    ETH: BigNumber.from("1000"), // 1 ETH = 1000 $YD
-    BTC: BigNumber.from("20000"), // 1 BTC = 20000 $YD
-    USDT: BigNumber.from("2"), // 1 USDT = 2 $YD
-    BNB: BigNumber.from("500"), // 1 BNB = 500 $YD
+    ETH: BigNumber.from("1000"),
+    BTC: BigNumber.from("20000"),
+    USDT: BigNumber.from("2"),
+    BNB: BigNumber.from("500"),
   };
+
   return (
     <>
       <ExchangeSection exchangeRates={exchangeRates} />
@@ -40,5 +53,4 @@ const Index = () => {
       </div> */}
     </>
   );
-};
-export default Index;
+}

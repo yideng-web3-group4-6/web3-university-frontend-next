@@ -1,0 +1,26 @@
+{
+  "header": {
+    "title": "Frontend Web3 University",
+    "home": "Home",
+    "courses": "Courses",
+    "knowledge": "Knowledge Base",
+    "award": "Rewards"
+  },
+  "language": {
+    "title": "Language",
+    "zh": "Chinese",
+    "en": "English"
+  },
+  "exchange": {
+    "title": "Cryptocurrency Exchange for $YD",
+    "description": "Explore the perfect combination of frontend development and Web3 technology, starting your blockchain development journey",
+    "inputPlaceholder": "Enter amount",
+    "rate": "Enter amount, real-time exchange for $YD, current rate:",
+    "estimated": "Estimated to receive:",
+    "button": "Exchange Now",
+    "alert": {
+      "invalidAmount": "Please enter a valid amount",
+      "exchangeFailed": "Exchange failed, please check your input!"
+    }
+  }
+} 

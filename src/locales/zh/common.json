@@ -1,0 +1,26 @@
+{
+  "header": {
+    "title": "前端Web3大学",
+    "home": "首页",
+    "courses": "课程",
+    "knowledge": "知识库",
+    "award": "奖励"
+  },
+  "language": {
+    "title": "语言",
+    "zh": "中文",
+    "en": "英文"
+  },
+  "exchange": {
+    "title": "加密货币兑换 $YD",
+    "description": "探索前端开发与 Web3 技术的完美结合，开启您的区块链开发之旅",
+    "inputPlaceholder": "输入数量",
+    "rate": "输入数量，实时兑换 $YD，当前汇率：",
+    "estimated": "预计获得：",
+    "button": "立即兑换",
+    "alert": {
+      "invalidAmount": "请输入有效的数量",
+      "exchangeFailed": "兑换失败，请检查输入！"
+    }
+  }
+} 
