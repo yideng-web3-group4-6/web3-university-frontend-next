@@ -7,10 +7,10 @@ import { LANGUAGE_COOKIE_KEY, DEFAULT_LANGUAGE, getDictionary, AVAILABLE_LANGUAG
 import { getCookie } from "cookies-next";
 
 interface ExchangeSectionProps {
-  exchangeRates: Record<CoinType, BigNumber>;
+  exchangeRateValues: Record<CoinType, string>;
 }
 
-const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates }) => {
+const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRateValues }) => {
   const { buyTokensWithETH } = useYiDengToken();
   const [ethAmount, setEthAmount] = useState<string>("");
   const [selectedCoin, setSelectedCoin] = useState<CoinType>("ETH");
@@ -31,6 +31,14 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates }) => {
       }
     }
   });
+  
+  // Convert strings to BigNumber objects
+  const exchangeRates: Record<CoinType, BigNumber> = {
+    ETH: BigNumber.from(exchangeRateValues.ETH),
+    BTC: BigNumber.from(exchangeRateValues.BTC),
+    USDT: BigNumber.from(exchangeRateValues.USDT),
+    BNB: BigNumber.from(exchangeRateValues.BNB),
+  };
   
   useEffect(() => {
     // Get language from cookie on client side
@@ -91,7 +99,7 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRates }) => {
           </h2>
           <p className="text-lg sm:text-xl mb-6 text-gray-300">
             {dictionary.exchange?.rate || "输入数量，实时兑换 $YD，当前汇率："} 1 {selectedCoin} ={" "}
-            <span className="text-cyber-blue font-semibold">{exchangeRates[selectedCoin].toString()}</span> $YD
+            <span className="text-cyber-blue font-semibold">{exchangeRateValues[selectedCoin]}</span> $YD
           </p>
           <div className="flex flex-col items-center gap-4">
             <div className="w-full max-w-md flex flex-col sm:flex-row gap-3">

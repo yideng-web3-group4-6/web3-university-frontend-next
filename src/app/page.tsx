@@ -16,17 +16,17 @@ export default async function Home() {
   // Load dictionary
   await getDictionary(locale as Language);
 
-  // Define exchange rates
-  const exchangeRates: Record<CoinType, BigNumber> = {
-    ETH: BigNumber.from("1000"),
-    BTC: BigNumber.from("20000"),
-    USDT: BigNumber.from("2"),
-    BNB: BigNumber.from("500"),
+  // Define exchange rates as string values to avoid serialization issues
+  const exchangeRateValues = {
+    ETH: "1000",
+    BTC: "20000",
+    USDT: "2",
+    BNB: "500",
   };
 
   return (
     <>
-      <ExchangeSection exchangeRates={exchangeRates} />
+      <ExchangeSection exchangeRateValues={exchangeRateValues} />
       {/* <div className="hero-gradient pt-24">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
