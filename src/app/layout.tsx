@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import { Web3Provider } from "@/components/WagmiConnect/Web3Provider";
 import { cookies } from "next/headers";
 import { AVAILABLE_LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_COOKIE_KEY, getDictionary, Language } from "@/i18n/config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
@@ -38,7 +33,7 @@ export default async function RootLayout({
   
   return (
     <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.variable} antialiased`}>
         <Web3Provider>
           <Header dictionary={dictionary} currentLanguage={locale} />
           {children}
