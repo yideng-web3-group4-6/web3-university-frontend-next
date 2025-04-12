@@ -8,29 +8,19 @@ import { getCookie } from "cookies-next";
 
 interface ExchangeSectionProps {
   exchangeRateValues: Record<CoinType, string>;
+  initialDictionary: any;
+  initialLocale: Language;
 }
 
-const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRateValues }) => {
+const ExchangeSection: React.FC<ExchangeSectionProps> = ({ 
+  exchangeRateValues, 
+  initialDictionary,
+  initialLocale 
+}) => {
   const { buyTokensWithETH } = useYiDengToken();
   const [ethAmount, setEthAmount] = useState<string>("");
   const [selectedCoin, setSelectedCoin] = useState<CoinType>("ETH");
-  const [dictionary, setDictionary] = useState<any>({
-    header: {
-      title: "前端 Web3 大学",
-    },
-    exchange: {
-      title: "加密货币兑换 $YD",
-      description: "探索前端开发与 Web3 技术的完美结合，开启您的区块链开发之旅",
-      inputPlaceholder: "输入数量",
-      rate: "输入数量，实时兑换 $YD，当前汇率：",
-      estimated: "预计获得：",
-      button: "立即兑换",
-      alert: {
-        invalidAmount: "请输入有效的数量",
-        exchangeFailed: "兑换失败，请检查输入！",
-      }
-    }
-  });
+  const [dictionary, setDictionary] = useState<any>(initialDictionary);
   
   // Convert strings to BigNumber objects
   const exchangeRates: Record<CoinType, BigNumber> = {
@@ -41,17 +31,24 @@ const ExchangeSection: React.FC<ExchangeSectionProps> = ({ exchangeRateValues })
   };
   
   useEffect(() => {
-    // Get language from cookie on client side
-    const localeCookie = getCookie(LANGUAGE_COOKIE_KEY);
-    const locale = typeof localeCookie === 'string' && AVAILABLE_LANGUAGES.includes(localeCookie as Language)
-      ? localeCookie as Language
-      : DEFAULT_LANGUAGE;
-      
-    // Load dictionary
-    getDictionary(locale as Language).then(dict => {
-      setDictionary(dict);
-    });
-  }, []);
+    // 仅在客户端语言变化时重新加载字典
+    const handleLanguageChange = () => {
+      const localeCookie = getCookie(LANGUAGE_COOKIE_KEY);
+      const locale = typeof localeCookie === 'string' && AVAILABLE_LANGUAGES.includes(localeCookie as Language)
+        ? localeCookie as Language
+        : DEFAULT_LANGUAGE;
+        
+      if (locale !== initialLocale) {
+        getDictionary(locale as Language).then(dict => {
+          setDictionary(dict);
+        });
+      }
+    };
+    
+    // 可以添加事件监听器监听语言变化
+    window.addEventListener('languageChange', handleLanguageChange);
+    return () => window.removeEventListener('languageChange', handleLanguageChange);
+  }, [initialLocale]);
 
   let yidengAmount = "0.00";
 

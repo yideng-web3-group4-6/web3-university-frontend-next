@@ -5,15 +5,6 @@ import { AVAILABLE_LANGUAGES, LANGUAGE_COOKIE_KEY } from "@/i18n/config";
 import { setCookie } from "cookies-next";
 import { usePathname, useRouter } from "next/navigation";
 
-// Function to change language
-const setLanguage = (language: string) => {
-  setCookie(LANGUAGE_COOKIE_KEY, language, {
-    maxAge: 365 * 24 * 60 * 60, // 1 year
-    path: '/',
-  });
-  window.location.reload();
-};
-
 interface LanguageSwitcherProps {
   dictionary: Record<string, any>;
   currentLanguage: string;
@@ -24,6 +15,23 @@ const LanguageSwitcher = ({ dictionary, currentLanguage }: LanguageSwitcherProps
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
+
+  // Function to change language
+  const setLanguage = (language: string) => {
+    setCookie(LANGUAGE_COOKIE_KEY, language, {
+      maxAge: 365 * 24 * 60 * 60, // 1 year
+      path: '/',
+    });
+    
+    // 不要直接刷新页面，而是触发语言变化事件
+    // 然后让路由器用新的语言导航到当前页面，这样更平滑
+    window.dispatchEvent(new Event('languageChange'));
+    
+    // 使用Next.js路由器重新导航到当前页面，保持状态但应用新语言
+    // 替代 window.location.reload();
+    const { pathname, search } = window.location;
+    router.refresh(); // 刷新当前路由，保持状态
+  };
 
   // Handle clicks outside of the dropdown
   useEffect(() => {
