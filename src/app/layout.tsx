@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import { Web3Provider } from "@/components/WagmiConnect/Web3Provider";
 import { languages } from "@/i18n/config";
-import { Suspense } from 'react'; // 引入Suspense
+import { Suspense } from "react"; // 引入Suspense
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,13 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lng}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Web3Provider>
           {/* 使用Suspense包裹Header组件，提供加载时的备用UI */}
           <Suspense fallback={<div className="h-16"></div>}>
             <Header />
           </Suspense>
-          <div>{children}</div>
+          <div className="pt-[65px]">{children}</div>
         </Web3Provider>
       </body>
     </html>
