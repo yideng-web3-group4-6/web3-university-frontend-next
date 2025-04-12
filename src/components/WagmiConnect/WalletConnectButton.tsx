@@ -5,10 +5,10 @@ import { useWalletAuth } from "@hooks/useWalletAuth";
 import { useTranslation } from '@/i18n/client';
 import { useParams } from 'next/navigation';
 import { useEffect } from "react";
-import { getNonce } from "@/api/userApi";
+import { fetchLogin, getNonce } from "@/api/userApi";
 
 export const WagmiConnectButton = () => {
-  const { isAuthenticated, isSigningMessage, address, isConnected } = useWalletAuth();
+  const { isAuthenticated, isSigningMessage, address, isConnected, signer } = useWalletAuth();
   const params = useParams();
   const lng = params?.lng as string || 'en';
   const { t } = useTranslation(lng, 'translation');
@@ -16,14 +16,17 @@ export const WagmiConnectButton = () => {
   useEffect(() => {
     const handleLogin = async () => {
       if(address) {
-        const res = await getNonce(address)
-        console.log(res, '============')
+        const {nonce} = await getNonce(address)
+        console.log(nonce, '============')
+        const jwt = await fetchLogin({walletAddress: address, signature: signer, nonce})
+        console.log(jwt, 'hahahahahha')
+
       }
     }
-    if(isConnected) {
+    if(isConnected && isAuthenticated) {
       handleLogin()
     }
-  }, [isConnected])
+  }, [isConnected, isAuthenticated])
 
   return (
     <ConnectKitButton.Custom>
