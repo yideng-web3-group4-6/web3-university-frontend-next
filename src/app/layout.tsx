@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
-import { Web3Provider } from '@/components/WagmiConnect/Web3Provider';
 import { languages } from '@/i18n/config';
 import { CartProvider } from '@/context/CartContext';
-import { Suspense } from 'react';
+import { Suspense } from 'react'; // 引入Suspense
+import { ClientWeb3Wrapper } from '@/components/common/ClientWeb3Wrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,13 +37,13 @@ export default function RootLayout({
     <html lang={lng}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <CartProvider>
-          <Web3Provider>
+          <ClientWeb3Wrapper>
             {/* 使用Suspense包裹Header组件，提供加载时的备用UI */}
             <Suspense fallback={<div className='h-16'></div>}>
               <Header />
             </Suspense>
             <div>{children}</div>
-          </Web3Provider>
+          </ClientWeb3Wrapper>
         </CartProvider>
       </body>
     </html>
