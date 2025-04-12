@@ -10,7 +10,7 @@ const courseList = [
     title: 'Aora',
     category: 'Development',
     year: '2024',
-    image: '/static/image.png',
+    image: '/static/home/course.png',
     bgColor: '#8c8472',
   },
   {
@@ -18,7 +18,7 @@ const courseList = [
     title: 'Code Screenshot',
     category: 'Development & Design',
     year: '2024',
-    image: '/static/image.png',
+    image: '/static/home/course.png',
     bgColor: '#f8d7ea',
   },
   {
@@ -26,7 +26,7 @@ const courseList = [
     title: 'Code Screenshot',
     category: 'Development & Design',
     year: '2024',
-    image: '/static/image.png',
+    image: '/static/home/course.png',
     bgColor: '#fff',
   },
   {
@@ -34,7 +34,7 @@ const courseList = [
     title: 'Code Screenshot',
     category: 'Development & Design',
     year: '2024',
-    image: '/static/image.png',
+    image: '/static/home/course.png',
     bgColor: 'rgba(187 247 208)',
   },
 ];

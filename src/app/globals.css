@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 :root {
   --neon-blue: #00f3ff;
@@ -188,4 +186,27 @@ input[type='number']::-webkit-outer-spin-button {
             visibility: visible;
         }
     }
+}
+
+/* 添加霓虹灯效果 */
+.neon-text {
+  text-shadow: 0 0 10px #00ff9f,
+               0 0 20px #00ff9f,
+               0 0 30px #00ff9f;
+}
+
+.neon-border {
+  box-shadow: 0 0 10px #00ff9f,
+              0 0 20px #00ff9f,
+              0 0 30px #00ff9f;
+}
+
+
+.opacity-container:has(.opacity-container-child:hover) .opacity-container-child:not(:hover) {
+  opacity:.5;
+}
+
+.opacity-container-child {
+  transition: opacity .3s ease;
+  cursor: pointer
 }

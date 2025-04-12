@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Coins, Wallet, Trophy } from "lucide-react";
+import { BookOpen, Coins, Wallet, Trophy, FileText } from "lucide-react";
 
 export function FloatingPaper({ count = 5 }) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -39,6 +39,7 @@ export function FloatingPaper({ count = 5 }) {
     { icon: Coins, color: "text-green-400/50" },
     { icon: Wallet, color: "text-purple-400/50" },
     { icon: Trophy, color: "text-orange-400/50" },
+    { icon: FileText, color: "text-purple-400/50" },
   ];
 
   return (
