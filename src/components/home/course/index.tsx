@@ -71,11 +71,11 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <Box className='w-full py-6 md:mt-30 md:mb-30'>
+    <Box className='w-full py-6 md:mt-20 md:mb-20'>
       <Container maxWidth='lg'>
         <h1 className='mb-2 font-bold text-4xl text-primary-500'>Popular Course</h1>
 
-        <h2 className='text-text-secondary mb-10 text-xl text-white'>
+        <h2 className='text-white mb-10 text-xl'>
           There are all kinds of courses, buy the courses you like.
         </h2>
         <div
@@ -104,12 +104,12 @@ const ProjectsSection = () => {
                 </span>
                 <span className='text-white'>
                   <div className='mt-4 space-y-2'>
-                    <h5>{item.title}</h5>
+                    <h5 className='text-white text-2xl font-bold'>{item.title}</h5>
                     <div className='flex justify-between'>
                       <div className='flex flex-wrap gap-2'>
-                        <p className='text-sm text-text-secondary'>{item.category}</p>
+                        <p className='text-sm text-white'>{item.category}</p>
                       </div>
-                      <p className='text-sm text-text-secondary'>{item.year}</p>
+                      <p className='text-sm text-white'>{item.year}</p>
                     </div>
                   </div>
                 </span>

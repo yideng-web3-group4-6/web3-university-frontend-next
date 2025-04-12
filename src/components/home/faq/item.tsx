@@ -16,7 +16,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
     <Accordion
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
-      className='bg-transparent border-none shadow-none pb-3 pt-3'
+      className='bg-transparent border-none shadow-none pb-2 pt-2'
       sx={{
         backgroundColor: 'transparent',
         '&::before': {
@@ -36,10 +36,10 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         id='panel-header'
         className='text-white'
       >
-        <p className='text-white font-semibold text-lg'>{question}</p>
+        <p className='text-white font-semibold text-2xl'>{question}</p>
       </AccordionSummary>
       <AccordionDetails>
-        <p className='text-gray-300 mb-4 text-md'>{answer}</p>
+        <p className='text-gray-300 text-lg'>{answer}</p>
       </AccordionDetails>
     </Accordion>
   );

@@ -6,6 +6,7 @@ import { languages } from '@/i18n/config';
 import { CartProvider } from '@/context/CartContext';
 import { Suspense } from 'react'; // 引入Suspense
 import { ClientWeb3Wrapper } from '@/components/common/ClientWeb3Wrapper';
+import Footer from '@/components/layout/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
