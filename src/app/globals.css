@@ -1,11 +1,13 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --neon-blue: #00f3ff;
   --dark-bg: #0a0b0f;
   --tw-text-opacity: 1;
   --tw-bg-opacity: 1;
-  --primary-500: #ad47ff;
+  --primary-500: #a855f7;
   --primary-600: #9333ea;
   --primary-700: #7928cc;
 }

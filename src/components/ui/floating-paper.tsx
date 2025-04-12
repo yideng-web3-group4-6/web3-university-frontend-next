@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FileText } from "lucide-react";
+import { BookOpen, Coins, Wallet, Trophy } from "lucide-react";
 
 export function FloatingPaper({ count = 5 }) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -34,6 +34,13 @@ export function FloatingPaper({ count = 5 }) {
     return <div className="relative w-full h-full"></div>;
   }
 
+  const icons = [
+    { icon: BookOpen, color: "text-blue-400/50" },
+    { icon: Coins, color: "text-green-400/50" },
+    { icon: Wallet, color: "text-purple-400/50" },
+    { icon: Trophy, color: "text-orange-400/50" },
+  ];
+
   return (
     <div className="relative w-full h-full">
       {Array.from({ length: count }).map((_, i) => {
@@ -51,6 +58,8 @@ export function FloatingPaper({ count = 5 }) {
           Math.random() * dimensions.height,
         ];
         const duration = 20 + Math.random() * 10;
+        const scale = 0.8 + Math.random() * 0.4;
+        const selectedIcon = icons[Math.floor(Math.random() * icons.length)];
 
         return (
           <motion.div
@@ -59,11 +68,13 @@ export function FloatingPaper({ count = 5 }) {
             initial={{
               x: initialX,
               y: initialY,
+              scale: scale,
             }}
             animate={{
               x: animateX,
               y: animateY,
               rotate: [0, 180, 360],
+              scale: [scale, scale * 1.2, scale],
             }}
             transition={{
               duration: duration,
@@ -72,7 +83,7 @@ export function FloatingPaper({ count = 5 }) {
             }}
           >
             <div className="relative w-16 h-20 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center transform hover:scale-110 transition-transform">
-              <FileText className="w-8 h-8 text-purple-400/50" />
+              <selectedIcon.icon className={`w-8 h-8 ${selectedIcon.color}`} />
             </div>
           </motion.div>
         );

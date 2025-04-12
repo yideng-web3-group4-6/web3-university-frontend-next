@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { SwapVert } from '@mui/icons-material';
 import { ethers } from 'ethers';
 import { YiDengToken__factory } from '@/typechain-types';
-import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi';
+import { useAccount, useConnect, useBalance } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import TokenInput from './input';
 
@@ -160,7 +160,7 @@ const TokenSwap: React.FC = () => {
           showSplit={true}
         />
 
-        <div className='bg-primary-500 rounded-full w-8 h-8 flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-primary-600 transition-colors'>
+        <div className="bg-primary-500 z-50 rounded-full w-8 h-8 flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-primary-600 transition-colors">
           <button
             onClick={handleSwap}
             className='rounded-full focus:bg-primary-600 align-middle cursor-pointer'

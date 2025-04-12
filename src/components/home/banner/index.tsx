@@ -2,10 +2,10 @@
 
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { FileText, Sparkles } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { FloatingPaper } from '@/components/ui/floating-paper';
 import { RoboAnimation } from '@/components/ui/robo-animation';
-import { Swap } from '@/components/home';
+import Swap from '@/components/home/swap';
 import Link from 'next/link';
 
 const Hero = () => {
