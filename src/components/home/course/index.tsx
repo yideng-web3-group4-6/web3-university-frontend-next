@@ -73,7 +73,7 @@ const ProjectsSection = () => {
   return (
     <Box className='w-full py-6 md:mt-30 md:mb-30'>
       <Container maxWidth='lg'>
-        <h1 className='mb-2 font-bold text-4xl text-[#A3FF12]'>Popular Course</h1>
+        <h1 className='mb-2 font-bold text-4xl text-primary-500'>Popular Course</h1>
 
         <h2 className='text-text-secondary mb-10 text-xl'>
           There are all kinds of courses, buy the courses you like.
@@ -118,7 +118,10 @@ const ProjectsSection = () => {
           ))}
         </div>
         <div className='flex justify-center'>
-          <a href='/course' className='cursor-pointer w-fit rounded-full bg-[#B5FF6D]/10 px-4 py-2'>
+          <a
+            href='/course'
+            className='cursor-pointer w-fit text-white rounded-full bg-primary-600 px-4 py-2'
+          >
             View All Course
           </a>
         </div>

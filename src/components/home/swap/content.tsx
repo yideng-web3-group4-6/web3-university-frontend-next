@@ -145,7 +145,7 @@ const TokenSwap: React.FC = () => {
 
   return (
     <div className='flex flex-col gap-10'>
-      <div className='flex flex-col gap-5 relative'>
+      <div className='flex flex-col gap-12 relative'>
         <TokenInput
           tokenSymbol={isSwapped ? 'ETH' : 'YD'}
           balance={isSwapped ? eth_Balance : yd_balance}
