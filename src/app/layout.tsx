@@ -5,6 +5,7 @@ import Header from '@/components/Header/Header';
 import { Web3Provider } from '@/components/WagmiConnect/Web3Provider';
 import { languages } from '@/i18n/config';
 import { CartProvider } from '@/context/CartContext';
+import { Suspense } from 'react';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,7 +38,10 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <CartProvider>
           <Web3Provider>
-            <Header />
+            {/* 使用Suspense包裹Header组件，提供加载时的备用UI */}
+            <Suspense fallback={<div className='h-16'></div>}>
+              <Header />
+            </Suspense>
             <div>{children}</div>
           </Web3Provider>
         </CartProvider>

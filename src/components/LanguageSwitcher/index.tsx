@@ -6,7 +6,7 @@ import { languages, cookieName } from "@/i18n/config";
 import Cookies from "js-cookie";
 
 export const LanguageSwitcher = ({ lng }: { lng: string }) => {
-  const { t } = useTranslation(lng, "translation");
+  const { t, i18n } = useTranslation(lng, "translation");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -22,26 +22,24 @@ export const LanguageSwitcher = ({ lng }: { lng: string }) => {
       // Replace the existing language segment
       newPath = pathname.replace(`/${currentLngInPath}`, `/${newLng}`);
     } else {
-      // Prepend the language segment (might happen on root path if not redirected)
-      newPath = `/${newLng}${pathname}`;
+      // Prepend the language segment
+      newPath = `/${newLng}${pathname}`
     }
 
     // Set cookie for persistence and language detection
     Cookies.set(cookieName, newLng, { expires: 365 });
 
-    // Use router.refresh() instead of push to update server components with the new language
-    // while preserving client state where possible.
-    router.refresh();
-    // Then push to the new path
-    router.push(newPath);
-
-    // Optionally, force i18n instance update if router.refresh isn't immediate
-    // i18n.changeLanguage(newLng)
-  };
+    // First change the language
+    i18n.changeLanguage(newLng)
+    
+    // Then push to the new path and refresh
+    router.push(newPath)
+    router.refresh()
+  }
 
   // Ensure the component doesn't render until translations are ready
   // Note: A proper loading state might be needed for better UX
-  // if (i18n.resolvedLanguage !== lng) return null; // Temporarily comment out this line
+  if (i18n.resolvedLanguage !== lng) return null; // Temporarily comment out this line
 
   return (
     <div>
