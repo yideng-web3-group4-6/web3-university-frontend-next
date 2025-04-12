@@ -4,12 +4,26 @@ import { Wallet, CheckCircle } from "lucide-react";
 import { useWalletAuth } from "@hooks/useWalletAuth";
 import { useTranslation } from '@/i18n/client';
 import { useParams } from 'next/navigation';
+import { useEffect } from "react";
+import { getNonce } from "@/api/userApi";
 
 export const WagmiConnectButton = () => {
-  const { isAuthenticated, isSigningMessage } = useWalletAuth();
+  const { isAuthenticated, isSigningMessage, address, isConnected } = useWalletAuth();
   const params = useParams();
   const lng = params?.lng as string || 'en';
   const { t } = useTranslation(lng, 'translation');
+
+  useEffect(() => {
+    const handleLogin = async () => {
+      if(address) {
+        const res = await getNonce(address)
+        console.log(res, '============')
+      }
+    }
+    if(isConnected) {
+      handleLogin()
+    }
+  }, [isConnected])
 
   return (
     <ConnectKitButton.Custom>

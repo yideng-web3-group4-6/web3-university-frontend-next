@@ -55,6 +55,9 @@ const request = async <T>({
       data,
       ...config,
     });
+    if(response.status === 200) {
+      return response.data as T
+    }
     const { code, msg, data: responseData } = response.data;
     if (code !== 10000 && code !== "10000") {
       return Promise.reject(msg || "Request failed with unknown error");
