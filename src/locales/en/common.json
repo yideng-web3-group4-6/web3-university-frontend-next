@@ -22,5 +22,10 @@
       "invalidAmount": "Please enter a valid amount",
       "exchangeFailed": "Exchange failed, please check your input!"
     }
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "signing": "Signing...",
+    "signVerify": "Sign to Verify"
   }
 } 

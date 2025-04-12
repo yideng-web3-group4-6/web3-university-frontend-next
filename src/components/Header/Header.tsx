@@ -30,7 +30,7 @@ const Header = ({ dictionary, currentLanguage }: HeaderProps) => {
 
           <div className="flex items-center">
             <LanguageSwitcher dictionary={dictionary} currentLanguage={currentLanguage} />
-            <WagmiConnectButton />
+            <WagmiConnectButton dictionary={dictionary} />
           </div>
         </div>
       </div>

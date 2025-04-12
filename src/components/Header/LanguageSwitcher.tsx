@@ -54,7 +54,7 @@ const LanguageSwitcher = ({ dictionary, currentLanguage }: LanguageSwitcherProps
         aria-expanded={isOpen}
       >
         <Globe className="h-5 w-5 mr-1" />
-        <span>{dictionary.language.title}</span>
+        <span>{dictionary.language[currentLanguage]}</span>
       </button>
 
       {isOpen && (

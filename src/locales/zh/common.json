@@ -22,5 +22,10 @@
       "invalidAmount": "请输入有效的数量",
       "exchangeFailed": "兑换失败，请检查输入！"
     }
+  },
+  "wallet": {
+    "connect": "连接钱包",
+    "signing": "签名中...",
+    "signVerify": "请签名验证"
   }
 } 

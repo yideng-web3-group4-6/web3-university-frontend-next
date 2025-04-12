@@ -3,8 +3,22 @@ import { ConnectKitButton } from "connectkit";
 import { Wallet, CheckCircle } from "lucide-react";
 import { useWalletAuth } from "@hooks/useWalletAuth";
 
-export const WagmiConnectButton = () => {
+interface WalletConnectButtonProps {
+  dictionary?: Record<string, any>;
+}
+
+export const WagmiConnectButton = ({ dictionary }: WalletConnectButtonProps) => {
   const { isAuthenticated, isSigningMessage } = useWalletAuth();
+  
+  // 默认文本（中文）
+  const defaultText = {
+    connect: "连接钱包",
+    signing: "签名中...",
+    signVerify: "请签名验证"
+  };
+  
+  // 使用字典中的文本，如果存在的话
+  const walletText = dictionary?.wallet || defaultText;
 
   return (
     <ConnectKitButton.Custom>
@@ -12,10 +26,10 @@ export const WagmiConnectButton = () => {
         const buttonText = isAuthenticated
           ? ensName || truncatedAddress
           : isSigningMessage
-          ? "签名中..."
+          ? walletText.signing
           : isConnected
-          ? "请签名验证"
-          : "连接钱包";
+          ? walletText.signVerify
+          : walletText.connect;
 
         return (
           <button
