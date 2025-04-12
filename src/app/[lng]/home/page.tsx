@@ -1,4 +1,4 @@
-import Hero from '@/components/home/banner';
+import Hero from '@/components/home/Hero';
 import { SparklesCore } from '@/components/ui/sparkles';
 const Home = () => {
   return (
