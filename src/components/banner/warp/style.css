@@ -1,0 +1,15 @@
+.main-container {
+    border-radius: 24px;
+    height: 592px;
+    padding-bottom: 24px;
+    position: relative;
+    background-color: rgba(30, 31, 53, 0.8);
+}
+
+.balance-text {
+    font-size: 14px;
+}
+
+.wrap-area {
+    background: radial-gradient(circle, #4a4176 -24%, #1E1F35 40%);
+}
