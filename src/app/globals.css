@@ -5,6 +5,9 @@
   --dark-bg: #0a0b0f;
   --tw-text-opacity: 1;
   --tw-bg-opacity: 1;
+  --primary-500: #ad47ff;
+  --primary-600: #9333ea;
+  --primary-700: #7928cc;
 }
 
 body {
@@ -62,7 +65,7 @@ body {
 }
 
 .bg-clip-text {
-  background: linear-gradient(45deg, #00f3ff, #9333ea);
+  background: linear-gradient(45deg, var(--primary-500), var(--primary-600));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

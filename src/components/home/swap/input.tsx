@@ -1,5 +1,5 @@
-import React from "react";
-import { Refresh } from "@mui/icons-material";
+import React from 'react';
+import { Refresh } from '@mui/icons-material';
 
 import './style.css';
 
@@ -23,41 +23,42 @@ const TokenInput: React.FC<TokenInputProps> = ({
   showSplit,
 }) => {
   return (
-    <div className="flex flex-col p-6 rounded-lg border border-gray-700">
+    <div className='flex flex-col p-6 rounded-lg border border-primary-700/30 bg-dark-800/50 backdrop-blur-sm hover:border-primary-600/50 transition-all'>
       {/* Input and Token Symbol */}
-      <div className="flex items-center justify-between pb-8">
+      <div className='flex items-center justify-between pb-8'>
         <input
-          type="text"
+          type='text'
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={e => onChange(e.target.value)}
           disabled={disabled}
           className={`flex-1 pr-4 text-2xl bg-transparent focus:outline-none ${
-            disabled ? "text-gray-400" : "text-white"
+            disabled ? 'text-gray-400' : 'text-white'
           } w-1/2`}
-          placeholder="0.0"
+          placeholder='0.0'
         />
-        <div className="flex flex-row items-center min-w-[100px]">
+        <div className='flex flex-row items-center min-w-[100px]'>
           {!disabled && (
-          <button
-            onClick={onMaxClick}
-            className="my-0 text-[#A3FF12] text-xs bg-gray-700 px-2 py-1 rounded-lg cursor-pointer"
-          >
-            Max
-          </button>
+            <button
+              onClick={onMaxClick}
+              className='my-0 text-primary-400 text-xs bg-primary-900/50 px-2 py-1 rounded-lg cursor-pointer hover:bg-primary-800/50'
+            >
+              Max
+            </button>
           )}
-          {showSplit &&<div className="w-[0.5px] h-5 bg-gray-500 rounded-full ml-3 mr-3"></div>}
-          <h6 className="text-white text-2xl">
-            {tokenSymbol}
-          </h6>
+          {showSplit && (
+            <div className='w-[0.5px] h-5 bg-primary-700/50 rounded-full ml-3 mr-3'></div>
+          )}
+          <h6 className='text-white text-2xl'>{tokenSymbol}</h6>
         </div>
       </div>
 
-      {/* Balance and Max Button */}
-      <div className="flex flex-row justify-end">
-        <p className="text-white mr-2 balance-text">
-          Balance: {balance}
-        </p>
-        <Refresh className="text-[#A3FF12] cursor-pointer" fontSize="small" />
+      {/* Balance and Refresh */}
+      <div className='flex flex-row justify-end'>
+        <p className='text-primary-400 mr-2 balance-text'>Balance: {balance}</p>
+        <Refresh
+          className='text-primary-400 cursor-pointer hover:text-primary-300 transition-colors'
+          fontSize='small'
+        />
       </div>
     </div>
   );
