@@ -120,3 +120,67 @@ input[type='number']::-webkit-outer-spin-button {
 .inactive:hover {
   color: var(--neon-blue);
 }
+
+
+.active-shape,
+.hover-shape-border {
+    position: relative;
+    .border-shadow {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 9;
+    }
+    .shadow-1,
+    .shadow-3{
+        width: 5px;
+        height: 200px;
+    }
+    .shadow-2,
+    .shadow-4{
+        width: 200px;
+    height: 5px;
+    }
+    .shadow-1{
+        top: 0px;
+        left: 0;
+        background: linear-gradient(to bottom, #F82552 -100%, rgba(21, 22, 37, 0) 64%);
+        width: 5px;
+        height: 200px;
+    }
+    .shadow-2{
+        top: 0px;
+        left: 5px;
+        background: linear-gradient(to right, #F82552 -100%, rgba(21, 22, 37, 0) 64%);
+        width: 200px;
+        height: 5px;
+    }
+    .shadow-3{
+        bottom: 0px;
+        right: 0;
+        width: 5px;
+        height: 200px;
+        background: linear-gradient(to top, #A3FF12 -100%, rgba(21, 22, 37, 0) 64%);
+    }
+    .shadow-4{
+        bottom: 0px;
+        right: 5px;
+        width: 200px;
+        height: 5px;
+        background: linear-gradient(to left, #A3FF12 -100%, rgba(21, 22, 37, 0) 64%);
+    }
+}
+
+.hover-shape-border {
+    .border-shadow {
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.4s;
+    }
+    &:hover{
+        .border-shadow {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

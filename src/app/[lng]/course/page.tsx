@@ -1,9 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import CourseList from '@components/course/CourseList';
+// import CourseList from '@components/course/CourseList';
 import CartSidebar from '@components/sidebar/CartSidebar';
 import RightSidebar from '@components/sidebar/RightSidebar';
+import CourseList from '@/components/course/list';
+import CourseContent from '@/components/course/index'
 import { Course } from '@utils/courseType';
 import { fetchCourse } from '@/apis/courseApi';
 import { useTranslation } from '@/i18n/client';
@@ -54,15 +56,16 @@ const CoursePage: React.FC = () => {
 
   return (
     <>
-      <CourseList onAddToCart={addToCart} lng={lng} courses={courses} />
+      {/* <CourseList onAddToCart={addToCart} lng={lng} courses={courses} /> */}
       <RightSidebar cartItems={cartItems} setIsCartOpen={setIsCartOpen} lng={lng} />
       <CartSidebar
-        cartItems={cartItems}
-        isCartOpen={isCartOpen}
-        setIsCartOpen={setIsCartOpen}
-        setCartItems={setCartItems}
-        lng={lng}
-      />
+         cartItems={cartItems}
+         isCartOpen={isCartOpen}
+         setIsCartOpen={setIsCartOpen}
+         setCartItems={setCartItems}
+         lng={lng}
+      /> 
+      <CourseContent/>
     </>
   );
 };

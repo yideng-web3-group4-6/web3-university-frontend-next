@@ -7,8 +7,8 @@ import { fallbackLng, languages, cookieName } from './i18n/config'
 acceptLanguage.languages([...languages]) // Use spread operator here
 
 export const config = {
-  // Matcher updated to standard i18n pattern
-  matcher: ['/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)']
+  // Matcher updated to exclude public folder and static assets
+  matcher: ['/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|static/).*)']
 }
 
 export function middleware(req: NextRequest) {

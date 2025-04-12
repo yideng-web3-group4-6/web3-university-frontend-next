@@ -1,98 +1,53 @@
 .course-item {
-    background: rgba(30, 31, 53, 0.8);
-    padding: 30px 30px 20px;
-  }
+  background: rgba(30, 31, 53, 0.8);
+  padding: 30px 30px 20px;
+}
   
-  .course-item a {
-    color: #FFFFFF;
-  }
+.course-item a {
+  color: #FFFFFF;
+}
   
-  .course-item a:hover {
-    color: rgba(255, 255, 255, 0.7);
-  }
+.course-item a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
   
-  .course-item:hover {
-    background-image: radial-gradient(circle, rgba(137, 120, 211, 0.4) 0%, #1E1F35 100%);
-  }
-    
-  .course-item .course-info {
-    margin-bottom: 28px;
-  }
+.course-item:hover {
+  background-image: radial-gradient(circle, rgba(137, 120, 211, 0.4) 0%, #1E1F35 100%);
+}
+
+.course-item .course-info img {
+  margin-right: 20px;
+}
+
+.course-item .course-icon {
+  position: relative;
+  top: -6px;
+}
   
-  .course-item .course-info img {
-    margin-right: 20px;
-  }
-    
-  .course-item .title {
-    margin-bottom: 40px;
-  }
-  
-  .course-item .title h4 {
-    font-size: 16px;
-    margin-bottom: 0;
-    position: relative;
-  }
-  
-  .course-item .title h4::before {
-    width: 197px;
-    height: 35px;
-    content: "";
-    /* background-image: url("../images/bg/shape-bg.png"); */
-    position: absolute;
-    left: -30px;
-    top: -7px;
-  }
-    
-  .course-item .course-icon {
-    position: relative;
-    top: -6px;
-  }
-    
-  .course-item .course-info span {
-    color: #FFFFFF;
-  }
-  
-  .course-item .course-info li {
-    display: block;
-    overflow: hidden;
-    padding-bottom: 15px;
-  }
-  
-  .course-item .course-info li:last-child {
-    padding-bottom: 0;
-  }
-  
-  .course-item .course-info li strong {
-    font-weight: 400;
-    color: #FFFFFF;
-  }
-  
-  .course-item .course-info li span {
-    float: right;
-  }
-  
-  .course-item .title {
-    margin-bottom: 40px;
-  }
-  
-  .course-item .title h4 {
-    font-size: 16px;
-    margin-bottom: 0;
-    position: relative;
-  }
-  
-  .course-item .title h4::before {
-    width: 197px;
-    height: 35px;
-    content: "";
-    background-image: url("/static/course/shape-bg.png");
-    position: absolute;
-    left: -30px;
-    top: -7px;
-  }
-  
-  .actions-btn {
-    background-color: #25263a;
-    padding: 25px 30px;
-    margin-bottom: 20px;
-  }
+.course-item .course-info span {
+  color: #FFFFFF;
+}
+
+.course-item .course-info li {
+  display: block;
+  overflow: hidden;
+}
+
+.course-item .course-info li:last-child {
+  padding-bottom: 0;
+}
+
+.course-item .course-info li strong {
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+.course-item .course-info li span {
+  float: right;
+}
+
+.actions-btn {
+  background-color: #25263a;
+  padding: 25px 30px;
+  margin-bottom: 20px;
+}

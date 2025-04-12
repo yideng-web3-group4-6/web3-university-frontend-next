@@ -1,13 +1,13 @@
 
 import React from "react";
-import { Box, Container } from "@mui/material";
+import { Box,Container } from "@mui/material";
 
 import CourseList from "./list";
 
 export default function Home() {
   return (
-    <Box className="min-h-screen mt-20">
-      <Container maxWidth="lg" className="px-10 py-10">
+    <Box className="w-full mt-20">
+      <Container maxWidth="lg">
         <CourseList />
       </Container>
     </Box>
