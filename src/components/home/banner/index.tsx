@@ -48,7 +48,11 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className='flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4'
             >
-              <Button size='lg' className='text-white px-8' asChild>
+              <Button
+                size='lg'
+                className='text-white px-8 bg-primary-500 hover:bg-primary-600'
+                asChild
+              >
                 <Link href='/courses'>
                   <FileText className='mr-2 h-5 w-5' />
                   Explore Courses

@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --neon-blue: #00f3ff;
@@ -10,15 +12,24 @@
   --primary-700: #7928cc;
 }
 
-body {
-  background-color: var(--dark-bg);
-  color: #ffffff;
+.bg-grid-white\/\[0\.02\] {
+	background-size: 30px 30px;
+	background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
-.hero-gradient {
-  background: linear-gradient(135deg, rgba(0, 13, 42, 0.95) 0%, rgba(25, 0, 66, 0.95) 100%);
-  position: relative;
-  overflow: hidden;
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+
+	50% {
+		transform: translateY(-20px);
+	}
+
+	100% {
+		transform: translateY(0px);
+	}
 }
 
 .nav-blur {

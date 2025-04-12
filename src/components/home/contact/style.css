@@ -29,7 +29,7 @@
 .active-shape .shadow-1, .hover-shape-border .shadow-1 {
   top: 0px;
   left: 0;
-  background: linear-gradient(to bottom, #F82552 -100%, rgba(21, 22, 37, 0) 64%);
+  background: linear-gradient(to bottom, #a855f7 -100%, rgba(21, 22, 37, 0) 64%);
   width: 5px;
   height: 200px;
 }
@@ -37,7 +37,7 @@
 .active-shape .shadow-2, .hover-shape-border .shadow-2 {
   top: 0px;
   left: 5px;
-  background: linear-gradient(to right, #F82552 -100%, rgba(21, 22, 37, 0) 64%);
+  background: linear-gradient(to right, #a855f7 -100%, rgba(21, 22, 37, 0) 64%);
   width: 200px;
   height: 5px;
 }
@@ -47,7 +47,7 @@
   right: 0;
   width: 5px;
   height: 200px;
-  background: linear-gradient(to top, #A3FF12 -100%, rgba(21, 22, 37, 0) 64%);
+  background: linear-gradient(to top, #a855f7 -100%, rgba(21, 22, 37, 0) 64%);
 }
 
 .active-shape .shadow-4, .hover-shape-border .shadow-4 {
@@ -55,7 +55,7 @@
   right: 5px;
   width: 200px;
   height: 5px;
-  background: linear-gradient(to left, #A3FF12 -100%, rgba(21, 22, 37, 0) 64%);
+  background: linear-gradient(to left, #a855f7 -100%, rgba(21, 22, 37, 0) 64%);
 }
 
 .hover-shape-border .border-shadow {
@@ -79,7 +79,7 @@
     position: absolute;
     top: 0;
     z-index: 0;
-    background: linear-gradient(rgba(255, 255, 255, 0), rgba(150, 136, 217, 0.06) 50%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(168, 85, 247, 0.06) 50%, rgba(255, 255, 255, 0) 100%);
 }
 
 .hover-shape-inner .hover_shape1 {

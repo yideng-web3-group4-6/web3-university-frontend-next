@@ -25,32 +25,32 @@
 }
 
 .token-input:hover {
-    border-color: rgba(163, 255, 18, 0.3);
+    border-color: rgba(168, 85, 247, 0.3);
 }
 
 .token-input:focus-within {
-    border-color: #A3FF12;
+    border-color: #a855f7;
 }
 
 /* Button Styles */
 .swap-button {
-    background: #A3FF12;
-    color: #000;
+    background: #a855f7;
+    color: #fff;
     transition: all 0.3s ease;
 }
 
 .swap-button:hover {
-    background: #8CEB00;
+    background: #9333ea;
     transform: scale(1.05);
 }
 
 .wrap-button {
-    background: #A3FF12;
-    color: #000;
+    background: #a855f7;
+    color: #fff;
     transition: all 0.3s ease;
 }
 
 .wrap-button:hover {
-    background: #8CEB00;
+    background: #9333ea;
     transform: translateY(-2px);
 }
