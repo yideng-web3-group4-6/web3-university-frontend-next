@@ -19,7 +19,9 @@ const ExchangeInfo: React.FC<ExchangeInfoProps> = ({
       onCopy();
     }
   }, [onCopy]);
-  const shortAddress = ydContract?.slice(0, 6) + '...' + ydContract?.slice(-4);
+  const shortAddress = ydContract
+    ? ydContract?.slice(0, 6) + '...' + ydContract?.slice(-4)
+    : '0x000....00';
   return (
     <div className='text-gray-400 text-sm mt-2 mb-2'>
       <div className='flex justify-between mb-2'>
