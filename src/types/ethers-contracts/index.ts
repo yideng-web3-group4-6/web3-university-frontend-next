@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { AccessControl } from "./AccessControl";
+export type { ArticleMarket } from "./ArticleMarket";
 export type { CourseCertificate } from "./CourseCertificate";
 export type { CourseMarket } from "./CourseMarket";
 export type { ERC165 } from "./ERC165";
@@ -18,6 +19,7 @@ export type { Ownable } from "./Ownable";
 export type { YiDengToken } from "./YiDengToken";
 export * as factories from "./factories";
 export { AccessControl__factory } from "./factories/AccessControl__factory";
+export { ArticleMarket__factory } from "./factories/ArticleMarket__factory";
 export { CourseCertificate__factory } from "./factories/CourseCertificate__factory";
 export { CourseMarket__factory } from "./factories/CourseMarket__factory";
 export { ERC165__factory } from "./factories/ERC165__factory";

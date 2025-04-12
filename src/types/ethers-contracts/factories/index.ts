@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { AccessControl__factory } from "./AccessControl__factory";
+export { ArticleMarket__factory } from "./ArticleMarket__factory";
 export { CourseCertificate__factory } from "./CourseCertificate__factory";
 export { CourseMarket__factory } from "./CourseMarket__factory";
 export { ERC165__factory } from "./ERC165__factory";
