@@ -21,7 +21,8 @@
     "home": "Home",
     "course": "Courses",
     "knowledge": "Knowledge Base",
-    "award": "Awards"
+    "award": "Awards",
+    "article": "Article"
   },
   "language": {
     "chinese": "Chinese"
@@ -35,4 +36,4 @@
     "invalidAmount": "Please enter a valid amount",
     "exchangeFailed": "Exchange failed, please check your input!"
   }
-} 
+}
