@@ -18,7 +18,11 @@ import { shortenAddress } from '@/lib/utils';
 import { useBalance, useAccount } from 'wagmi';
 import { formatEther } from 'viem';
 
-export const WagmiConnectButton = () => {
+interface WagmiConnectButtonProps {
+  showIcon?: boolean;
+}
+
+export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps) => {
   const { isAuthenticated, isSigningMessage } = useWalletAuth();
   const params = useParams();
   const lng = (params?.lng as string) || 'en';
@@ -46,7 +50,7 @@ export const WagmiConnectButton = () => {
               <DropdownMenuTrigger asChild>
                 <button
                   className={`
-                    px-6 py-2.5 rounded-lg text-sm font-medium flex items-center
+                    px-6 py-2.5 rounded-lg text-sm font-medium flex items-center justify-center
                     transition-all duration-300 relative overflow-hidden
                     bg-primary-600/20 text-primary-400 hover:bg-primary-600/30
                     disabled:opacity-50 disabled:cursor-not-allowed
@@ -116,7 +120,7 @@ export const WagmiConnectButton = () => {
               hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]
             `}
           >
-            <Wallet className='h-4 w-4 mr-2 text-white' />
+            {showIcon && <Wallet className='h-4 w-4 mr-2 text-white' />}
             {buttonText}
           </button>
         );

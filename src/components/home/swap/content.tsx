@@ -5,6 +5,7 @@ import { YiDengToken__factory } from '@/typechain-types';
 import { useAccount, useConnect, useBalance } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import TokenInput from './input';
+import { WagmiConnectButton } from '@/components/WagmiConnect/WalletConnectButton';
 
 const YIDENG_TOKEN_ADDRESS = '0xb26BA51DAcc2F8e59CB87ECCD2eC73a2C3540d6f';
 const EXCHANGE_RATE = 1000; // 1000 YD = 1 ETH
@@ -18,9 +19,6 @@ const TokenSwap: React.FC = () => {
   const [yd_balance, setYdBalance] = useState('0');
 
   const { address, isConnected } = useAccount();
-  const { connect } = useConnect({
-    connector: injected(),
-  });
 
   const { data: ethBalance } = useBalance({
     address,
@@ -103,7 +101,6 @@ const TokenSwap: React.FC = () => {
 
   const handleSwap = () => {
     if (!isConnected) {
-      connect();
       return;
     }
     setIsSwapped(!isSwapped);
@@ -111,12 +108,10 @@ const TokenSwap: React.FC = () => {
 
   const handleWrap = async () => {
     if (!isConnected) {
-      connect();
       return;
     }
 
     if (!contract || !signer) return;
-    console.log('handleWrap', isSwapped, amount);
 
     // 检查余额是否足够
     if (!checkBalance()) {
@@ -179,12 +174,16 @@ const TokenSwap: React.FC = () => {
           showSplit={false}
         />
       </div>
-      <button
-        onClick={handleWrap}
-        className='w-full h-13 rounded-lg py-3 bg-primary-500 hover:bg-primary-600 transition-colors cursor-pointer'
-      >
-        <span className='font-bold text-white text-lg'>Wrap</span>
-      </button>
+      {isConnected ? (
+        <button
+          onClick={handleWrap}
+          className='w-full h-13 rounded-lg py-3 bg-primary-500 hover:bg-primary-600 transition-colors cursor-pointer'
+        >
+          <span className='font-bold text-white text-lg'>Swap</span>
+        </button>
+      ) : (
+        <WagmiConnectButton showIcon={false} />
+      )}
     </div>
   );
 };
