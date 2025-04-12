@@ -37,14 +37,14 @@ const TokenInput: React.FC<TokenInputProps> = ({
           placeholder='0.0'
         />
         <div className='flex flex-row items-center min-w-[100px]'>
-          {!disabled && (
+          {/* {!disabled && (
             <button
               onClick={onMaxClick}
               className='my-0 text-primary-400 text-xs bg-primary-900/50 px-2 py-1 rounded-lg cursor-pointer hover:bg-primary-800/50'
             >
               Max
             </button>
-          )}
+          )} */}
           {showSplit && (
             <div className='w-[0.5px] h-5 bg-primary-700/50 rounded-full ml-3 mr-3'></div>
           )}
