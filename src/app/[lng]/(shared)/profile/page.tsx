@@ -9,6 +9,8 @@ import CoursesPannel from "@/components/Profile/CoursesPannel";
 import ArticlesPannel from "@/components/Profile/ArticlesPannel";
 import NFTAssets from "@/components/Profile/NFTAssets";
 import { getArticleList } from "@/api/article";
+import TokenCard from "@/components/Profile/TokenCard";
+import { useYiDengToken } from "@/hooks/useYiDengToken";
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
@@ -16,7 +18,9 @@ const Profile: React.FC = () => {
   const chainId = useChainId();
   const { address: walletAddress } = useAccount();
   const { data } = useBalance({ address: walletAddress, chainId });
+  const { tokenBalance } = useYiDengToken()
 
+  console.log(tokenBalance, '-------')
   useEffect(() => {
     async function handleGetArticleList() {
       const res = await getArticleList();
@@ -61,6 +65,7 @@ const Profile: React.FC = () => {
                     onAvatarChange={setAvatarUrl}
                   />
                   <Balance ethBalance={data?.value.toString() || ""} />
+                  <TokenCard token={tokenBalance || "0"}/>
 
                   {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
                 </div>
