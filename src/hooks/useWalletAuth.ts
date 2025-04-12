@@ -51,17 +51,17 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   };
 
   // 监听钱包连接状态
-  // useEffect(() => {
-  //   // 定义内部异步函数，用于在适当条件下请求签名
-  //   const requestSignature = async () => {
-  //     // 当钱包已连接、未认证且不在签名过程中时，触发签名
-  //     if (isConnected) {
-  //       await handleSignature();
-  //     }
-  //   };
-  //   requestSignature();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isConnected]);
+  useEffect(() => {
+    // 定义内部异步函数，用于在适当条件下请求签名
+    const requestSignature = async () => {
+      // 当钱包已连接、未认证且不在签名过程中时，触发签名
+      if (isConnected) {
+        await handleSignature();
+      }
+    };
+    requestSignature();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isConnected]);
 
   // 当连接断开时，重置认证状态
   useEffect(() => {
