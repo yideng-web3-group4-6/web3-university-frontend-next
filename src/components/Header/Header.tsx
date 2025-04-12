@@ -7,11 +7,14 @@ import Avatar from "../common/Avatar";
 import { LanguageSwitcher } from "../LanguageSwitcher"; // Import LanguageSwitcher
 import { useTranslation } from "@/i18n/client"; // Import useTranslation
 import { useParams } from "next/navigation"; // Import useParams
+import { useWalletAuth } from "@/hooks/useWalletAuth";
 
 const Header = () => {
   const params = useParams(); // Get params hook
   const lng = (params?.lng as string) || "en"; // Extract lng, default to 'en' if needed
   const { t } = useTranslation(lng, "translation"); // Use lng from params
+
+  const { isConnected } = useWalletAuth()
 
   return (
     <header className="nav-blur fixed w-full z-50">
@@ -36,7 +39,7 @@ const Header = () => {
             {/* Pass lng obtained from params to LanguageSwitcher */}
             <LanguageSwitcher lng={lng} />
             <WagmiConnectButton />
-            <Avatar />
+            {isConnected &&  <Avatar />}
           </div>
         </div>
       </div>
