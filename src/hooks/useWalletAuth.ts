@@ -47,6 +47,8 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
       } finally {
         setIsSigningMessage(false); // 无论成功或失败，最终结束签名状态
       }
+    } else {
+      alert('请先连接钱包')
     }
   };
 
