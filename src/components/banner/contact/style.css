@@ -1,0 +1,96 @@
+.email-area {
+    background: radial-gradient(circle, #4a4176 -24%, #1E1F35 40%);
+    padding: 70px 0 80px 0;
+    position: relative;
+    width: 100%;
+}
+
+.active-shape, .hover-shape-border {
+  position: relative;
+}
+
+.active-shape .border-shadow, .hover-shape-border .border-shadow {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 9;
+}
+
+.active-shape .shadow-1, .active-shape .shadow-3, .hover-shape-border .shadow-1, .hover-shape-border .shadow-3 {
+  width: 5px;
+  height: 200px;
+}
+
+.active-shape .shadow-2, .active-shape .shadow-4, .hover-shape-border .shadow-2, .hover-shape-border .shadow-4 {
+  width: 200px;
+  height: 5px;
+}
+
+.active-shape .shadow-1, .hover-shape-border .shadow-1 {
+  top: 0px;
+  left: 0;
+  background: linear-gradient(to bottom, #F82552 -100%, rgba(21, 22, 37, 0) 64%);
+  width: 5px;
+  height: 200px;
+}
+
+.active-shape .shadow-2, .hover-shape-border .shadow-2 {
+  top: 0px;
+  left: 5px;
+  background: linear-gradient(to right, #F82552 -100%, rgba(21, 22, 37, 0) 64%);
+  width: 200px;
+  height: 5px;
+}
+
+.active-shape .shadow-3, .hover-shape-border .shadow-3 {
+  bottom: 0px;
+  right: 0;
+  width: 5px;
+  height: 200px;
+  background: linear-gradient(to top, #A3FF12 -100%, rgba(21, 22, 37, 0) 64%);
+}
+
+.active-shape .shadow-4, .hover-shape-border .shadow-4 {
+  bottom: 0px;
+  right: 5px;
+  width: 200px;
+  height: 5px;
+  background: linear-gradient(to left, #A3FF12 -100%, rgba(21, 22, 37, 0) 64%);
+}
+
+.hover-shape-border .border-shadow {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+}
+
+.hover-shape-border:hover .border-shadow {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hover-shape-inner .hover-shape-bg {
+    width: 35px;
+    height: 100%;
+    transform: skew(-26deg);
+    display: inline-block;
+    margin: 0 5.5px;
+    transition: 0.3s;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(150, 136, 217, 0.06) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hover-shape-inner .hover_shape1 {
+    left: 40%;
+}
+
+.hover-shape-inner .hover_shape2 {
+    left: 46.5%;
+}
+
+.hover-shape-inner .hover_shape3 {
+    left: 53%;
+    width: 60px;
+}

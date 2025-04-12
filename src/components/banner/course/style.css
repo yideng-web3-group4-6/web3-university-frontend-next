@@ -1,0 +1,17 @@
+.slide-from-left, .slide-from-right {
+  opacity: 0;
+  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+}
+
+.slide-from-left {
+  transform: translateX(-150px);
+}
+
+.slide-from-right {
+  transform: translateX(150px);
+}
+
+.slide-in {
+  transform: translateX(0);
+  opacity: 1;
+}
