@@ -7,7 +7,7 @@ import { FloatingPaper } from '@/components/ui/floating-paper';
 import { RoboAnimation } from '@/components/ui/robo-animation';
 import Link from 'next/link';
 
-export default function Hero() {
+const Hero = () => {
   return (
     <div className='relative min-h-[calc(100vh-76px)] flex items-center'>
       {/* Floating papers background */}
@@ -69,4 +69,6 @@ export default function Hero() {
       </div>
     </div>
   );
-}
+};
+
+export default Hero;

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+'use client';
+
+import React, { useState } from 'react';
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface FAQItemProps {
   question: string;
@@ -18,32 +16,30 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
     <Accordion
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
-      className="bg-transparent border-none shadow-none pb-3 pt-3"
-      sx={{ 
-        backgroundColor: "transparent", 
+      className='bg-transparent border-none shadow-none pb-3 pt-3'
+      sx={{
+        backgroundColor: 'transparent',
         '&::before': {
           opacity: 0,
         },
-        "& .MuiButtonBase-root": {
-          padding: "0px",
+        '& .MuiButtonBase-root': {
+          padding: '0px',
         },
-        "& .MuiAccordionDetails-root": {
-          paddingLeft: "0px",
-        }
+        '& .MuiAccordionDetails-root': {
+          paddingLeft: '0px',
+        },
       }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon className="text-gray-400 font-bold" />}
-        aria-controls="panel-content"
-        id="panel-header"
-        className="text-white"
+        expandIcon={<ExpandMoreIcon className='text-gray-400 font-bold' />}
+        aria-controls='panel-content'
+        id='panel-header'
+        className='text-white'
       >
-        <p className="text-white font-semibold text-lg">
-          {question}
-        </p>
+        <p className='text-white font-semibold text-lg'>{question}</p>
       </AccordionSummary>
       <AccordionDetails>
-        <p className="text-gray-300 mb-4 text-md">{answer}</p>
+        <p className='text-gray-300 mb-4 text-md'>{answer}</p>
       </AccordionDetails>
     </Accordion>
   );

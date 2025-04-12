@@ -55,7 +55,9 @@
     "wagmi": "^2.14.12",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
-    "jotai": "^2.12.2"
+    "jotai": "^2.12.2",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

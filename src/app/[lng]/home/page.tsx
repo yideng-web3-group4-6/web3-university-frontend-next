@@ -1,4 +1,4 @@
-import Hero from '@/components/home/Hero';
+import { Hero, Course, FAQ, Swap, Contact } from '@/components/home';
 import { SparklesCore } from '@/components/ui/sparkles';
 const Home = () => {
   return (
@@ -18,6 +18,9 @@ const Home = () => {
 
       <div className='relative z-10'>
         <Hero />
+        <Course />
+        <FAQ />
+        <Contact />
       </div>
     </main>
   );
