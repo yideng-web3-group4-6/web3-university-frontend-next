@@ -75,7 +75,7 @@ const ProjectsSection = () => {
       <Container maxWidth='lg'>
         <h1 className='mb-2 font-bold text-4xl text-primary-500'>Popular Course</h1>
 
-        <h2 className='text-text-secondary mb-10 text-xl'>
+        <h2 className='text-text-secondary mb-10 text-xl text-white'>
           There are all kinds of courses, buy the courses you like.
         </h2>
         <div
@@ -102,7 +102,7 @@ const ProjectsSection = () => {
                     />
                   </div>
                 </span>
-                <span>
+                <span className='text-white'>
                   <div className='mt-4 space-y-2'>
                     <h5>{item.title}</h5>
                     <div className='flex justify-between'>
