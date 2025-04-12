@@ -8,7 +8,7 @@ import Balance from "@/components/Profile/Balance";
 import CoursesPannel from "@/components/Profile/CoursesPannel";
 import ArticlesPannel from "@/components/Profile/ArticlesPannel";
 import NFTAssets from "@/components/Profile/NFTAssets";
-import { getArticleList } from "@/api/article";
+// import { getArticleList } from "@/api/article";
 import TokenCard from "@/components/Profile/TokenCard";
 import { useYiDengToken } from "@/hooks/useYiDengToken";
 
@@ -20,14 +20,14 @@ const Profile: React.FC = () => {
   const { data } = useBalance({ address: walletAddress, chainId });
   const { tokenBalance } = useYiDengToken()
 
-  console.log(tokenBalance, '-------')
-  useEffect(() => {
-    async function handleGetArticleList() {
-      const res = await getArticleList();
-      console.log(res);
-    }
-    handleGetArticleList();
-  }, []);
+  // console.log(tokenBalance, '-------')
+  // useEffect(() => {
+  //   async function handleGetArticleList() {
+  //     const res = await getArticleList();
+  //     console.log(res);
+  //   }
+  //   handleGetArticleList();
+  // }, []);
 
   const nfts = [
     { id: "1", name: "Digital Art #1", imageUrl: "/img/nft1.jpg" },
@@ -65,7 +65,7 @@ const Profile: React.FC = () => {
                     onAvatarChange={setAvatarUrl}
                   />
                   <Balance ethBalance={data?.value.toString() || ""} />
-                  <TokenCard token={tokenBalance || "0"}/>
+                  <TokenCard token={tokenBalance as string || "0"}/>
 
                   {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
                 </div>
