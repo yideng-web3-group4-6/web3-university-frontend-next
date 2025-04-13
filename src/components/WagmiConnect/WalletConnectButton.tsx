@@ -17,22 +17,37 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { shortenAddress } from '@/lib/utils';
 import { useBalance, useAccount } from 'wagmi';
 import { formatEther } from 'viem';
+import { useEffect } from "react";
+import { fetchLogin, getNonce } from "@/api/userApi";
 
 interface WagmiConnectButtonProps {
   showIcon?: boolean;
 }
 
 export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps) => {
-  const { isAuthenticated, isSigningMessage } = useWalletAuth();
+  const { isAuthenticated, isSigningMessage, address, isConnected, signer } = useWalletAuth();
+
   const params = useParams();
   const lng = (params?.lng as string) || 'en';
   const { t } = useTranslation(lng, 'translation');
-  const { address } = useAccount();
 
   const { data: ethBalance } = useBalance({
     address: address,
   });
+  useEffect(() => {
+    const handleLogin = async () => {
+      if(address) {
+        const {nonce} = await getNonce(address)
+        console.log(nonce, '============')
+        const jwt = await fetchLogin({walletAddress: address, signature: signer, nonce})
+        console.log(jwt, 'hahahahahha')
 
+      }
+    }
+    if(isConnected && isAuthenticated) {
+      handleLogin()
+    }
+  }, [isConnected, isAuthenticated])
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, show, truncatedAddress, ensName }) => {

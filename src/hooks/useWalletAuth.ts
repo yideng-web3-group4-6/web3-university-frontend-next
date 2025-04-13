@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { Address } from "viem";
 // 导入 wagmi 库的 hooks 用于钱包连接、签名和断开连接
 import { useAccount, useSignMessage, useDisconnect } from "wagmi";
 
@@ -11,11 +12,12 @@ interface UseWalletAuthReturn {
   handleSignature: () => Promise<void>; // 处理签名请求的异步函数
   disconnect: () => void; // 断开钱包连接的函数
   signer: string;
+  address: Address | undefined
 }
 
 // 自定义 hook，用于管理钱包认证逻辑
 export const useWalletAuth = (): UseWalletAuthReturn => {
-  const { isConnected } = useAccount(); // 添加 address 和 chain
+  const { isConnected, address } = useAccount(); // 添加 address 和 chain
   // const { isConnected } = useAccount(); // 从 wagmi 获取钱包连接状态
   const { disconnect } = useDisconnect(); // 从 wagmi 获取断开连接的函数
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 管理认证状态，初始为未认证
@@ -45,6 +47,8 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
       } finally {
         setIsSigningMessage(false); // 无论成功或失败，最终结束签名状态
       }
+    } else {
+      alert('请先连接钱包')
     }
   };
 
@@ -76,5 +80,6 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
     handleSignature, // 手动触发签名的函数
     disconnect, // 断开钱包连接的函数
     signer,
+    address
   };
 };
