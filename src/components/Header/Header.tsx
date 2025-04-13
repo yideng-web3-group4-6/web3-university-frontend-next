@@ -27,7 +27,7 @@ const Header = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className='flex items-center justify-between bg-black/[0.96] px-6 py-4 backdrop-blur-sm border-b border-white/10'
+      className='flex items-center justify-between bg-black/[0.96] px-6 py-4 backdrop-blur-sm border-b border-white/10 relative z-[99]'
     >
       <Link href={`/${lng}`} className='flex items-center space-x-2'>
         <Bot className='w-8 h-8 text-purple-500' />

@@ -44,7 +44,6 @@ export default function Web3Provider({ children }: { children: ReactNode }) {
           mode='dark'
           options={{
             enforceSupportedChains: false, // 允许显示所有链，包括自定义链
-            defaultChain: sepolia, // 设置默认链为 Sepolia
           }}
         >
           {children}
