@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CourseGrid from './CourseGrid';
-import { Course, CartItem } from '@/utils/courseType';
+import { Course, CartItem } from '@/types/course/courseType';
 import { useTranslation } from '@/i18n/client';
 
 interface CourseListProps {

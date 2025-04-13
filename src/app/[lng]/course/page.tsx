@@ -6,12 +6,13 @@ import CartSidebar from '@components/sidebar/CartSidebar';
 import RightSidebar from '@components/sidebar/RightSidebar';
 import CourseList from '@/components/course/list';
 import CourseContent from '@/components/course/index';
-import { Course } from '@utils/courseType';
+import { Course } from '@/types/course/courseType';
 import { fetchCourse } from '@/apis/courseApi';
 import { useTranslation } from '@/i18n/client';
 import { useCart } from '@/context/CartContext';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { ErrorScreen } from '@/components/common/ErrorScreen';
+import Footer from '@/components/layout/footer';
 
 const CoursePage: React.FC = () => {
   const params = useParams();
@@ -26,7 +27,7 @@ const CoursePage: React.FC = () => {
     const loadCourses = async () => {
       try {
         setLoading(true);
-        const response = await fetchCourse();
+        const response = await fetchCourse({});
         setCourses(response?.courses || []);
       } catch (error) {
         console.error('Failed to load courses:', error);
@@ -60,7 +61,7 @@ const CoursePage: React.FC = () => {
           subtitle={error}
           onRefresh={() => {
             setError(null);
-            fetchCourse();
+            fetchCourse({});
           }}
         />
       </div>
@@ -68,7 +69,7 @@ const CoursePage: React.FC = () => {
   }
 
   return (
-    <>
+    <div>
       {/* <CourseList onAddToCart={addToCart} lng={lng} courses={courses} /> */}
       <RightSidebar cartItems={cartItems} setIsCartOpen={setIsCartOpen} lng={lng} />
       <CartSidebar
@@ -79,7 +80,7 @@ const CoursePage: React.FC = () => {
         lng={lng}
       />
       <CourseContent courses={courses} />
-    </>
+    </div>
   );
 };
 

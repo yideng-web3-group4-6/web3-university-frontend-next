@@ -1,11 +1,12 @@
-import React, { useCallback, useState, useEffect } from 'react';
-
-import './style.css';
+import React, { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { ethers } from 'ethers';
 import { useContracts } from '@/context/ContractContext';
 import Link from 'next/link';
 import { useLoading } from '@/context/LoadingContext';
+import { Course } from '@/types/course/courseType';
+
+import './style.css';
 
 interface CourseItemProps {
   course: Course;
@@ -69,7 +70,7 @@ const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
     }
 
     const tokenBalanceNum = parseFloat(tokenBalance);
-    const coursePriceNum = parseFloat(course.price);
+    const coursePriceNum = parseFloat(course.price.toString());
 
     if (tokenBalanceNum < coursePriceNum) {
       alert(
@@ -80,7 +81,6 @@ const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
 
     try {
       showLoading('Processing transaction...');
-
       const allowance = await ydContract.allowance(address, courseContract.address);
       const priceInWei = ethers.utils.parseEther(course.price.toString());
       if (allowance.lt(priceInWei)) {
@@ -105,28 +105,28 @@ const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
   };
 
   return (
-    <div className='course-item'>
+    <div className='course-item cursor-pointer'>
       <div className='course-info'>
         <img src={course.coverImage || '/static/course/course-1.png'} alt='Course Image' />
-        <div className='course-author'>
-          <h2>{course.title}</h2>
+        <div className='course-title'>
+          <h2 className='pb-2 pt-2'>{course.title}</h2>
           <p>{course.description}</p>
         </div>
       </div>
       <div className='course-content'>
         <ul className='course-listing'>
           <li className='flex justify-between'>
-            <span>Category</span>
-            <span>{course.level}</span>
+            <p>Category</p>
+            <p>{course.level}</p>
           </li>
           <li className='flex justify-between'>
-            <span>Price</span>
-            <span>{course.price} YD</span>
+            <p className='font-bolder'>Price</p>
+            <p>{course.price} YD</p>
           </li>
           {isConnected && (
             <li className='flex justify-between'>
-              <span>Your Balance</span>
-              <span>{tokenBalance} YD</span>
+              <p>Your Balance</p>
+              <p>{tokenBalance} YD</p>
             </li>
           )}
         </ul>

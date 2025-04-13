@@ -1,5 +1,5 @@
 import React from 'react';
-import { Course } from '@utils/courseType';
+import { Course } from '@/types/course/courseType';
 import { useTranslation } from '@/i18n/client';
 import { transitionBigNumber } from '@/utils/common';
 

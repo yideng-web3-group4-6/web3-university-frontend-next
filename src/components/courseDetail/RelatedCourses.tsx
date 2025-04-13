@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseGrid from '@components/course/CourseGrid';
-import { CartItem, Course } from '@utils/courseType';
+import { CartItem, Course } from '@/types/course/courseType';
 import { useTranslation } from '@/i18n/client';
 
 interface RelatedCoursesProps {

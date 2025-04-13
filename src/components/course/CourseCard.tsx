@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Info, ShoppingCart } from 'lucide-react';
-import { Course } from '@/utils/courseType';
+import { Course } from '@/types/course/courseType';
 import { transitionBigNumber } from '@/utils/common';
 import { useTranslation } from '@/i18n/client';
 

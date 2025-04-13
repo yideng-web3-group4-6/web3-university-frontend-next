@@ -39,3 +39,9 @@ export const iconMap = {
   Zap: Zap,
   Workflow: Workflow,
 };
+
+
+export interface PaginationParams {
+  page?: number;
+  pageSize?: number;
+}

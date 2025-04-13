@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShoppingCart, ArrowUp } from 'lucide-react';
-import { CartItem } from '@utils/courseType';
+import { CartItem } from '@/types/course/courseType';
 import { useTranslation } from '@/i18n/client';
 
 interface RightSidebarProps {

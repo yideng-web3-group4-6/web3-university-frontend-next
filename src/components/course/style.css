@@ -59,17 +59,31 @@
   float: right;
 }
 
-.course-author h2 {
+.course-title h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
   font-size: 1.5rem;
   font-weight: 600;
   color: #ffffff;
   margin: 0;
+  height: 3.5em;
 }
-
-.course-author p {
+.course-title p {
   color: #888888;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  margin: 0;
+  height: 3em;
 }
 
 .course-listing {
@@ -80,7 +94,7 @@
 
 .course-listing li {
   color: #888888;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }

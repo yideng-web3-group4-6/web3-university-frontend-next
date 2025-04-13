@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = ({ showScrollToTop = true }) => {
 
 
   return (
-    <footer className="w-full py-6 mt-20 mb-10">
+    <footer className="w-full py-6">
       <div className="mx-auto px-4">
         {/* Navigation Links */}
         <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-5">

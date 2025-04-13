@@ -1,9 +1,10 @@
-import api from './axios';
-import { CourseData, Course } from '@/utils/courseType';
 
-export const fetchCourse = async (): Promise<CourseData> => {
+import { CourseData, Course, PaginationParams } from '@/types/course/courseType';
+import api from './axios';
+
+export const fetchCourse = async (params: PaginationParams): Promise<CourseData> => {
   try {
-    const response = await api.get('/api/course/list');
+    const response = await api.get('/api/course/list', { params });
     const data = response.data?.data;
     if (!data) {
       throw new Error('No course data found in response');

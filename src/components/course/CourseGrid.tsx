@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseCard from './CourseCard';
-import { CartItem, Course, iconMap } from '@utils/courseType';
+import { CartItem, Course, iconMap } from '@/types/course/courseType';
 import { Code } from 'lucide-react';
 
 interface CourseGridProps {

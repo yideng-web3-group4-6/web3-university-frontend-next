@@ -1,8 +1,8 @@
 import React from 'react';
 import { Play, Lock } from 'lucide-react';
-import { Course } from '@/utils/courseType';
+import { Course } from '@/types/course/courseType';
 import { useTranslation } from '@/i18n/client';
-import { Chapter } from '@/utils/courseType';
+import { Chapter } from '@/types/course/courseType';
 
 interface CourseChaptersProps {
   lng: string;

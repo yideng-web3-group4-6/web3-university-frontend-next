@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import RightSidebar from '@components/sidebar/RightSidebar';
 import CartSidebar from '@components/sidebar/CartSidebar';
-import { Course, CartItem } from '@/utils/courseType';
+import { Course, CartItem } from '@/types/course/courseType';
 import { fetchCourse, fetchCourseById } from '@/apis/courseApi';
 import CourseDetailInfo from '@components/courseDetail/CourseDetailInfo';
 import CourseChapters from '@components/courseDetail/CourseChapters';

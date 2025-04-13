@@ -2,60 +2,14 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Box, Container } from '@mui/material';
+import { Course } from '@/types/course/courseType';
+import Link from 'next/link';
+
 import './style.css';
-
-const courseList = [
-  {
-    id: 1,
-    title: 'Aora',
-    category: 'Development',
-    year: '2024',
-    image: '/static/home/course.png',
-    bgColor: '#8c8472',
-  },
-  {
-    id: 2,
-    title: 'Code Screenshot',
-    category: 'Development & Design',
-    year: '2024',
-    image: '/static/home/course.png',
-    bgColor: '#f8d7ea',
-  },
-  {
-    id: 3,
-    title: 'Code Screenshot',
-    category: 'Development & Design',
-    year: '2024',
-    image: '/static/home/course.png',
-    bgColor: '#fff',
-  },
-  {
-    id: 4,
-    title: 'Code Screenshot',
-    category: 'Development & Design',
-    year: '2024',
-    image: '/static/home/course.png',
-    bgColor: 'rgba(187 247 208)',
-  },
-  {
-    id: 5,
-    title: 'Aora',
-    category: 'Development',
-    year: '2024',
-    image: '/static/home/course.png',
-    bgColor: '#8c8472',
-  },
-  {
-    id: 6,
-    title: 'Code Screenshot',
-    category: 'Development & Design',
-    year: '2024',
-    image: '/static/home/course.png',
-    bgColor: '#f8d7ea',
-  },
-];
-
-const ProjectsSection = () => {
+export interface CourseSectionProps {
+  courseList: Course[];
+}
+const CourseSection = ({ courseList }: CourseSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -109,10 +63,10 @@ const ProjectsSection = () => {
                 <span className='opacity-container-child__image'>
                   <div
                     className='aspect-[3/2] w-full overflow-hidden rounded-3xl'
-                    style={{ backgroundColor: item.bgColor }}
+                    // style={{ backgroundColor:  CourseBgColor[(index+1).toString() as keyof typeof CourseBgColor]}}
                   >
                     <img
-                      src={item.image}
+                      src={item.coverImage || '/static/course/course-1.png'}
                       alt='image'
                       className='aspect-[3/2] w-full object-cover transition duration-300 group-hover:scale-[1.015]'
                     />
@@ -120,12 +74,12 @@ const ProjectsSection = () => {
                 </span>
                 <span className='text-white'>
                   <div className='mt-4 space-y-2'>
-                    <h5>{item.title}</h5>
+                    <h5 className='text-1xl font-bold line-clamp-2 overflow-hidden text-ellipsis'>{item.title}</h5>
                     <div className='flex justify-between'>
                       <div className='flex flex-wrap gap-2'>
-                        <p className='text-sm text-text-secondary'>{item.category}</p>
+                        <p className='text-sm text-text-secondary'>{item.tags}</p>
                       </div>
-                      <p className='text-sm text-text-secondary'>{item.year}</p>
+                      <p className='text-sm text-text-secondary'>{item.price} YD</p>
                     </div>
                   </div>
                 </span>
@@ -134,16 +88,16 @@ const ProjectsSection = () => {
           ))}
         </div>
         <div className='flex justify-center'>
-          <a
+          <Link
             href='/course'
             className='cursor-pointer w-fit text-white rounded-lg bg-primary-600 px-4 py-2'
           >
             View All Course
-          </a>
+          </Link>
         </div>
       </Container>
     </Box>
   );
 };
 
-export default ProjectsSection;
+export default CourseSection;

@@ -5,7 +5,7 @@ import './style.css';
 
 const ContactUs = () => {
   return (
-    <Box className='md:mt-10 md:mb-30 w-full'>
+    <Box className='md:mt-10 md:mb-30 w-full mb-20 mt-20'>
       <Container>
         <Box className='email-area text-center active-shape hover-shape-inner'>
           <h2 className='title mb-8 text-3xl font-bold text-white'>
