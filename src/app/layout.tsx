@@ -4,9 +4,11 @@ import './globals.css';
 import Header from '@/components/Header/Header';
 import { languages } from '@/i18n/config';
 import { CartProvider } from '@/context/CartContext';
-import { Suspense } from 'react'; // 引入Suspense
+import { Suspense } from 'react';
 import { ClientWeb3Wrapper } from '@/components/common/ClientWeb3Wrapper';
 import Footer from '@/components/layout/footer';
+import { ContractProvider } from '@/context/ContractContext';
+import LoadingWrapper from '@/components/common/LoadingWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,15 +39,18 @@ export default function RootLayout({
   return (
     <html lang={lng}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <CartProvider>
-          <ClientWeb3Wrapper>
-            {/* 使用Suspense包裹Header组件，提供加载时的备用UI */}
-            <Suspense fallback={<div className='h-16'></div>}>
-              <Header />
-            </Suspense>
-            <div>{children}</div>
-          </ClientWeb3Wrapper>
-        </CartProvider>
+        <LoadingWrapper>
+          <CartProvider>
+            <ClientWeb3Wrapper>
+              <ContractProvider>
+                <Suspense fallback={<div className='h-16'></div>}>
+                  <Header />
+                </Suspense>
+                <div>{children}</div>
+              </ContractProvider>
+            </ClientWeb3Wrapper>
+          </CartProvider>
+        </LoadingWrapper>
       </body>
     </html>
   );

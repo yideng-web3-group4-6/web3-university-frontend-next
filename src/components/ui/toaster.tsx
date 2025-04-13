@@ -1,35 +1,42 @@
-"use client"
+'use client';
 
-import { useToast } from "@/hooks/use-toast"
+import { useEffect, useState } from 'react';
 import {
   Toast,
-  ToastClose,
+  ToastTitle,
   ToastDescription,
   ToastProvider,
-  ToastTitle,
   ToastViewport,
-} from "@/components/ui/toast"
+} from '@/components/ui/toast';
 
 export function Toaster() {
-  const { toasts } = useToast()
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastTitle, setToastTitle] = useState('');
+  const [toastDescription, setToastDescription] = useState('');
+  const [toastVariant, setToastVariant] = useState<'default' | 'destructive'>('default');
+
+  useEffect(() => {
+    const handleShowToast = (event: CustomEvent) => {
+      const { title, description, variant } = event.detail;
+      setToastTitle(title);
+      setToastDescription(description);
+      setToastVariant(variant);
+      setToastOpen(true);
+    };
+
+    window.addEventListener('show-toast', handleShowToast as EventListener);
+    return () => {
+      window.removeEventListener('show-toast', handleShowToast as EventListener);
+    };
+  }, []);
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, action, ...props }) {
-        return (
-          <Toast key={id} {...props}>
-            <div className="grid gap-1">
-              {title && <ToastTitle>{title}</ToastTitle>}
-              {description && (
-                <ToastDescription>{description}</ToastDescription>
-              )}
-            </div>
-            {action}
-            <ToastClose />
-          </Toast>
-        )
-      })}
+      <Toast open={toastOpen} onOpenChange={setToastOpen} variant={toastVariant}>
+        <ToastTitle>{toastTitle}</ToastTitle>
+        <ToastDescription>{toastDescription}</ToastDescription>
+      </Toast>
       <ToastViewport />
     </ToastProvider>
-  )
+  );
 }
