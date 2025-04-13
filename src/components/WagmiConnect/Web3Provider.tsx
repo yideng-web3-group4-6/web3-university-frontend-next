@@ -8,12 +8,12 @@ import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 const config = createConfig(
   getDefaultConfig({
     // 支持的区块链
-    chains: [mainnet, sepolia, localhost],
+    chains: [sepolia, mainnet, localhost], // 将 sepolia 放在第一位
     transports: {
-      // 添加ETH主网链的 RPC URL
-      [mainnet.id]: http(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
       // 添加 sepolia 的 RPC 配置
       [sepolia.id]: http(`https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
+      // 添加ETH主网链的 RPC URL
+      [mainnet.id]: http(`https://mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`),
       // 本地链接
       [localhost.id]: http('http://127.0.0.1:8545'),
     },
