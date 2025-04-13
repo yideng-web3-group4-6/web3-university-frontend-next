@@ -1,24 +1,36 @@
-"use client";
 import React from "react";
 import { BigNumber } from "@ethersproject/bignumber";
 import { CoinType } from "@/mockData/courseData";
-import ExchangeSection from "@/components/Index/ExchangeSection";
-import { useParams } from "next/navigation";
+import ExchangeSection from "@components/Index/ExchangeSection";
+import { cookies } from "next/headers";
+import { DEFAULT_LANGUAGE, LANGUAGE_COOKIE_KEY, Language, AVAILABLE_LANGUAGES, getDictionary } from "@/i18n/config";
 
-const Index = () => {
-  const params = useParams();
-  const lng = (params?.lng as string) || "en";
+export default async function Home() {
+  // Get language from cookies for server-side rendering
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get(LANGUAGE_COOKIE_KEY)?.value;
+  const locale = (localeCookie && AVAILABLE_LANGUAGES.includes(localeCookie as Language)) 
+    ? localeCookie as Language 
+    : DEFAULT_LANGUAGE;
+    
+  // Load dictionary
+  const dictionary = await getDictionary(locale as Language);
 
-  const exchangeRates: Record<CoinType, BigNumber> = {
-    ETH: BigNumber.from("1000"), // 1 ETH = 1000 $YD
-    BTC: BigNumber.from("20000"), // 1 BTC = 20000 $YD
-    USDT: BigNumber.from("2"), // 1 USDT = 2 $YD
-    BNB: BigNumber.from("500"), // 1 BNB = 500 $YD
+  // Define exchange rates as string values to avoid serialization issues
+  const exchangeRateValues = {
+    ETH: "1000",
+    BTC: "20000",
+    USDT: "2",
+    BNB: "500",
   };
 
   return (
-    <>
-      <ExchangeSection exchangeRates={exchangeRates} lng={lng} />
+    <main>
+      <ExchangeSection 
+        exchangeRateValues={exchangeRateValues} 
+        initialDictionary={dictionary}
+        initialLocale={locale}
+      />
       {/* <div className="hero-gradient pt-24">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -43,7 +55,6 @@ const Index = () => {
           ))}
         </div>
       </div> */}
-    </>
+    </main>
   );
-};
-export default Index;
+}

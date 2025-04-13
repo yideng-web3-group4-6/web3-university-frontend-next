@@ -1,6 +1,14 @@
-// src/i18n/config.ts
+export const LANGUAGE_COOKIE_KEY = 'NEXT_LOCALE';
+export const DEFAULT_LANGUAGE = 'zh';
+export const AVAILABLE_LANGUAGES = ['zh', 'en'] as const;
+export type Language = typeof AVAILABLE_LANGUAGES[number];
 
-export const fallbackLng = 'zh'; // Default language
-export const languages = ['en', 'zh']; // Supported languages (English and Chinese)
-export const cookieName = 'i18next'; // Cookie name to store language preference
-export const defaultNS = 'translation'; // Default namespace for translations 
+export const getDictionary = async (locale: Language) => {
+  switch (locale) {
+    case 'en':
+      return import('../locales/en/common.json').then((module) => module.default);
+    case 'zh':
+    default:
+      return import('../locales/zh/common.json').then((module) => module.default);
+  }
+}; 
