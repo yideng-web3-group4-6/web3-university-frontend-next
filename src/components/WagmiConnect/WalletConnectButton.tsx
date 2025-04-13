@@ -1,6 +1,6 @@
 'use client';
 import { ConnectKitButton } from 'connectkit';
-import { Wallet, CheckCircle, LogOut, Coins } from 'lucide-react';
+import { Wallet, CheckCircle, LogOut, Coins, User } from 'lucide-react';
 import { useWalletAuth } from '@hooks/useWalletAuth';
 import { useTranslation } from '@/i18n/client';
 import { useParams } from 'next/navigation';
@@ -17,9 +17,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { shortenAddress } from '@/lib/utils';
 import { useBalance, useAccount } from 'wagmi';
 import { formatEther } from 'viem';
-import { useEffect } from "react";
-import { fetchLogin, getNonce } from "@/api/userApi";
-
+import { useEffect } from 'react';
+import { fetchLogin, getNonce } from '@/api/userApi';
+import Link from 'next/link';
 interface WagmiConnectButtonProps {
   showIcon?: boolean;
 }
@@ -36,18 +36,17 @@ export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps)
   });
   useEffect(() => {
     const handleLogin = async () => {
-      if(address) {
-        const {nonce} = await getNonce(address)
-        console.log(nonce, '============')
-        const jwt = await fetchLogin({walletAddress: address, signature: signer, nonce})
-        console.log(jwt, 'hahahahahha')
-
+      if (address) {
+        const { nonce } = await getNonce(address);
+        console.log(nonce, '============');
+        const jwt = await fetchLogin({ walletAddress: address, signature: signer, nonce });
+        console.log(jwt, 'hahahahahha');
       }
+    };
+    if (isConnected && isAuthenticated) {
+      handleLogin();
     }
-    if(isConnected && isAuthenticated) {
-      handleLogin()
-    }
-  }, [isConnected, isAuthenticated])
+  }, [isConnected, isAuthenticated]);
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, show, truncatedAddress, ensName }) => {
@@ -84,7 +83,7 @@ export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps)
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className='w-56 bg-dark-800/95 border border-primary-500/20 text-white'
+                className='w-56 bg-dark-800/95 border bg-black border-primary-500/20 text-white'
                 align='end'
                 forceMount
               >
@@ -94,6 +93,17 @@ export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps)
                     <p className='text-xs text-gray-400 font-mono'>
                       {shortenAddress(address || '')}
                     </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuLabel className='font-normal'>
+                  <div className='flex flex-col space-y-1'>
+                    <Link
+                      href={`/${lng}/profile`}
+                      className='flex items-center gap-2 text-sm text-white hover:text-primary-300 transition-colors'
+                    >
+                      <User className='h-4 w-4' />
+                      <span>Profile</span>
+                    </Link>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className='bg-primary-500/20' />
