@@ -69,5 +69,26 @@
     "successAlert": "成功结算！总价为",
     "scrollToTop": "返回顶部",
     "confirmDelete": "确定要从购物车中移除这个课程吗？"
+  },
+  "course": {
+    "loading": {
+      "subtitle": "正在加载课程内容...",
+      "status": "准备中，请稍候"
+    }
+  },
+  "error": {
+    "title": "加载失败",
+    "refresh": "重新加载",
+    "notFound": {
+      "title": "页面未找到",
+      "description": "抱歉，您访问的页面似乎已经迷失在了数字宇宙中...",
+      "subDescription": "也许它去了另一个平行宇宙度假？🚀",
+      "tips": [
+        "要不要去首页看看？",
+        "说不定你会发现新大陆呢～",
+        "这里什么都没有，但首页有很多宝藏！"
+      ],
+      "backHome": "返回首页"
+    }
   }
 }

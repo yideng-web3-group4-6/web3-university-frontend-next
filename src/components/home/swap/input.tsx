@@ -54,7 +54,9 @@ const TokenInput: React.FC<TokenInputProps> = ({
 
       {/* Balance and Refresh */}
       <div className='flex flex-row justify-end'>
-        <p className='text-primary-400 mr-2 balance-text'>Balance: {balance}</p>
+        <p className='text-primary-400 mr-2 balance-text'>
+          Balance: {parseFloat(balance).toFixed(2)}
+        </p>
         <Refresh
           className='text-primary-400 cursor-pointer hover:text-primary-300 transition-colors'
           fontSize='small'

@@ -1,10 +1,11 @@
-"use client";
-import dynamic from "next/dynamic";
-import { ReactNode } from "react";
+'use client';
+import dynamic from 'next/dynamic';
+import { ReactNode } from 'react';
+import { LoadingScreen } from './LoadingScreen';
 
-const Web3Provider = dynamic(() => import("@/components/WagmiConnect/Web3Provider"), {
+const Web3Provider = dynamic(() => import('@/components/WagmiConnect/Web3Provider'), {
   ssr: false,
-  loading: () => <div>加载 Web3...</div>,
+  loading: () => <LoadingScreen />,
 });
 
 export function ClientWeb3Wrapper({ children }: { children: ReactNode }) {

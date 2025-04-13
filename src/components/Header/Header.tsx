@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { WagmiConnectButton } from '../WagmiConnect/WalletConnectButton';
 import { useParams } from 'next/navigation';
 import { useTranslation } from '@/i18n/client';
-
+import GooeyNav from './gooeyNav';
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const params = useParams();
   const lng = (params?.lng as string) || 'en';
@@ -33,14 +33,7 @@ const Header = () => {
         <Bot className='w-8 h-8 text-purple-500' />
         <span className='text-white font-medium text-xl'>Web3Learn</span>
       </Link>
-
-      <div className='hidden md:flex items-center space-x-8'>
-        <NavLink href='/course'>{t('nav.course')}</NavLink>
-        <NavLink href='/knowledge'>{t('nav.knowledge')}</NavLink>
-        <NavLink href='/award'>{t('nav.award')}</NavLink>
-        <NavLink href='/article'>{t('nav.article')}</NavLink>
-      </div>
-
+      <GooeyNav />
       <div className='hidden md:flex items-center space-x-4'>
         <WagmiConnectButton />
       </div>

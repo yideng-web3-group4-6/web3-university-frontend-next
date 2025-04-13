@@ -5,11 +5,13 @@ import { useParams } from 'next/navigation';
 import CartSidebar from '@components/sidebar/CartSidebar';
 import RightSidebar from '@components/sidebar/RightSidebar';
 import CourseList from '@/components/course/list';
-import CourseContent from '@/components/course/index'
+import CourseContent from '@/components/course/index';
 import { Course } from '@utils/courseType';
 import { fetchCourse } from '@/apis/courseApi';
 import { useTranslation } from '@/i18n/client';
 import { useCart } from '@/context/CartContext';
+import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { ErrorScreen } from '@/components/common/ErrorScreen';
 
 const CoursePage: React.FC = () => {
   const params = useParams();
@@ -41,7 +43,11 @@ const CoursePage: React.FC = () => {
   if (loading) {
     return (
       <div className='max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 text-center'>
-        <p className='text-cyber-blue'>{t('loading')}</p>
+        <LoadingScreen
+          title={t('loading')}
+          subtitle={t('course.loading.subtitle')}
+          status={t('course.loading.status')}
+        />
       </div>
     );
   }
@@ -49,7 +55,14 @@ const CoursePage: React.FC = () => {
   if (error) {
     return (
       <div className='max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 text-center'>
-        <p className='text-red-500'>{error}</p>
+        <ErrorScreen
+          title={t('error.title')}
+          subtitle={error}
+          onRefresh={() => {
+            setError(null);
+            fetchCourse();
+          }}
+        />
       </div>
     );
   }
@@ -59,13 +72,13 @@ const CoursePage: React.FC = () => {
       {/* <CourseList onAddToCart={addToCart} lng={lng} courses={courses} /> */}
       <RightSidebar cartItems={cartItems} setIsCartOpen={setIsCartOpen} lng={lng} />
       <CartSidebar
-         cartItems={cartItems}
-         isCartOpen={isCartOpen}
-         setIsCartOpen={setIsCartOpen}
-         setCartItems={setCartItems}
-         lng={lng}
-      /> 
-      <CourseContent/>
+        cartItems={cartItems}
+        isCartOpen={isCartOpen}
+        setIsCartOpen={setIsCartOpen}
+        setCartItems={setCartItems}
+        lng={lng}
+      />
+      <CourseContent />
     </>
   );
 };

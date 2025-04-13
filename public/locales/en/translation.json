@@ -69,5 +69,20 @@
     "successAlert": "Successfully checked out! Total price is",
     "scrollToTop": "Back to Top",
     "confirmDelete": "Are you sure you want to remove this course from the cart?"
+  },
+  "error": {
+    "title": "Loading Failed",
+    "refresh": "Refresh",
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "Oops! The page you are looking for has been lost in the digital universe...",
+      "subDescription": "Maybe it went on vacation to a parallel universe? 🚀",
+      "tips": [
+        "Why not check out our homepage?",
+        "You might discover something new!",
+        "Nothing here, but treasures await on the homepage!"
+      ],
+      "backHome": "Back Home"
+    }
   }
 }
