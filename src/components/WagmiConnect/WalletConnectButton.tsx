@@ -18,7 +18,7 @@ import { shortenAddress } from '@/lib/utils';
 import { useBalance, useAccount } from 'wagmi';
 import { formatEther } from 'viem';
 import { useEffect } from 'react';
-import { fetchLogin, getNonce } from '@/api/userApi';
+import { fetchLogin, getNonce } from '@/apis/userApi';
 import Link from 'next/link';
 interface WagmiConnectButtonProps {
   showIcon?: boolean;
