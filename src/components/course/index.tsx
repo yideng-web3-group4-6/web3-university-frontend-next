@@ -6,7 +6,7 @@ import CourseList from "./list";
 
 export default function Home() {
   return (
-    <Box className="w-full mt-20">
+    <Box className="w-full pt-20">
       <Container maxWidth="lg">
         <CourseList />
       </Container>

@@ -11,6 +11,8 @@ import NFTAssets from "@/components/Profile/NFTAssets";
 // import { getArticleList } from "@/api/article";
 import TokenCard from "@/components/Profile/TokenCard";
 import { useYiDengToken } from "@/hooks/useYiDengToken";
+import { Container } from "@mui/material";
+
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("info");
@@ -30,8 +32,8 @@ const Profile: React.FC = () => {
   // }, []);
 
   const nfts = [
-    { id: "1", name: "Digital Art #1", imageUrl: "/img/nft1.jpg" },
-    { id: "2", name: "Pixel Art #2", imageUrl: "/img/nft2.jpg" },
+    { id: "1", name: "Digital Art #1", imageUrl: "http://gips0.baidu.com/it/u=3602773692,1512483864&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280" },
+    { id: "2", name: "Pixel Art #2", imageUrl: "http://gips3.baidu.com/it/u=3419425165,837936650&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024" },
   ];
   const courses = [
     { id: "1", title: "Solidity 入门", instructor: "Alice", type: "purchased" },
@@ -46,39 +48,42 @@ const Profile: React.FC = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white">
-      {/* 侧边栏 */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+    <Container>
+       <div className="flex text-white pt-5">
+        {/* 侧边栏 */}
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* 主内容区域 */}
-      <div className="flex-1 ml-64 pt-5">
-        <div className="max-w-5xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-8">
-          {/* 根据 activeTab 渲染内容 */}
-          {walletAddress && (
-            <>
-              {activeTab === "info" && (
-                <div className="space-y-8">
-                  <UserInfoCard
-                    username="User"
-                    walletAddress={walletAddress}
-                    avatarUrl={avatarUrl}
-                    onAvatarChange={setAvatarUrl}
-                  />
-                  <Balance ethBalance={data?.value.toString() || ""} />
-                  <TokenCard token={tokenBalance as string || "0"}/>
+        {/* 主内容区域 */}
+        <div className="flex-1 ">
+          <div className="max-w-5xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-8">
+            {/* 根据 activeTab 渲染内容 */}
+            {walletAddress && (
+              <>
+                {activeTab === "info" && (
+                  <div className="space-y-8">
+                    <UserInfoCard
+                      username="User"
+                      walletAddress={walletAddress}
+                      avatarUrl={avatarUrl}
+                      onAvatarChange={setAvatarUrl}
+                    />
+                    <Balance ethBalance={data?.value.toString() || ""} />
+                    <TokenCard token={tokenBalance as string || "0"}/>
 
-                  {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
-                </div>
-              )}
-              {activeTab === "nfts" && <NFTAssets nfts={nfts} />}
-              {activeTab === "courses" && <CoursesPannel courses={courses} />}
-              {activeTab === "articles" && <ArticlesPannel articles={articles} />}
-            </>
-          )}
+                    {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
+                  </div>
+                )}
+                {activeTab === "nfts" && <NFTAssets nfts={nfts} />}
+                {activeTab === "courses" && <CoursesPannel courses={courses} />}
+                {activeTab === "articles" && <ArticlesPannel articles={articles} />}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    </Container>
+   
+  )
 };
 
 export default Profile;

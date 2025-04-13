@@ -43,7 +43,7 @@ export default function RootLayout({
             <Suspense fallback={<div className='h-16'></div>}>
               <Header />
             </Suspense>
-            <div>{children}</div>
+            <div className='bg-black/[0.96] min-h-screen'>{children}</div>
           </ClientWeb3Wrapper>
         </CartProvider>
       </body>
