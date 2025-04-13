@@ -56,7 +56,11 @@ const request = async <T>({
       ...config,
     });
     if(response.status === 200) {
-      return response.data as T
+      if(!response.data.data) {
+        return response.data as T
+      } else {
+        return response.data.data as T
+      }
     }
     const { code, msg, data: responseData } = response.data;
     if (code !== 10000 && code !== "10000") {

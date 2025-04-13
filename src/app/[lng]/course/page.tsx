@@ -65,7 +65,7 @@ const CoursePage: React.FC = () => {
          setCartItems={setCartItems}
          lng={lng}
       /> 
-      <CourseContent/>
+      <CourseContent courses={courses} />
     </>
   );
 };

@@ -1,10 +1,12 @@
 import React from "react";
 
 import './style.css'
+import { Course } from "@/utils/courseType";
 
-interface CourseItemProps {}
-const CourseItem:React.FC<CourseItemProps> = ({
-}) => {
+interface CourseItemProps {
+  course: Course
+}
+const CourseItem:React.FC<CourseItemProps> = ({course}) => {
   return (
     <div className="col-lg-4 col-md-6">
       <div className="course-shape-item hover-shape-border">
@@ -16,10 +18,10 @@ const CourseItem:React.FC<CourseItemProps> = ({
             <div className="course-author">
                 <h2 className="pb-3 pt-3">
                   <a href="project-details.html" className="text-2xl">
-                    Cyber City Clan
+                    {course.title}
                   </a>
                 </h2>
-              <p className="pb-3">描述信息描述信息描述信息描述信息描述信息描述信息描述信息</p>
+              <p className="pb-3">{course.description}</p>
             </div>
           </div>
           <div className="course-content">
@@ -31,7 +33,7 @@ const CourseItem:React.FC<CourseItemProps> = ({
                 </li>
                 <li className="pb-1 flex justify-between">
                   <span>price</span>
-                  <span>900.00 BUSD</span>
+                  <span>{course.price} YD</span>
                 </li>
               </ul>
             </div>
