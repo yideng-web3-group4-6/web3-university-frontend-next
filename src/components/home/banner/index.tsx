@@ -10,9 +10,9 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <div className='relative min-h-[calc(100vh-76px)] flex mt-10'>
+    <div className='relative pb-32 flex mt-10'>
       {/* Floating papers background */}
-      <div className='absolute inset-0 overflow-hidden'>
+      <div className='absolute inset-0 overflow-hidden w-[100vw] h-[100vh]'>
         <FloatingPaper count={10} />
       </div>
 

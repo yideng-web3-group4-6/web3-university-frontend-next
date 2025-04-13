@@ -88,7 +88,7 @@ const ProjectsSection = () => {
 
   return (
     <Box className='w-full py-6 md:mt-30 md:mb-30'>
-      <Container maxWidth='lg'>
+      <Container>
         <h1 className='mb-2 font-bold text-4xl text-primary-500'>Popular Course</h1>
 
         <h2 className='text-text-secondary mb-10 text-xl text-white'>

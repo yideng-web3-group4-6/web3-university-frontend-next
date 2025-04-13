@@ -6,9 +6,11 @@ import './style.css';
 const ContactUs = () => {
   return (
     <Box className='md:mt-10 md:mb-30 w-full'>
-      <Container maxWidth='lg'>
+      <Container>
         <Box className='email-area text-center active-shape hover-shape-inner'>
-          <h2 className='title mb-8 text-3xl font-bold text-white'>Get alerts 💌 for new IGOs & IDOs</h2>
+          <h2 className='title mb-8 text-3xl font-bold text-white'>
+            Get alerts 💌 for new IGOs & IDOs
+          </h2>
           <div className='des mb-10 md:mb-8 text-white'>
             Sign up for newsletter to get more IGO/IDO News and Updates
           </div>
