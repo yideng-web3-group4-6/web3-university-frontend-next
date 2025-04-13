@@ -2,8 +2,6 @@
 import { ConnectKitButton } from "connectkit";
 import { Wallet, CheckCircle } from "lucide-react";
 import { useWalletAuth } from "@hooks/useWalletAuth";
-import { useTranslation } from '@/i18n/client';
-import { useParams } from 'next/navigation';
 
 interface WalletConnectButtonProps {
   dictionary?: Record<string, any>;
