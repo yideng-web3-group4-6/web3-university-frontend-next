@@ -37,6 +37,22 @@ const courseList = [
     image: '/static/home/course.png',
     bgColor: 'rgba(187 247 208)',
   },
+  {
+    id: 5,
+    title: 'Aora',
+    category: 'Development',
+    year: '2024',
+    image: '/static/home/course.png',
+    bgColor: '#8c8472',
+  },
+  {
+    id: 6,
+    title: 'Code Screenshot',
+    category: 'Development & Design',
+    year: '2024',
+    image: '/static/home/course.png',
+    bgColor: '#f8d7ea',
+  },
 ];
 
 const ProjectsSection = () => {
@@ -71,23 +87,23 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <Box className='w-full py-6 md:mt-20 md:mb-20'>
+    <Box className='w-full py-6 md:mt-30 md:mb-30'>
       <Container maxWidth='lg'>
         <h1 className='mb-2 font-bold text-4xl text-primary-500'>Popular Course</h1>
 
-        <h2 className='text-white mb-10 text-xl'>
+        <h2 className='text-text-secondary mb-10 text-xl text-white'>
           There are all kinds of courses, buy the courses you like.
         </h2>
         <div
           ref={containerRef}
-          className='pb-20 opacity-container grid row-gap-10 grid-cols-1 grid-rows-[masonry] gap-y-10 py-md sm:grid-cols-2 sm:gap-x-16 sm:gap-y-0'
+          className='pb-20 opacity-container grid row-gap-10 grid-cols-3 grid-rows-[masonry] gap-y-10 py-md sm:grid-cols-3 sm:gap-x-16 sm:gap-y-0'
         >
           {courseList.map((item, index) => (
             <div
               key={item.id}
-              className={`opacity-container-child group h-fit w-full cursor-pointer even:sm:mt-14 ${
-                index % 2 === 0 ? 'slide-from-left' : 'slide-from-right'
-              }`}
+              className={`opacity-container-child group h-fit w-full cursor-pointer ${
+                index >= 1 && (index - 1) % 3 === 0 ? 'sm:mt-10' : ''
+              } ${index % 2 === 0 ? 'slide-from-left' : 'slide-from-right'}`}
             >
               <a className='h-fit w-full'>
                 <span className='opacity-container-child__image'>
@@ -104,12 +120,12 @@ const ProjectsSection = () => {
                 </span>
                 <span className='text-white'>
                   <div className='mt-4 space-y-2'>
-                    <h5 className='text-white text-2xl font-bold'>{item.title}</h5>
+                    <h5>{item.title}</h5>
                     <div className='flex justify-between'>
                       <div className='flex flex-wrap gap-2'>
-                        <p className='text-sm text-white'>{item.category}</p>
+                        <p className='text-sm text-text-secondary'>{item.category}</p>
                       </div>
-                      <p className='text-sm text-white'>{item.year}</p>
+                      <p className='text-sm text-text-secondary'>{item.year}</p>
                     </div>
                   </div>
                 </span>
@@ -120,7 +136,7 @@ const ProjectsSection = () => {
         <div className='flex justify-center'>
           <a
             href='/course'
-            className='cursor-pointer w-fit text-white rounded-full bg-primary-600 px-4 py-2'
+            className='cursor-pointer w-fit text-white rounded-lg bg-primary-600 px-4 py-2'
           >
             View All Course
           </a>

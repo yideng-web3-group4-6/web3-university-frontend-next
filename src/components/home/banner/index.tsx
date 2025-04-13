@@ -10,10 +10,10 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <div className='relative min-h-[calc(100vh-76px)] flex items-center'>
+    <div className='relative min-h-[calc(100vh-76px)] flex mt-10'>
       {/* Floating papers background */}
       <div className='absolute inset-0 overflow-hidden'>
-        <FloatingPaper count={6} />
+        <FloatingPaper count={10} />
       </div>
 
       <div className='container mx-auto px-6 relative z-10'>
@@ -68,7 +68,7 @@ const Hero = () => {
       </div>
 
       {/* Animated robot */}
-      <div className='absolute bottom-0 right-0 w-96 h-96'>
+      <div className='absolute bottom-0 right-0 w-48 h-96'>
         <RoboAnimation />
       </div>
     </div>
