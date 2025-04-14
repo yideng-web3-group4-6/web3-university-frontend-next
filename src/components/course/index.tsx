@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Box, Container } from '@mui/material';
 import { Course } from '@/types/course/courseType';
 
-import CourseList from './list';
 import Filter from './filter';
 import Info from './info';
 import Footer from '../layout/footer';
@@ -10,6 +9,7 @@ import { useContracts } from '@/context/ContractContext';
 import { useAccount } from 'wagmi';
 import { useLoading } from '@/context/LoadingContext';
 import { ethers } from 'ethers';
+import CourseContent from './content';
 
 export default function Home({ courses }: { courses: Course[] }) {
   const { courseContract, ydContract } = useContracts();
@@ -93,13 +93,23 @@ export default function Home({ courses }: { courses: Course[] }) {
     }
   };
 
+  const [filteredCourses, setFilteredCourses] = useState(courses);
+  const handleCategoryChange = (category: string) => {
+    if (category === 'All Categories') {
+      setFilteredCourses(courses);
+    } else {
+      const filtered = courses.filter(course => course.level.toLowerCase() === category.toLowerCase());
+      setFilteredCourses(filtered);
+    }
+  };
+
   return (
     <Box className='w-full pt-20 bg-black pb-0'>
       <Container maxWidth='lg'>
         <Info />
-        <Filter />
-        <CourseList
-          courses={courses}
+        <Filter onCategoryChange={handleCategoryChange} />
+        <CourseContent
+          courses={filteredCourses}
           userCourses={userCourses}
           tokenBalance={tokenBalance}
           onBuyCourse={handleBuyCourse}

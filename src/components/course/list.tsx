@@ -1,9 +1,9 @@
 import React from 'react';
-
-import CourseItem from './item';
 import { Course } from '@/types/course/courseType';
 
-interface CourseListProps {
+import CourseItem from './item';
+
+export interface CourseListProps {
   courses: Course[];
   userCourses: Record<string, boolean>;
   tokenBalance: string;
