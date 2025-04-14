@@ -6,6 +6,7 @@ import { injected } from 'wagmi/connectors';
 import TokenInput from './input';
 import { WagmiConnectButton } from '@/components/WagmiConnect/WalletConnectButton';
 import { useContracts } from '@/context/ContractContext';
+import { useLoading } from '@/context/LoadingContext';
 
 const EXCHANGE_RATE = 1000; // 1000 YD = 1 ETH
 
@@ -13,6 +14,7 @@ const TokenSwap: React.FC = () => {
   const [amount, setAmount] = useState('0');
   const [isSwapped, setIsSwapped] = useState(false);
   const [yd_balance, setYdBalance] = useState('0');
+  const { showLoading, hideLoading } = useLoading();
 
   const { address, isConnected } = useAccount();
   const { ydContract } = useContracts();
@@ -86,7 +88,7 @@ const TokenSwap: React.FC = () => {
     setIsSwapped(!isSwapped);
   };
 
-  const handleWrap = async () => {
+  const contractSwap = async () => {
     if (!isConnected) {
       return;
     }
@@ -95,10 +97,11 @@ const TokenSwap: React.FC = () => {
 
     // 检查余额是否足够
     if (!checkBalance()) {
-      alert('余额不足');
+      alert('Insufficient balance');
       return;
     }
     try {
+      showLoading('Processing transaction...');
       if (!isSwapped) {
         // 卖出YD代币换取ETH
         const amountInWei = ethers.utils.parseEther(amount);
@@ -116,16 +119,18 @@ const TokenSwap: React.FC = () => {
         getYdBalance();
       }
     } catch (error) {
-      console.error('交易失败:', error);
+      console.error('Transaction failed:', error);
       if (error instanceof Error) {
         alert(error.message);
       }
+    } finally {
+      hideLoading();
     }
   };
 
   return (
     <div className='flex flex-col gap-10'>
-      <div className='flex flex-col gap-5 relative'>
+      <div className='flex flex-col gap-12 relative'>
         <TokenInput
           tokenSymbol={isSwapped ? 'ETH' : 'YD'}
           balance={isSwapped ? eth_Balance : yd_balance}
@@ -156,7 +161,7 @@ const TokenSwap: React.FC = () => {
       </div>
       {isConnected ? (
         <button
-          onClick={handleWrap}
+          onClick={contractSwap}
           className='w-full h-13 rounded-lg py-3 bg-primary-500 hover:bg-primary-600 transition-colors cursor-pointer'
         >
           <span className='font-bold text-white text-lg'>Swap</span>
