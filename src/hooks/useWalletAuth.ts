@@ -1,8 +1,9 @@
-"use client";
-import { useState, useEffect } from "react";
-import { Address } from "viem";
+'use client';
+import { fetchLogin, getNonce } from '@/apis/userApi';
+import { useState, useEffect } from 'react';
+import { Address } from 'viem';
 // 导入 wagmi 库的 hooks 用于钱包连接、签名和断开连接
-import { useAccount, useSignMessage, useDisconnect } from "wagmi";
+import { useAccount, useSignMessage, useDisconnect } from 'wagmi';
 
 // 定义返回值的接口类型，明确 hook 返回的对象结构
 interface UseWalletAuthReturn {
@@ -12,7 +13,7 @@ interface UseWalletAuthReturn {
   handleSignature: () => Promise<void>; // 处理签名请求的异步函数
   disconnect: () => void; // 断开钱包连接的函数
   signer: string;
-  address: Address | undefined
+  address: Address | undefined;
 }
 
 // 自定义 hook，用于管理钱包认证逻辑
@@ -23,10 +24,9 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 管理认证状态，初始为未认证
   const [isSigningMessage, setIsSigningMessage] = useState(false); // 管理签名进行状态，初始为未签名
   const { signMessageAsync } = useSignMessage(); // 从 wagmi 获取异步签名函数
-  const [signer, setSigner] = useState("");
+  const [signer, setSigner] = useState('');
 
   // 定义固定的签名消息内容，用于用户确认授权登录
-  const signatureMessage = "确认授权登录您的web3钱包嘛?";
 
   // 处理签名请求
   const handleSignature = async () => {
@@ -36,11 +36,18 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
       setIsSigningMessage(true); // 设置签名状态为正在进行
       try {
         // 调用签名函数，传入签名消息，等待用户签名
-        const sig = await signMessageAsync({ message: signatureMessage });
-        setSigner(sig);
-        setIsAuthenticated(true); // 更新认证状态为已认证
+        if (address) {
+          const { nonce } = await getNonce(address);
+          const signatureMessage = `Domain: yideng.university\nWallet: ${address}\nNonce: ${nonce}\nChainId: 1`;
+          console.log(signatureMessage, '-------');
+          const sig = await signMessageAsync({ message: signatureMessage });
+          setSigner(sig);
+          setIsAuthenticated(true); // 更新认证状态为已认证
+          const jwt = await fetchLogin({ walletAddress: address, signature: sig, nonce });
+          console.log(jwt, 'hahahahahha');
+        }
       } catch (error) {
-        console.error("签名错误:", error);
+        console.error('签名错误:', error);
         // 签名被拒绝或失败，断开钱包连接
         disconnect(); // 签名失败，断开钱包连接
         setIsAuthenticated(false); // 重置认证状态为未认证
@@ -48,7 +55,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
         setIsSigningMessage(false); // 无论成功或失败，最终结束签名状态
       }
     } else {
-      alert('请先连接钱包')
+      alert('请先连接钱包');
     }
   };
 
@@ -80,6 +87,6 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
     handleSignature, // 手动触发签名的函数
     disconnect, // 断开钱包连接的函数
     signer,
-    address
+    address,
   };
 };

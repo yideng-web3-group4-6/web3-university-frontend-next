@@ -1,6 +1,6 @@
 'use client';
 import { ConnectKitButton } from 'connectkit';
-import { Wallet, CheckCircle, LogOut, Coins, User } from 'lucide-react';
+import { Wallet, LogOut, Coins, User } from 'lucide-react';
 import { useWalletAuth } from '@hooks/useWalletAuth';
 import { useTranslation } from '@/i18n/client';
 import { useParams } from 'next/navigation';
@@ -15,17 +15,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { shortenAddress } from '@/lib/utils';
-import { useBalance, useAccount } from 'wagmi';
+import { useBalance } from 'wagmi';
 import { formatEther } from 'viem';
-import { useEffect } from 'react';
-import { fetchLogin, getNonce } from '@/apis/userApi';
 import Link from 'next/link';
 interface WagmiConnectButtonProps {
   showIcon?: boolean;
 }
 
 export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps) => {
-  const { isAuthenticated, isSigningMessage, address, isConnected, signer } = useWalletAuth();
+  const { isAuthenticated, isSigningMessage, address } = useWalletAuth();
 
   const params = useParams();
   const lng = (params?.lng as string) || 'en';
@@ -34,19 +32,7 @@ export const WagmiConnectButton = ({ showIcon = true }: WagmiConnectButtonProps)
   const { data: ethBalance } = useBalance({
     address: address,
   });
-  useEffect(() => {
-    const handleLogin = async () => {
-      if (address) {
-        const { nonce } = await getNonce(address);
-        console.log(nonce, '============');
-        const jwt = await fetchLogin({ walletAddress: address, signature: signer, nonce });
-        console.log(jwt, 'hahahahahha');
-      }
-    };
-    if (isConnected && isAuthenticated) {
-      handleLogin();
-    }
-  }, [isConnected, isAuthenticated]);
+
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, show, truncatedAddress, ensName }) => {
