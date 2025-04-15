@@ -9,6 +9,7 @@ import { ClientWeb3Wrapper } from '@/components/common/ClientWeb3Wrapper';
 import Footer from '@/components/layout/footer';
 import { ContractProvider } from '@/context/ContractContext';
 import LoadingWrapper from '@/components/common/LoadingWrapper';
+import MonitorComponent from './monitor';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -45,6 +46,7 @@ export default function RootLayout({
               <ContractProvider>
                 <Suspense fallback={<div className='h-16'></div>}>
                   <Header />
+                  <MonitorComponent />
                 </Suspense>
                 <div>{children}</div>
               </ContractProvider>
