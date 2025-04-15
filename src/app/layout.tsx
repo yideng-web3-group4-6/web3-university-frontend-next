@@ -7,6 +7,7 @@ import { CartProvider } from '@/context/CartContext';
 import { Suspense } from 'react'; // 引入Suspense
 import { ClientWeb3Wrapper } from '@/components/common/ClientWeb3Wrapper';
 import Footer from '@/components/layout/footer';
+import { Provider } from 'jotai';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,15 +38,17 @@ export default function RootLayout({
   return (
     <html lang={lng}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <CartProvider>
-          <ClientWeb3Wrapper>
-            {/* 使用Suspense包裹Header组件，提供加载时的备用UI */}
-            <Suspense fallback={<div className='h-16'></div>}>
-              <Header />
-            </Suspense>
-            <div className='bg-black/[0.96] min-h-screen'>{children}</div>
-          </ClientWeb3Wrapper>
-        </CartProvider>
+        <Provider>
+          <CartProvider>
+            <ClientWeb3Wrapper>
+              {/* 使用Suspense包裹Header组件，提供加载时的备用UI */}
+              <Suspense fallback={<div className='h-16'></div>}>
+                <Header />
+              </Suspense>
+              <div className='bg-black/[0.96] min-h-screen'>{children}</div>
+            </ClientWeb3Wrapper>
+          </CartProvider>
+        </Provider>
       </body>
     </html>
   );

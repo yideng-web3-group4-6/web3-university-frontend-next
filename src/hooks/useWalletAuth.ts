@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Address } from 'viem';
 // 导入 wagmi 库的 hooks 用于钱包连接、签名和断开连接
 import { useAccount, useSignMessage, useDisconnect } from 'wagmi';
+import { useAtom } from 'jotai';
+import { tokenAtom } from '@/store/auth';
 
 // 定义返回值的接口类型，明确 hook 返回的对象结构
 interface UseWalletAuthReturn {
@@ -25,6 +27,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   const [isSigningMessage, setIsSigningMessage] = useState(false); // 管理签名进行状态，初始为未签名
   const { signMessageAsync } = useSignMessage(); // 从 wagmi 获取异步签名函数
   const [signer, setSigner] = useState('');
+  const [_, setToken] = useAtom(tokenAtom);
 
   // 定义固定的签名消息内容，用于用户确认授权登录
 
@@ -43,6 +46,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
           setIsAuthenticated(true); // 更新认证状态为已认证
           const jwt = await fetchLogin({ walletAddress: address, signature: sig, nonce });
           console.log(jwt, 'hahahahahha');
+          setToken(jwt.access_token);
         }
       } catch (error) {
         console.error('签名错误:', error);
