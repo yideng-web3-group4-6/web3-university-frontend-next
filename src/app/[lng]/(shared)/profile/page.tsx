@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Sidebar from '@/components/Profile/Sidebar';
 import UserInfoCard from '@/components/Profile/UserInfoCard';
 import { useAccount, useBalance, useChainId } from 'wagmi';
@@ -8,12 +8,9 @@ import Balance from '@/components/Profile/Balance';
 import CoursesPannel from '@/components/Profile/CoursesPannel';
 import ArticlesPannel from '@/components/Profile/ArticlesPannel';
 import NFTAssets from '@/components/Profile/NFTAssets';
-// import { getArticleList } from "@/api/article";
 import TokenCard from '@/components/Profile/TokenCard';
 import { useYiDengToken } from '@/hooks/useYiDengToken';
 import { Container } from '@mui/material';
-import { useAtom } from 'jotai';
-import { tokenAtom } from '@/store/auth';
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('info');
@@ -22,17 +19,6 @@ const Profile: React.FC = () => {
   const { address: walletAddress } = useAccount();
   const { data } = useBalance({ address: walletAddress, chainId });
   const { tokenBalance } = useYiDengToken();
-
-  const [token] = useAtom(tokenAtom);
-  console.log(token, '个人信息--------');
-  // console.log(tokenBalance, '-------')
-  // useEffect(() => {
-  //   async function handleGetArticleList() {
-  //     const res = await getArticleList();
-  //     console.log(res);
-  //   }
-  //   handleGetArticleList();
-  // }, []);
 
   const nfts = [
     {
@@ -82,8 +68,6 @@ const Profile: React.FC = () => {
                     />
                     <Balance ethBalance={data?.value.toString() || ''} />
                     <TokenCard token={(tokenBalance as string) || '0'} />
-
-                    {/* <DependentAccountInfo isAuthorized={true} info="这是授权后可见的隐私信息" /> */}
                   </div>
                 )}
                 {activeTab === 'nfts' && <NFTAssets nfts={nfts} />}
