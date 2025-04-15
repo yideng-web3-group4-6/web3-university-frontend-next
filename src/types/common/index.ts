@@ -1,6 +1,6 @@
 export interface ResBase<T> {
   code: number | string;
-  msg: string;
+  message: string;
   data?: T;
 }
 

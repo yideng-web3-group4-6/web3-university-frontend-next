@@ -38,9 +38,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
         // 调用签名函数，传入签名消息，等待用户签名
         if (address) {
           const { nonce } = await getNonce(address);
-          const signatureMessage = `Domain: yideng.university\nWallet: ${address}\nNonce: ${nonce}\nChainId: 1`;
-          console.log(signatureMessage, '-------');
-          const sig = await signMessageAsync({ message: signatureMessage });
+          const sig = await signMessageAsync({ message: nonce });
           setSigner(sig);
           setIsAuthenticated(true); // 更新认证状态为已认证
           const jwt = await fetchLogin({ walletAddress: address, signature: sig, nonce });

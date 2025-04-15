@@ -1,40 +1,40 @@
-import { ResBase } from "@/types/common";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { ResBase } from '@/types/common';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // 创建 axios 实例
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_APP_BASE_API || "", // 基础 URL
+  baseURL: process.env.NEXT_PUBLIC_APP_BASE_API || '', // 基础 URL
   timeout: 10000, // 请求超时时间
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
 // 请求拦截器（可选）
 apiClient.interceptors.request.use(
-  (config) => {
+  config => {
     // 在请求发送前可以添加 token 等
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  error => Promise.reject(error),
 );
 
 // 响应拦截器（可选）
 apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
     // 统一处理错误
     if (error.response) {
-      console.error("API Error:", error.response.data);
+      console.error('API Error:', error.response.data);
     } else {
-      console.error("Network Error:", error.message);
+      console.error('Network Error:', error.message);
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 const request = async <T>({
@@ -43,7 +43,7 @@ const request = async <T>({
   data,
   config,
 }: {
-  method: "get" | "post" | "put" | "delete";
+  method: 'get' | 'post' | 'put' | 'delete';
   url: string;
   data?: object;
   config?: AxiosRequestConfig;
@@ -55,29 +55,19 @@ const request = async <T>({
       data,
       ...config,
     });
-    if(response.status === 200) {
-      if(!response.data.data) {
-        return response.data as T
-      } else {
-        return response.data.data as T
-      }
+    const { code, message, data: responseData } = response.data;
+    if (code !== 200 && code !== '200') {
+      return Promise.reject(message || 'Request failed with unknown error');
     }
-    const { code, msg, data: responseData } = response.data;
-    if (code !== 10000 && code !== "10000") {
-      return Promise.reject(msg || "Request failed with unknown error");
-    }
-
     // 返回 ResBase 格式的响应
     return responseData as T;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       // error 被类型收窄为 AxiosError
-      return Promise.reject(
-        error.response?.data?.message || error.message || "Request failed"
-      );
+      return Promise.reject(error.response?.data?.message || error.message || 'Request failed');
     }
     // 处理非 AxiosError 的情况
-    return Promise.reject("Request failed with unknown error");
+    return Promise.reject('Request failed with unknown error');
   }
 };
 
