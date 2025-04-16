@@ -101,7 +101,7 @@ export function ErrorScreen({
             onClick={onRefresh}
           >
             <RefreshCw className='mr-2 h-4 w-4' />
-            重新加载
+            Reload
           </Button>
         </motion.div>
       )}

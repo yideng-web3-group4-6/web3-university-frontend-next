@@ -191,7 +191,6 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     resizeObserver.observe(containerRef.current);
     return () => resizeObserver.disconnect();
   }, [activeIndex]);
-  console.log(items);
   return (
     <div className='gooey-nav-container overflow-hidden' ref={containerRef}>
       <nav>

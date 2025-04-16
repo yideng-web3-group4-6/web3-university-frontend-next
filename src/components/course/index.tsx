@@ -64,7 +64,7 @@ export default function Home({ courses }: { courses: Course[] }) {
     if (tokenBalanceNum < coursePriceNum) {
       alert(
         `Insufficient token balance. Current balance: ${tokenBalance} YD, Course price: ${course.price} YD`,
-      );
+          );
       return;
     }
 

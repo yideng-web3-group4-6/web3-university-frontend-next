@@ -6,7 +6,6 @@ import { languages } from '@/i18n/config';
 import { CartProvider } from '@/context/CartContext';
 import { Suspense } from 'react';
 import { ClientWeb3Wrapper } from '@/components/common/ClientWeb3Wrapper';
-import Footer from '@/components/layout/footer';
 import { ContractProvider } from '@/context/ContractContext';
 import LoadingWrapper from '@/components/common/LoadingWrapper';
 import MonitorComponent from './monitor';
@@ -44,11 +43,11 @@ export default function RootLayout({
           <CartProvider>
             <ClientWeb3Wrapper>
               <ContractProvider>
-                <Suspense fallback={<div className='h-16'></div>}>
-                  <Header />
-                  <MonitorComponent />
-                </Suspense>
-                <div>{children}</div>
+                  <Suspense fallback={<div className='h-16'></div>}>
+                    <Header />
+                    <MonitorComponent />
+                  </Suspense>
+                  <div>{children}</div>
               </ContractProvider>
             </ClientWeb3Wrapper>
           </CartProvider>
