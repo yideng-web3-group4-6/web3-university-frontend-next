@@ -11,6 +11,8 @@ import NFTAssets from '@/components/Profile/NFTAssets';
 import TokenCard from '@/components/Profile/TokenCard';
 import { useYiDengToken } from '@/hooks/useYiDengToken';
 import { Container } from '@mui/material';
+import { useAtomValue } from 'jotai';
+import { userInfoAtom } from '@/store/auth';
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('info');
@@ -19,7 +21,8 @@ const Profile: React.FC = () => {
   const { address: walletAddress } = useAccount();
   const { data } = useBalance({ address: walletAddress, chainId });
   const { tokenBalance } = useYiDengToken();
-
+  const userInfo = useAtomValue(userInfoAtom);
+  console.log(userInfo, 'userpage---')
   const nfts = [
     {
       id: '1',

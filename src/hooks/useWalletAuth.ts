@@ -1,10 +1,13 @@
 'use client';
-import { fetchLogin, getNonce } from '@/apis/userApi';
+import { fetchLogin, getNonce, getUserInfo } from '@/apis/userApi';
 import { useState, useEffect } from 'react';
 import { Address } from 'viem';
 // 导入 wagmi 库的 hooks 用于钱包连接、签名和断开连接
 import { useAccount, useSignMessage, useDisconnect } from 'wagmi';
 import { getToken, setToken } from '@/utils/token';
+import { UserInfo } from '@/types/other/user';
+import { useSetAtom } from 'jotai';
+import { userInfoAtom } from '@/store/auth';
 
 // 定义返回值的接口类型，明确 hook 返回的对象结构
 interface UseWalletAuthReturn {
@@ -17,6 +20,16 @@ interface UseWalletAuthReturn {
   address: Address | undefined;
 }
 
+const handleGetUserInfo = async (): Promise<UserInfo | null> => {
+  try {
+    const res = await getUserInfo()
+    return res
+  } catch (err) {
+    console.log(err)
+    return null
+  }
+}
+
 // 自定义 hook，用于管理钱包认证逻辑
 export const useWalletAuth = (): UseWalletAuthReturn => {
   const { isConnected, address } = useAccount(); // 添加 address 和 chain
@@ -26,8 +39,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   const [isSigningMessage, setIsSigningMessage] = useState(false); // 管理签名进行状态，初始为未签名
   const { signMessageAsync } = useSignMessage(); // 从 wagmi 获取异步签名函数
   const [signer, setSigner] = useState('');
-
-  // 定义固定的签名消息内容，用于用户确认授权登录
+  const setUserInfo = useSetAtom(userInfoAtom)
 
   // 处理签名请求
   const handleSignature = async () => {
@@ -35,7 +47,11 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
       if (isAuthenticated || isSigningMessage) return;
       const token = getToken();
       if (token) {
-        setIsAuthenticated(true);
+        const res = await handleGetUserInfo()
+        if(res) {
+          setUserInfo(res)
+          setIsAuthenticated(true);
+        }
         return;
       }
       // 检查钱包是否已连接
@@ -46,15 +62,19 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
           const { nonce } = await getNonce(address);
           const sig = await signMessageAsync({ message: nonce });
           setSigner(sig);
-          setIsAuthenticated(true); // 更新认证状态为已认证
           const jwt = await fetchLogin({ walletAddress: address, signature: sig, nonce });
-          console.log(jwt, 'hahahahahha');
+          setIsAuthenticated(true); // 更新认证状态为已认证
           setToken(jwt.access_token);
+          const userInfo = await handleGetUserInfo()
+          if(userInfo) {
+            setUserInfo(userInfo)
+          }
         }
       } catch (error) {
         console.error('签名错误:', error);
         disconnect(); // 签名失败，断开钱包连接
         setIsAuthenticated(false); // 重置认证状态为未认证
+        setUserInfo(null);
       } finally {
         setIsSigningMessage(false); // 无论成功或失败，最终结束签名状态
       }
@@ -81,6 +101,7 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
     if (!isConnected) {
       // 如果钱包连接断开
       setIsAuthenticated(false); // 重置认证状态为未认证
+      setUserInfo(null);
     }
   }, [isConnected]);
 
