@@ -57,6 +57,9 @@ const request = async <T>({
     });
     const { code, message, data: responseData } = response.data;
     if (code !== 200 && code !== '200') {
+      if (response.data) {
+        return response.data as T;
+      }
       return Promise.reject(message || 'Request failed with unknown error');
     }
     // 返回 ResBase 格式的响应
