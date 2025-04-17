@@ -1,6 +1,6 @@
 import { ResBase } from '@/types/common';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getToken } from './token';
+import { delToken, getToken } from './token';
 
 // 创建 axios 实例
 const apiClient = axios.create({
@@ -17,7 +17,7 @@ apiClient.interceptors.request.use(
     // 在请求发送前可以添加 token 等
     const token = getToken();
     if (token) {
-      config.headers.Authorization = `${'Bearer ' + JSON.parse(token)}`;
+      config.headers.Authorization = `${'Bearer ' + token}`;
     }
     return config;
   },
@@ -29,6 +29,9 @@ apiClient.interceptors.response.use(
   response => response,
   error => {
     // 统一处理错误
+    if (error.response.status === 401) {
+      delToken();
+    }
     if (error.response) {
       console.error('API Error:', error.response.data);
     } else {
@@ -63,14 +66,11 @@ const request = async <T>({
       }
       return Promise.reject(message || 'Request failed with unknown error');
     }
-    // 返回 ResBase 格式的响应
     return responseData as T;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      // error 被类型收窄为 AxiosError
       return Promise.reject(error.response?.data?.message || error.message || 'Request failed');
     }
-    // 处理非 AxiosError 的情况
     return Promise.reject('Request failed with unknown error');
   }
 };

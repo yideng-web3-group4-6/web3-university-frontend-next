@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import { Address } from 'viem';
 // 导入 wagmi 库的 hooks 用于钱包连接、签名和断开连接
 import { useAccount, useSignMessage, useDisconnect } from 'wagmi';
-import { useAtom } from 'jotai';
-import { tokenAtom } from '@/store/auth';
+import { getToken, setToken } from '@/utils/token';
 
 // 定义返回值的接口类型，明确 hook 返回的对象结构
 interface UseWalletAuthReturn {
@@ -27,7 +26,6 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   const [isSigningMessage, setIsSigningMessage] = useState(false); // 管理签名进行状态，初始为未签名
   const { signMessageAsync } = useSignMessage(); // 从 wagmi 获取异步签名函数
   const [signer, setSigner] = useState('');
-  const [_, setToken] = useAtom(tokenAtom);
 
   // 定义固定的签名消息内容，用于用户确认授权登录
 
@@ -35,6 +33,11 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
   const handleSignature = async () => {
     if (isConnected) {
       if (isAuthenticated || isSigningMessage) return;
+      const token = getToken();
+      if (token) {
+        setIsAuthenticated(true);
+        return;
+      }
       // 检查钱包是否已连接
       setIsSigningMessage(true); // 设置签名状态为正在进行
       try {
@@ -50,7 +53,6 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
         }
       } catch (error) {
         console.error('签名错误:', error);
-        // 签名被拒绝或失败，断开钱包连接
         disconnect(); // 签名失败，断开钱包连接
         setIsAuthenticated(false); // 重置认证状态为未认证
       } finally {
