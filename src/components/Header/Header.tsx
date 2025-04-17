@@ -36,9 +36,8 @@ const Header = () => {
 
       <div className='hidden md:flex items-center space-x-8'>
         <NavLink href='/course'>{t('nav.course')}</NavLink>
-        <NavLink href='/knowledge'>{t('nav.knowledge')}</NavLink>
+        <NavLink href='/knowledge'>{t('nav.article')}</NavLink>
         <NavLink href='/award'>{t('nav.award')}</NavLink>
-        <NavLink href='/article'>{t('nav.article')}</NavLink>
       </div>
 
       <div className='hidden md:flex items-center space-x-4'>
