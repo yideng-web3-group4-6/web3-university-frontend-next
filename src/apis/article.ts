@@ -1,4 +1,4 @@
-import { ArtileListRes, ArticleQueryParams } from '@/types/other/artical';
+import { ArtileListRes, ArticleQueryParams, ArticleItem } from '@/types/other/artical';
 import request from '@/utils/request';
 
 // 获取文章列表
@@ -15,7 +15,7 @@ export const getArticleList = async (params: ArticleQueryParams) => {
 
 // 获取文章详情
 export const getArticleDetail = async (id: string | number) => {
-  const response = await request<object>({
+  const response = await request<ArticleItem>({
     method: 'get',
     url: `/article/${id}`,
   });
