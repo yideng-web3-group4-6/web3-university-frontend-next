@@ -16,7 +16,7 @@ apiClient.interceptors.request.use(
     // 在请求发送前可以添加 token 等
     const token = localStorage.getItem('token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `${'Bearer ' + JSON.parse(token)}`;
     }
     return config;
   },

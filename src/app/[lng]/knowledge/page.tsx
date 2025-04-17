@@ -2,9 +2,22 @@
 import { useRouter } from "next/navigation";
 import { ArticleCard, IArticle } from "@/components/article-card";
 import { articles } from "../../../mockData/articalData";
+// import { useEffect } from "react";
+// import { getArticleDetail, getArticleList } from "@/apis/article";
+// import { ArticleQueryParams } from "@/types/other/artical";
+
+// const handleGetArticleList = async (params: ArticleQueryParams) => {
+//   // const res = await getArticleList(params)
+//   const res = await getArticleDetail(1)
+//   console.log(res)
+// }
 
 export default function Knowledge() {
   const router = useRouter();
+
+  // useEffect(() => {
+  //   handleGetArticleList({page: 1, pageSize: 10})
+  // }, [])
 
   const handleClickArticle = (article: IArticle) => {
     router.push(`/knowledge/${article.id}`);
