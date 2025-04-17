@@ -1,5 +1,6 @@
 import { ResBase } from '@/types/common';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { getToken } from './token';
 
 // 创建 axios 实例
 const apiClient = axios.create({
@@ -14,7 +15,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   config => {
     // 在请求发送前可以添加 token 等
-    const token = localStorage.getItem('token');
+    const token = getToken();
     if (token) {
       config.headers.Authorization = `${'Bearer ' + JSON.parse(token)}`;
     }
