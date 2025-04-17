@@ -51,6 +51,10 @@ export const useWalletAuth = (): UseWalletAuthReturn => {
         if(res) {
           setUserInfo(res)
           setIsAuthenticated(true);
+        } else {
+          disconnect(); // 签名失败，断开钱包连接
+          setIsAuthenticated(false); // 重置认证状态为未认证
+          setUserInfo(null);
         }
         return;
       }
