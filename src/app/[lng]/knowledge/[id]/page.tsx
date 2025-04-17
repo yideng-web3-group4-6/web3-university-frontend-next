@@ -1,7 +1,6 @@
 'use client';
 import { useRouter, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import React from 'react';
 import { Heart, Star } from 'lucide-react';
 import { ArticleItem } from '@/types/other/artical';
 import { getArticleDetail } from '@/apis/article';
