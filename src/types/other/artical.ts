@@ -27,3 +27,16 @@ export interface ArtileListRes {
   pageSize: number;
   total: number;
 }
+
+// 发布文章参数
+export interface ArticleBody {
+  title: string;
+  content: string;
+  subtitle?: string;
+  slug?: string;
+  cover?: string;
+  keywords?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  status?: 'draft' | 'published' | 'archived';
+}

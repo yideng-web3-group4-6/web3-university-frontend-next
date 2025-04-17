@@ -1,5 +1,15 @@
-import { ArtileListRes, ArticleQueryParams, ArticleItem } from '@/types/other/artical';
+import { ArtileListRes, ArticleQueryParams, ArticleItem, ArticleBody } from '@/types/other/artical';
 import request from '@/utils/request';
+
+// 发表文章
+export const postArticle = async (data: ArticleBody) => {
+  const response = await request<any>({
+    method: 'post',
+    url: '/article',
+    data,
+  });
+  return response;
+};
 
 // 获取文章列表
 export const getArticleList = async (params: ArticleQueryParams) => {
