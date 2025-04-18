@@ -1,19 +1,19 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
+import { useAccount } from 'wagmi';
 
 interface ExchangeInfoProps {
-  exchangeRate: string;
-  ydContract: string;
+  exchangeRate: string; // 默认的对率，，
   showCopy?: boolean;
   onCopy?: () => void;
 }
 
-const ExchangeInfo: React.FC<ExchangeInfoProps> = ({
-  showCopy = true,
-  onCopy,
-  exchangeRate,
-  ydContract,
-}) => {
+/**
+ * 置换资产模块底部 兑换率 及 合约地址展示
+ * */
+const ExchangeInfo: React.FC<ExchangeInfoProps> = ({ showCopy = true, onCopy, exchangeRate }) => {
+  const { address: ydContract } = useAccount();
+
   const handleCopy = useCallback(() => {
     if (onCopy) {
       onCopy();

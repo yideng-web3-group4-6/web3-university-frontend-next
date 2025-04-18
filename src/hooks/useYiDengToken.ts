@@ -13,13 +13,10 @@ export const useYiDengToken = () => {
 
   // 使用 ETH 购买代币
   const { writeContractAsync: buyWithETH, isPending: isBuying } = useWriteContract();
-
   const buyTokensWithETH = useCallback(
     async (ethAmount: string) => {
       if (!walletAccount.isConnected) throw new Error('Please connect your wallet');
-
-      const ethValue = parseEther(ethAmount); // viem 的 parseEther 直接返回 bigint
-
+      const ethValue = parseEther(ethAmount);
       const tx = await buyWithETH({
         address: YI_DENG_TOKEN_ADDRESS as `0x${string}`,
         abi: YiDengTokenABI.abi, // 直接传入 abi
@@ -32,20 +29,15 @@ export const useYiDengToken = () => {
   );
 
   // 查询账户代币余额
-  const {
-    data: tokenBalance,
-    isLoading: isBalanceLoading,
-    error: balanceError,
-  } = useReadContract({
-    address: YI_DENG_TOKEN_ADDRESS as `0x${string}`,
-    abi: YiDengTokenABI.abi,
-    functionName: 'balanceOf',
+  const { data: tokenBalance, isLoading: isBalanceLoading } = useReadContract({
+    address: YI_DENG_TOKEN_ADDRESS as `0x${string}`, // 合约地址
+    abi: YiDengTokenABI.abi, // 合约abi
+    functionName: 'balanceOf', // 方法名
     args: [walletAccount.address], // 传入当前账户地址
     query: {
       enabled: !!walletAccount.address, // 仅在地址存在时查询
     },
   });
-  console.log('Balance Error:', balanceError);
 
   return {
     isConnected: walletAccount.isConnected,
