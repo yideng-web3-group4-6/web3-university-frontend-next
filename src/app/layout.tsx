@@ -39,18 +39,18 @@ export default function RootLayout({
   return (
     <html lang={lng}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <LoadingWrapper>
-          <CartProvider>
-            <ClientWeb3Wrapper>
+        <CartProvider>
+          <ClientWeb3Wrapper>
+            <LoadingWrapper>
               <ContractProvider>
                 <Suspense fallback={<div className='h-16'></div>}>
                   <Header />
                 </Suspense>
                 <div>{children}</div>
               </ContractProvider>
-            </ClientWeb3Wrapper>
-          </CartProvider>
-        </LoadingWrapper>
+            </LoadingWrapper>
+          </ClientWeb3Wrapper>
+        </CartProvider>
       </body>
     </html>
   );

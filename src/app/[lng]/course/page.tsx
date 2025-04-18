@@ -1,47 +1,25 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'next/navigation';
-// import CourseList from '@components/course/CourseList';
 import CartSidebar from '@components/sidebar/CartSidebar';
 import RightSidebar from '@components/sidebar/RightSidebar';
-import CourseList from '@/components/course/list';
 import CourseContent from '@/components/course/index';
-import { Course } from '@/types/course/courseType';
-import { fetchCourse } from '@/apis/courseApi';
+import { useCourseList } from '@/apis/courseApi';
 import { useTranslation } from '@/i18n/client';
 import { useCart } from '@/context/CartContext';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { ErrorScreen } from '@/components/common/ErrorScreen';
-import Footer from '@/components/layout/footer';
 
 const CoursePage: React.FC = () => {
   const params = useParams();
   const lng = (params?.lng as string) || 'en';
   const { t } = useTranslation(lng);
   const { cartItems, addToCart, setCartItems, isCartOpen, setIsCartOpen } = useCart();
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  
+  const { data, isLoading, error, refetch } = useCourseList({});
+  const courses = data?.courses || [];
 
-  useEffect(() => {
-    const loadCourses = async () => {
-      try {
-        setLoading(true);
-        const response = await fetchCourse({});
-        setCourses(response?.courses || []);
-      } catch (error) {
-        console.error('Failed to load courses:', error);
-        setError(t('fetchCoursesError'));
-        setCourses([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCourses();
-  }, [t]);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className='max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 text-center'>
         <LoadingScreen
@@ -58,11 +36,8 @@ const CoursePage: React.FC = () => {
       <div className='max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 text-center'>
         <ErrorScreen
           title={t('error.title')}
-          subtitle={error}
-          onRefresh={() => {
-            setError(null);
-            fetchCourse({});
-          }}
+          subtitle={t('fetchCoursesError')}
+          onRefresh={refetch}
         />
       </div>
     );
@@ -70,7 +45,6 @@ const CoursePage: React.FC = () => {
 
   return (
     <div>
-      {/* <CourseList onAddToCart={addToCart} lng={lng} courses={courses} /> */}
       <RightSidebar cartItems={cartItems} setIsCartOpen={setIsCartOpen} lng={lng} />
       <CartSidebar
         cartItems={cartItems}
