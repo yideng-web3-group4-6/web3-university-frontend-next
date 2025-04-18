@@ -1,14 +1,21 @@
 import { useCallback } from 'react';
 import { useAccount, useWriteContract, useReadContract } from 'wagmi';
-import { parseEther } from 'viem'; // 使用 viem 的 parseEther，避免 BigNumber 问题
+import { Address, parseEther } from 'viem'; // 使用 viem 的 parseEther，避免 BigNumber 问题
 import YiDengTokenABI from '@/abis/YiDengToken.json'; // 导入合约 ABI
 
 // 提取合约地址
 const YI_DENG_TOKEN_ADDRESS = YiDengTokenABI.networks['1337'].address;
 // const YI_DENG_TOKEN_ADDRESS = "0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0";
 
+type UseYiDengTokenReturn = {
+  buyTokensWithETH: (ethAmount: string) => Promise<Address>;
+  isBuying: boolean;
+  tokenBalance: number;
+  isBalanceLoading: boolean;
+};
+
 // 精简的 Hook，仅用于购买代币
-export const useYiDengToken = () => {
+export const useYiDengToken = (): UseYiDengTokenReturn => {
   const walletAccount = useAccount();
 
   // 使用 ETH 购买代币
@@ -40,10 +47,9 @@ export const useYiDengToken = () => {
   });
 
   return {
-    isConnected: walletAccount.isConnected,
     buyTokensWithETH,
     isBuying,
-    tokenBalance, // 格式化为可读的字符串
+    tokenBalance: tokenBalance as number, // 格式化为可读的字符串
     isBalanceLoading,
   };
 };
