@@ -11,6 +11,7 @@ export type LoginRes = {
 };
 
 export interface UserInfo {
+  avatar: string,
   avatarUrl: symbol;
   createdAt: Date;
   email: string;
