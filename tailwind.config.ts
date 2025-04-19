@@ -11,14 +11,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        'neon-blue': 'var(--neon-blue)', // #00f3ff
+        'dark-bg': 'var(--dark-bg)', // #0a0b0f
         primary: {
           100: 'hsl(270, 91%, 90%)',
           200: 'hsl(270, 91%, 80%)',
           300: 'hsl(270, 91%, 70%)',
           400: 'hsl(270, 91%, 60%)',
-          500: 'hsl(270, 91%, 65%)',
-          600: 'hsl(270, 91%, 50%)',
-          700: 'hsl(270, 91%, 40%)',
+          500: 'var(--primary-500)', // #a855f7
+          600: 'var(--primary-600)', // #9333ea
+          700: 'var(--primary-700)', // #7928cc
           800: 'hsl(270, 91%, 30%)',
           900: 'hsl(270, 91%, 20%)',
         },
@@ -70,34 +72,33 @@ const config: Config = {
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
+        lg: 'var(--radius)', // 0.35rem
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+        shine: {
+          '0%': { transform: 'translateX(-100%)' },
+          '20%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        shine: 'shine 3s ease-in-out infinite',
       },
     },
   },
   plugins: [require('tailwindcss-animate')],
 };
+
 export default config;

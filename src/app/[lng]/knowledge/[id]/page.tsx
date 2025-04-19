@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Heart, Star } from 'lucide-react';
 import { ArticleItem } from '@/types/other/artical';
 import { getArticleDetail } from '@/apis/article';
+import RewardButton from '@/components/common/RewardBtn';
 
 export default function ArticleDetail() {
   const router = useRouter();
@@ -41,6 +42,7 @@ export default function ArticleDetail() {
       >
         ← 返回
       </button>
+      <RewardButton />
 
       <div className='bg-gray-800/50 dark:bg-gray-900/50 rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,255,170,0.05)] transition-all duration-300 border border-gray-700/30'>
         <h1 className='text-4xl font-bold text-gray-100 dark:text-white mb-4'>{article.title}</h1>

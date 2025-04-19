@@ -2,35 +2,39 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { SwapVert } from '@mui/icons-material';
 import { ethers } from 'ethers';
 import { YiDengToken__factory } from '@/typechain-types';
-import { useAccount, useConnect, useBalance } from 'wagmi';
-import { injected } from 'wagmi/connectors';
+import { useAccount, useBalance } from 'wagmi';
 import TokenInput from './input';
 import { WagmiConnectButton } from '@/components/WagmiConnect/WalletConnectButton';
 
-const YIDENG_TOKEN_ADDRESS = '0xb26BA51DAcc2F8e59CB87ECCD2eC73a2C3540d6f';
+// const YIDENG_TOKEN_ADDRESS = '0xb26BA51DAcc2F8e59CB87ECCD2eC73a2C3540d6f';
+const YIDENG_TOKEN_ADDRESS = '0xf0D22f11e49e9bcfB433d40074f5d1504BaE0694';
+
 const EXCHANGE_RATE = 1000; // 1000 YD = 1 ETH
 
 const TokenSwap: React.FC = () => {
-  const [amount, setAmount] = useState('0.111');
+  // 状态：用户输入的兑换资产总量（代币或 ETH）
+  const [amount, setAmount] = useState('0');
+  // 状态：兑换方向，false 表示 YD → ETH，true 表示 ETH → YD
   const [isSwapped, setIsSwapped] = useState(false);
+  // 状态：Web3 提供者（如 MetaMask）
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
+  // 状态：签名者（用户的钱包，用于签署交易）
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
+  // 状态：YiDengToken 合约实例
   const [contract, setContract] = useState<any>(null);
+  // 状态：用户的 YD 代币余额
   const [yd_balance, setYdBalance] = useState('0');
-
+  // 使用 Wagmi 获取连接钱包的地址和连接状态
   const { address, isConnected } = useAccount();
-
-  const { data: ethBalance } = useBalance({
-    address,
-    enabled: isConnected,
-  });
-
+  // 使用 Wagmi 获取连接钱包的 ETH 余额
+  const { data: ethBalance } = useBalance({ address });
+  // 将 ETH 余额格式化为可读的字符串（单位为 ETH，而不是 Wei）
   const eth_Balance = ethBalance ? ethers.utils.formatEther(ethBalance.value) : '0';
-
   // 获取 YD 代币余额
   const getYdBalance = useCallback(async () => {
     if (contract && address) {
       try {
+        // 调用合约的 balanceOf 方法获取用户的 YD 余额
         const balance = await contract.balanceOf(address);
         setYdBalance(balance.toString());
       } catch (error) {
@@ -77,10 +81,12 @@ const TokenSwap: React.FC = () => {
   // 初始化合约连接
   const initContract = useCallback(async () => {
     if (window.ethereum && isConnected) {
+      // 创建 Web3 提供者（通过 MetaMask 或其他钱包）
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      // 获取签名者（用户的钱包）
       const signer = provider.getSigner();
+      // 使用 YiDengToken 合约地址和签名者创建合约实例
       const contract = YiDengToken__factory.connect(YIDENG_TOKEN_ADDRESS, signer);
-
       setProvider(provider);
       setSigner(signer);
       setContract(contract);
@@ -155,7 +161,7 @@ const TokenSwap: React.FC = () => {
           showSplit={true}
         />
 
-        <div className="bg-primary-500 z-50 rounded-full w-8 h-8 flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-primary-600 transition-colors">
+        <div className='bg-primary-500 z-50 rounded-full w-8 h-8 flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-primary-600 transition-colors'>
           <button
             onClick={handleSwap}
             className='rounded-full focus:bg-primary-600 align-middle cursor-pointer'
