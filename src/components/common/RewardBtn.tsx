@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import TransferYDToken from './TransferYDToken';
+import React, { useState } from 'react';
 
-export default function RewardButton() {
+export default function RewardButton({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false); // 控制弹窗
 
   return (
@@ -69,7 +68,7 @@ export default function RewardButton() {
               ✕
             </button>
             <h2 className='text-xl font-bold text-primary-200 mb-4'>打赏-YD-代币</h2>
-            <TransferYDToken />
+            {children}
           </div>
         </div>
       )}
