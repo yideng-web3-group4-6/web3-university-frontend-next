@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useAccount, useWriteContract, useReadContract } from 'wagmi';
-import { Address, parseEther } from 'viem'; // 使用 viem 的 parseEther，避免 BigNumber 问题
+import { Address, parseEther, parseUnits } from 'viem'; // 使用 viem 的 parseEther，避免 BigNumber 问题
 import YiDengTokenABI from '@/abis/YiDengToken.json'; // 导入合约 ABI
 
 // 提取合约地址
@@ -12,6 +12,7 @@ type UseYiDengTokenReturn = {
   isBuying: boolean;
   tokenBalance: number;
   isBalanceLoading: boolean;
+  handlrTransferYDToken: (yd: string, recipient: Address) => void;
 };
 
 // 精简的 Hook，仅用于购买代币
@@ -19,7 +20,7 @@ export const useYiDengToken = (): UseYiDengTokenReturn => {
   const walletAccount = useAccount();
 
   // 使用 ETH 购买代币
-  const { writeContractAsync: buyWithETH, isPending: isBuying } = useWriteContract();
+  const { writeContract, writeContractAsync: buyWithETH, isPending: isBuying } = useWriteContract();
   const buyTokensWithETH = useCallback(
     async (ethAmount: string) => {
       if (!walletAccount.isConnected) throw new Error('Please connect your wallet');
@@ -46,10 +47,31 @@ export const useYiDengToken = (): UseYiDengTokenReturn => {
     },
   });
 
+  const handlrTransferYDToken = async (yd: string, recipient: Address) => {
+    try {
+      // 将金额转换为最小单位（假设 YD 代币有 18 位小数）
+      const amountInWei = Number(yd);
+      console.log(amountInWei, '-------');
+
+      // 调用 transfer 函数
+      writeContract({
+        address: YI_DENG_TOKEN_ADDRESS as `0x${string}`,
+        abi: YiDengTokenABI.abi,
+        functionName: 'transfer',
+        args: [recipient, amountInWei],
+      });
+
+      console.log('转账交易已提交！');
+    } catch (err) {
+      console.error('转账失败:', err);
+    }
+  };
+
   return {
     buyTokensWithETH,
     isBuying,
     tokenBalance: tokenBalance as number, // 格式化为可读的字符串
     isBalanceLoading,
+    handlrTransferYDToken,
   };
 };

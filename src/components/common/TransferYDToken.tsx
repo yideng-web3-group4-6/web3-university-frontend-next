@@ -1,15 +1,23 @@
+'use client';
 import { useYiDengToken } from '@/hooks/useYiDengToken';
 import { useCallback, useState } from 'react';
+import { Address } from 'viem';
 
-export default function TransferYDToken() {
-  const { tokenBalance } = useYiDengToken();
+interface TransferYDTokenProps {
+  transferToAccount: Address | undefined;
+}
+
+export default function TransferYDToken({ transferToAccount }: TransferYDTokenProps) {
+  const { tokenBalance, handlrTransferYDToken } = useYiDengToken();
   const [rewradAmount, setRewardAmount] = useState<string>('');
   const [isTransfer, setIsTransfer] = useState(false);
 
   const handleReward = useCallback(() => {
     if (isTransfer) return;
     if (+rewradAmount > tokenBalance) return;
+    if (!transferToAccount) return;
     setIsTransfer(true);
+    handlrTransferYDToken(rewradAmount, transferToAccount);
   }, []);
 
   return (
