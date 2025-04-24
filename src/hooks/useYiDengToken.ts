@@ -1,11 +1,9 @@
 import { useCallback } from 'react';
-import { useAccount, useWriteContract, useReadContract } from 'wagmi';
-import { Address, parseEther, parseUnits } from 'viem'; // 使用 viem 的 parseEther，避免 BigNumber 问题
+import { useAccount, useWriteContract, useReadContract, useChainId } from 'wagmi';
+import { Address, parseEther } from 'viem'; // 使用 viem 的 parseEther，避免 BigNumber 问题
 import YiDengTokenABI from '@/abis/YiDengToken.json'; // 导入合约 ABI
+import { YD_TOKEN_ADDRESS } from '@/constands/common';
 
-// 提取合约地址
-// const YI_DENG_TOKEN_ADDRESS = YiDengTokenABI.networks['1337'].address;
-const YI_DENG_TOKEN_ADDRESS = "0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0";
 
 type UseYiDengTokenReturn = {
   buyTokensWithETH: (ethAmount: string) => Promise<Address>;
@@ -18,7 +16,8 @@ type UseYiDengTokenReturn = {
 // 精简的 Hook，仅用于购买代币
 export const useYiDengToken = (): UseYiDengTokenReturn => {
   const walletAccount = useAccount();
-
+  const chainId = useChainId()
+  const YI_DENG_TOKEN_ADDRESS = YD_TOKEN_ADDRESS[chainId]
   // 使用 ETH 购买代币
   const { writeContract, writeContractAsync: buyWithETH, isPending: isBuying } = useWriteContract();
   const buyTokensWithETH = useCallback(
@@ -26,19 +25,19 @@ export const useYiDengToken = (): UseYiDengTokenReturn => {
       if (!walletAccount.isConnected) throw new Error('Please connect your wallet');
       const ethValue = parseEther(ethAmount);
       const tx = await buyWithETH({
-        address: YI_DENG_TOKEN_ADDRESS as `0x${string}`,
+        address: YI_DENG_TOKEN_ADDRESS,
         abi: YiDengTokenABI.abi, // 直接传入 abi
         functionName: 'buyWithETH',
         value: ethValue,
       });
       return tx; // 返回交易哈希
     },
-    [walletAccount.isConnected, buyWithETH],
+    [walletAccount.isConnected, buyWithETH, YI_DENG_TOKEN_ADDRESS],
   );
 
   // 查询账户代币余额
   const { data: tokenBalance, isLoading: isBalanceLoading } = useReadContract({
-    address: YI_DENG_TOKEN_ADDRESS as `0x${string}`, // 合约地址
+    address: YI_DENG_TOKEN_ADDRESS, // 合约地址
     abi: YiDengTokenABI.abi, // 合约abi
     functionName: 'balanceOf', // 方法名
     args: [walletAccount.address], // 传入当前账户地址
@@ -49,18 +48,13 @@ export const useYiDengToken = (): UseYiDengTokenReturn => {
 
   const handlrTransferYDToken = async (yd: string, recipient: Address) => {
     try {
-      // 将金额转换为最小单位（假设 YD 代币有 18 位小数）
       const amountInWei = Number(yd);
-      console.log(amountInWei, '-------');
-
-      // 调用 transfer 函数
       writeContract({
-        address: YI_DENG_TOKEN_ADDRESS as `0x${string}`,
+        address: YI_DENG_TOKEN_ADDRESS,
         abi: YiDengTokenABI.abi,
         functionName: 'transfer',
         args: [recipient, amountInWei],
       });
-
       console.log('转账交易已提交！');
     } catch (err) {
       console.error('转账失败:', err);

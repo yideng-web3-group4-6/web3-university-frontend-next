@@ -9,9 +9,6 @@ export function shortenAddress(address: string): string {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
-// Web3 related utility functions
-// export const YIDENG_TOKEN_ADDRESS = '0x1234567890123456789012345678901234567890'; // Replace with actual token address
-export const YIDENG_TOKEN_ADDRESS = '0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0';
 export const YIDENG_TOKEN_ABI = [
   // ERC20 standard functions
   'function balanceOf(address owner) view returns (uint256)',

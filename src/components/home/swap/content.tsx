@@ -2,18 +2,17 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { SwapVert } from '@mui/icons-material';
 import { ethers } from 'ethers';
 import { YiDengToken__factory } from '@/typechain-types';
-import { useAccount, useBalance } from 'wagmi';
+import { useAccount, useBalance, useChainId } from 'wagmi';
 import TokenInput from './input';
 import { WagmiConnectButton } from '@/components/WagmiConnect/WalletConnectButton';
-
-// const YIDENG_TOKEN_ADDRESS = '0xb26BA51DAcc2F8e59CB87ECCD2eC73a2C3540d6f';
-// const YIDENG_TOKEN_ADDRESS = '0xf0D22f11e49e9bcfB433d40074f5d1504BaE0694';
-const YIDENG_TOKEN_ADDRESS = '0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0';
+import { YD_TOKEN_ADDRESS } from '@/constands/common';
 
 
 const EXCHANGE_RATE = 1000; // 1000 YD = 1 ETH
 
 const TokenSwap: React.FC = () => {
+  const chainId = useChainId()
+  const YIDENG_TOKEN_ADDRESS = YD_TOKEN_ADDRESS[chainId]
   // 状态：用户输入的兑换资产总量（代币或 ETH）
   const [amount, setAmount] = useState('0');
   // 状态：兑换方向，false 表示 YD → ETH，true 表示 ETH → YD
@@ -93,7 +92,7 @@ const TokenSwap: React.FC = () => {
       setSigner(signer);
       setContract(contract);
     }
-  }, [isConnected]);
+  }, [isConnected, YIDENG_TOKEN_ADDRESS]);
 
   React.useEffect(() => {
     initContract();

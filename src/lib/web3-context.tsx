@@ -12,10 +12,11 @@ import {
   walletConnectWallet,
   rainbowWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import { WagmiProvider, useAccount, useBalance, useContractRead } from "wagmi";
+import { WagmiProvider, useAccount, useBalance, useChainId, useContractRead } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { mainnet, sepolia } from "wagmi/chains";
-import { YIDENG_TOKEN_ADDRESS, YIDENG_TOKEN_ABI } from "@/lib/utils";
+import { YIDENG_TOKEN_ABI } from "@/lib/utils";
+import { YD_TOKEN_ADDRESS } from "@/constands/common";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,8 @@ const Web3Context = createContext<Web3ContextType>(defaultContext);
 export const useWeb3 = () => useContext(Web3Context);
 
 const Web3ProviderContent = ({ children }: { children: ReactNode }) => {
+  const chainId = useChainId()
+  const YIDENG_TOKEN_ADDRESS = YD_TOKEN_ADDRESS[chainId]
   const { address, isConnected } = useAccount();
   const { data: balanceData } = useBalance({
     address,
