@@ -4,8 +4,8 @@ import { Address, parseEther, parseUnits } from 'viem'; // 使用 viem 的 parse
 import YiDengTokenABI from '@/abis/YiDengToken.json'; // 导入合约 ABI
 
 // 提取合约地址
-const YI_DENG_TOKEN_ADDRESS = YiDengTokenABI.networks['1337'].address;
-// const YI_DENG_TOKEN_ADDRESS = "0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0";
+// const YI_DENG_TOKEN_ADDRESS = YiDengTokenABI.networks['1337'].address;
+const YI_DENG_TOKEN_ADDRESS = "0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0";
 
 type UseYiDengTokenReturn = {
   buyTokensWithETH: (ethAmount: string) => Promise<Address>;

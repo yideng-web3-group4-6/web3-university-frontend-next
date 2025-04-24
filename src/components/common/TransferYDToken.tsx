@@ -18,7 +18,8 @@ export default function TransferYDToken({ transferToAccount }: TransferYDTokenPr
     if (!transferToAccount) return;
     setIsTransfer(true);
     handlrTransferYDToken(rewradAmount, transferToAccount);
-  }, []);
+    setIsTransfer(false);
+  }, [rewradAmount]);
 
   return (
     <div className='space-y-4'>
@@ -39,7 +40,7 @@ export default function TransferYDToken({ transferToAccount }: TransferYDTokenPr
             [&::-webkit-outer-spin-button]:appearance-none
             [&::-webkit-inner-spin-button]:appearance-none
           '
-          onChange={e => setRewardAmount(e.target.value)}
+          onChange={e => {setRewardAmount(e.target.value)}}
         />
       </div>
       <button

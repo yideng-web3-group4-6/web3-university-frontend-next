@@ -7,7 +7,9 @@ import TokenInput from './input';
 import { WagmiConnectButton } from '@/components/WagmiConnect/WalletConnectButton';
 
 // const YIDENG_TOKEN_ADDRESS = '0xb26BA51DAcc2F8e59CB87ECCD2eC73a2C3540d6f';
-const YIDENG_TOKEN_ADDRESS = '0xf0D22f11e49e9bcfB433d40074f5d1504BaE0694';
+// const YIDENG_TOKEN_ADDRESS = '0xf0D22f11e49e9bcfB433d40074f5d1504BaE0694';
+const YIDENG_TOKEN_ADDRESS = '0x2cd99DD1804F1D0B1a704e3D112A15f27b2851f0';
+
 
 const EXCHANGE_RATE = 1000; // 1000 YD = 1 ETH
 
